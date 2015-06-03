@@ -2,17 +2,17 @@ package de.project.entities;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.HashSet;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
+
 import de.project.enumerations.ProjectStatus;
 
 @Entity
@@ -20,14 +20,13 @@ public class Project {
 	
 	@Id
 	@GeneratedValue
-	public long id;
+	private long id;
 	
 	@Enumerated(EnumType.ORDINAL)
 	private ProjectStatus projectStatus;
 	
 	@ManyToMany
-	//@JoinColumn(name = "member_id")
-	private HashSet<User> members;
+	private List<User> members;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
 	private List<Milestone> milestone;
@@ -50,11 +49,11 @@ public class Project {
 		this.projectStatus = projectStatus;
 	}
 
-	public HashSet<User> getMembers() {
+	public List<User> getMembers() {
 		return members;
 	}
 
-	public void setMembers(HashSet<User> members) {
+	public void setMembers(List<User> members) {
 		this.members = members;
 	}
 

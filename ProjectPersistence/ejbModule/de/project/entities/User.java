@@ -6,7 +6,9 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User implements Serializable{
@@ -20,8 +22,12 @@ public class User implements Serializable{
 
 	private Calendar registrationDate;
 	
-	@ManyToMany(mappedBy = "members")
+	@ManyToMany
 	private List<Project> projects;
+	
+	@OneToMany
+	@JoinColumn(name = "user_note_id")
+	private List<Note> notes;
 	
 	public User() {
 		super();

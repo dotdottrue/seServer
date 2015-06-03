@@ -10,16 +10,17 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.entities.ProjectSession;
 import de.project.entities.User;
 
 @Stateless
-public class ProjectUserDAO {
+public class ProjectUserDAO implements ProjectUserDAOLocal {
 	
 	@PersistenceContext
 	private EntityManager em;
 	
-	@override
+	@Override
 	public User findUserByName(String user) {
 		return em.find(User.class, user);
 	}
@@ -63,4 +64,5 @@ public class ProjectUserDAO {
     	ProjectSession session = em.find(ProjectSession.class, sessionId);
     	return session;
     }
+
 }

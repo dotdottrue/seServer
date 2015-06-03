@@ -16,11 +16,15 @@ public class Milestone {
 	
 	@Id
 	@GeneratedValue
-	private long id;
-	
+	private long id;	
 	
 	@ManyToOne//oder doch ManyToMany
 	private Project project;
+	
+	private Calendar createdAt;
+	
+	@Enumerated(EnumType.ORDINAL)
+	private MilestoneStatus status;
 	
 	public long getId() {
 		return id;
@@ -38,14 +42,6 @@ public class Milestone {
 		this.project = project;
 	}
 
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
 	public Calendar getCreatedAt() {
 		return createdAt;
 	}
@@ -61,10 +57,5 @@ public class Milestone {
 	public void setStatus(MilestoneStatus status) {
 		this.status = status;
 	}
-
-	private String notes;
-	private Calendar createdAt;
 	
-	@Enumerated(EnumType.ORDINAL)
-	private MilestoneStatus status;
 }

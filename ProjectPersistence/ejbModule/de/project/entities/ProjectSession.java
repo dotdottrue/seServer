@@ -20,6 +20,10 @@ public class ProjectSession {
 	private User user;
 	private Calendar createdAt;
 	
+	public ProjectSession() {
+		super();
+	}
+	
 	public ProjectSession(User user) {
 		this.user = user;
 		this.createdAt = new GregorianCalendar();
