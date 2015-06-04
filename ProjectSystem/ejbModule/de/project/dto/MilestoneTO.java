@@ -1,11 +1,14 @@
 package de.project.dto;
 
+import java.io.Serializable;
+import java.util.Calendar;
+
 import javax.persistence.ManyToOne;
 
 import de.project.entities.*;
 import de.project.enumerations.*;
 
-public class MilestoneTO {
+public class MilestoneTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private long id;	

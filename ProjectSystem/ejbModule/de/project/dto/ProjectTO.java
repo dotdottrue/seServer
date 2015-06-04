@@ -1,5 +1,6 @@
 package de.project.dto;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import de.project.entities.*;
 import de.project.enumerations.*;
 
 
-public class ProjectTO {		
+public class ProjectTO implements Serializable{		
 	private static final long serialVersionUID = 1L;
 		private long id;
 		private ProjectStatus projectStatus;
