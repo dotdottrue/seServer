@@ -1,5 +1,5 @@
 package de.project.enumerations;
 
 public enum ProjectStatus {
-	IDEAL, DELAYED, OUTOFTIME
+	IDEAL, DELAYED, OUTOFTIME, FINISHED
 }

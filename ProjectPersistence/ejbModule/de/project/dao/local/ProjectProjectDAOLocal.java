@@ -6,20 +6,21 @@ import javax.ejb.Local;
 
 import de.project.entities.Milestone;
 import de.project.entities.Project;
+import de.project.entities.User;
 
 @Local
 public interface ProjectProjectDAOLocal {
 
 	public Project findProjectById(long id);
 	
-	public Project createProject(String projectName);
-	
-	public List<Project> findProjects(String searchString);
+	public List<Project> findProjects(User currentUser);
 	
 	public Project getProject(long projectId);
 	
-	public Project cancelProject(long ProjectId);
+	public void cancelProject(Project projet);
 	
-    public Milestone  getMilestones(int milestoneId);
+    public List<Milestone> getMilestones(Project project);
+
+	public Project createProject(Project project, String projectName, List<User> member);
 	
 }
