@@ -31,6 +31,7 @@ public class Project {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
 	private List<Milestone> milestones;
 	
+	private User owner;
 	private Date updatedOn;
 	private String projectName;
 	
@@ -86,6 +87,14 @@ public class Project {
 
 	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}	
 	
 }

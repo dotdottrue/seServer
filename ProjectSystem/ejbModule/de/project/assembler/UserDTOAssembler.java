@@ -2,13 +2,11 @@ package de.project.assembler;
 
 import javax.ejb.Stateless;
 
-import de.project.dto.ProjectTO;
 import de.project.dto.UserTO;
-import de.project.entities.Project;
 import de.project.entities.User;
 
 @Stateless
-public abstract class DtoAssembler {
+public abstract class UserDTOAssembler {
 	
 	public UserTO makeDTO(User user){
 		
@@ -18,18 +16,6 @@ public abstract class DtoAssembler {
 		dto.setLastName(user.getLastName());
 		dto.setProjects(user.getProjects());
 		dto.setRegistrationDate(user.getRegistrationDate());
-		
-		return dto;
-	}
-	
-	public ProjectTO makeDTO(Project project){
-		
-		ProjectTO dto = new ProjectTO();
-		dto.setId(project.getId());
-		dto.setMembers(project.getMembers());
-		dto.setMilestone(project.getMilestone());
-		dto.setProjectStatus(project.getProjectStatus());
-		dto.setUpdatedOn(project.getUpdatedOn());
 		
 		return dto;
 	}

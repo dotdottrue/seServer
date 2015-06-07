@@ -1,7 +1,7 @@
 package de.project.dto;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import de.project.entities.*;
@@ -14,7 +14,7 @@ public class ProjectTO implements Serializable{
 		private ProjectStatus projectStatus;
 		private List<User> members;
 		private List<Milestone> milestone;
-		private Calendar updatedOn;
+		private Date updatedOn;
 	
 		public String toString() {
 			return "Project [id=" + id + ", projectStatus=" + projectStatus
@@ -53,12 +53,12 @@ public class ProjectTO implements Serializable{
 			this.milestone = milestone;
 		}
 
-		public Calendar getUpdatedOn() {
+		public Date getUpdatedOn() {
 			return updatedOn;
 		}
 
-		public void setUpdatedOn(Calendar updatedOn) {
-			this.updatedOn = updatedOn;
+		public void setUpdatedOn(Date date) {
+			this.updatedOn = date;
 		}
 		
 		
