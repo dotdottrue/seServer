@@ -3,8 +3,6 @@ package de.project.dto;
 import java.io.Serializable;
 import java.util.Calendar;
 
-import javax.persistence.ManyToOne;
-
 import de.project.entities.*;
 import de.project.enumerations.*;
 

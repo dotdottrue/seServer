@@ -1,8 +1,9 @@
 package de.project.dto;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
 import de.project.entities.Note;
 import de.project.entities.Project;
 
@@ -13,7 +14,7 @@ public class UserTO implements Serializable{
 		private String phoneNumber;
 		private String firstName;
 		private String lastName;
-		private Calendar registrationDate;
+		private Date registrationDate;
 		private List<Project> projects;
 		private List<Note> notes;
 		public String getPhoneNumber() {
@@ -34,11 +35,11 @@ public class UserTO implements Serializable{
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
 		}
-		public Calendar getRegistrationDate() {
+		public Date getRegistrationDate() {
 			return registrationDate;
 		}
-		public void setRegistrationDate(Calendar registrationDate) {
-			this.registrationDate = registrationDate;
+		public void setRegistrationDate(Date date) {
+			this.registrationDate = date;
 		}
 		public List<Project> getProjects() {
 			return projects;
