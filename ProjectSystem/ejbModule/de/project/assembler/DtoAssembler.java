@@ -1,13 +1,13 @@
 package de.project.assembler;
 
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 
 import de.project.dto.ProjectTO;
 import de.project.dto.UserTO;
 import de.project.entities.Project;
 import de.project.entities.User;
 
-@Singleton
+@Stateless
 public abstract class DtoAssembler {
 	
 	public UserTO makeDTO(User user){
