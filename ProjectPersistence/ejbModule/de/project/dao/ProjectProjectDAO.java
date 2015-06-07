@@ -31,8 +31,7 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 		//glaube brauchen wir gar nicht
 		@Override
 		public Project findProjectById(long id) {
-			// TODO Auto-generated method stub
-			return null;
+			return em.find(Project.class, id);
 		}
 
 		@Override
