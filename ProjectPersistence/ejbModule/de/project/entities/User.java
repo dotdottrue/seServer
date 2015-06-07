@@ -1,7 +1,7 @@
 package de.project.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -20,7 +20,7 @@ public class User implements Serializable{
 	private String firstName;
 	private String lastName;
 
-	private Calendar registrationDate;
+	private Date registrationDate;
 	
 	@ManyToMany
 	private List<Project> projects;
@@ -34,7 +34,7 @@ public class User implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(String phoneNumber, Calendar registrationDate) {
+	public User(String phoneNumber, Date registrationDate) {
 		this.phoneNumber = phoneNumber;
 		this.registrationDate = registrationDate;
 	}
@@ -63,11 +63,11 @@ public class User implements Serializable{
 		this.lastName = lastName;
 	}
 
-	public Calendar getRegistrationDate() {
+	public Date getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(Calendar registrationDate) {
+	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 

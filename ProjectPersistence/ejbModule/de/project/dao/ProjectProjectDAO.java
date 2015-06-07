@@ -78,4 +78,9 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 			return projectMilestones;
 		}
 
+		@Override
+		public void saveProject(Project project) {
+			em.persist(project);		
+		}
+
 }
