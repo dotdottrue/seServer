@@ -1,6 +1,6 @@
 package de.project.entities;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -29,10 +29,19 @@ public class Project {
 	private List<User> members;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
-	private List<Milestone> milestone;
+	private List<Milestone> milestones;
 	
-	private Calendar updatedOn;
+	private Date updatedOn;
+	private String projectName;
 	
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+	
+	public String getProjectName() {
+		return projectName;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -57,12 +66,12 @@ public class Project {
 		this.members = members;
 	}
 
-	public List<Milestone> getMilestone() {
-		return milestone;
+	public List<Milestone> getMilestones() {
+		return milestones;
 	}
 
-	public void setMilestone(List<Milestone> milestone) {
-		this.milestone = milestone;
+	public void setMilestones(List<Milestone> milestone) {
+		this.milestones = milestone;
 	}
 
 	@Override
@@ -71,11 +80,11 @@ public class Project {
 				+ ", member=" + members + "]";
 	}
 
-	public Calendar getUpdatedOn() {
+	public Date getUpdatedOn() {
 		return updatedOn;
 	}
 
-	public void setUpdatedOn(Calendar updatedOn) {
+	public void setUpdatedOn(Date updatedOn) {
 		this.updatedOn = updatedOn;
 	}	
 	

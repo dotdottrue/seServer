@@ -1,6 +1,6 @@
 package de.project.dao;
 
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -27,18 +27,18 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
 	
 	@Override
     public User createUser(String phoneNumber) {
-    	User user = new User(phoneNumber, new GregorianCalendar());
+    	User user = new User(phoneNumber, new Date());
     	em.persist(user);
     	return user;
     }
 
 	@Override
-	public List<User> searchUsers(String info) {
+	public List<User> searchUsers(String phoneNumber) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		Root<User> user = cq.from(User.class);
 		cq.select(user);
-		cq.where(cb.like(user.<String> get("phoneNumber"), "%" + info + "%"));
+		cq.where(cb.like(user.<String> get("phoneNumber"), phoneNumber));
 		return em.createQuery(cq).getResultList();
 	}
     

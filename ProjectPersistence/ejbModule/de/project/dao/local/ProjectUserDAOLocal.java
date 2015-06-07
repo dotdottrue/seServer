@@ -18,7 +18,7 @@ public interface ProjectUserDAOLocal {
 
     public boolean closeSession(int sessionId);
 
-    public List<User> searchUsers(String info);
+    public List<User> searchUsers(String phoneNumber);
 
     public ProjectSession getSession(int sessionId);
 

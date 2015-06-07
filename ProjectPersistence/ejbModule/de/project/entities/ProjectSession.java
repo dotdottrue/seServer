@@ -1,7 +1,6 @@
 package de.project.entities;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +17,7 @@ public class ProjectSession {
 	
 	@OneToOne
 	private User user;
-	private Calendar createdAt;
+	private Date createdAt;
 	
 	public ProjectSession() {
 		super();
@@ -26,7 +25,7 @@ public class ProjectSession {
 	
 	public ProjectSession(User user) {
 		this.user = user;
-		this.createdAt = new GregorianCalendar();
+		this.createdAt = new Date();
 	}
 	
 	public int getId() {
@@ -42,10 +41,10 @@ public class ProjectSession {
 		this.user = user;
 	}
 
-	public Calendar getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Calendar createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 	
