@@ -15,7 +15,16 @@ public class ProjectTO implements Serializable{
 		private List<User> members;
 		private List<Milestone> milestone;
 		private Date updatedOn;
+		private String projectName;
 	
+		public String getProjectName() {
+			return projectName;
+		}
+
+		public void setProjectName(String projectName) {
+			this.projectName = projectName;
+		}
+
 		public String toString() {
 			return "Project [id=" + id + ", projectStatus=" + projectStatus
 					+ ", member=" + members + "]";
