@@ -10,7 +10,7 @@ import de.project.entities.User;
 @Local
 public interface ProjectUserDAOLocal {
 
-    public User findUserByName(String username);
+    public User findUserByNumber(String phoneNumber);
 
     public ProjectSession createSession(User user);
 
@@ -18,7 +18,7 @@ public interface ProjectUserDAOLocal {
 
     public boolean closeSession(int sessionId);
 
-    public List<User> searchUsers(String phoneNumber);
+    //public List<User> searchUsers(String phoneNumber);
 
     public ProjectSession getSession(int sessionId);
 
