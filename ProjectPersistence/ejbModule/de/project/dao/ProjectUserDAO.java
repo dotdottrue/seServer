@@ -21,8 +21,8 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
 	private EntityManager em;
 	
 	@Override
-	public User findUserByName(String user) {
-		return em.find(User.class, user);
+	public User findUserByNumber(String phoneNumber) {
+		return em.find(User.class, phoneNumber);
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
     	return user;
     }
 
-	@Override
+	/*@Override
 	public List<User> searchUsers(String phoneNumber) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
@@ -40,7 +40,7 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
 		cq.select(user);
 		cq.where(cb.like(user.<String> get("phoneNumber"), phoneNumber));
 		return em.createQuery(cq).getResultList();
-	}
+	}*/
     
     public ProjectSession createSession(User user) {
     	ProjectSession session = new ProjectSession(user);
