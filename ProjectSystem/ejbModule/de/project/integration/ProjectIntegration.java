@@ -1,4 +1,4 @@
-package de.project.project;
+package de.project.integration;
 
 import javax.ejb.EJB;
 
