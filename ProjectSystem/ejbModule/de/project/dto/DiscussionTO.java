@@ -4,18 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import de.project.entities.Note;
-import de.project.entities.Project;
-import de.project.entities.User;
-
 public class DiscussionTO implements Serializable{
 
 	private static final long serialVersionUID = -7131993484423007681L;
 	
 	private long id;
-	private List<User> users;
-	private Project project;
-	private List<Note> notes;
+	private List<UserTO> users;
+	private ProjectTO project;
+	private List<NoteTO> notes;
 	private String topic;
 	private Date createdAt;
 	
@@ -27,27 +23,27 @@ public class DiscussionTO implements Serializable{
 		this.id = id;
 	}
 	
-	public List<User> getUsers() {
+	public List<UserTO> getUsers() {
 		return users;
 	}
 	
-	public void setUsers(List<User> users) {
+	public void setUsers(List<UserTO> users) {
 		this.users = users;
 	}
 	
-	public Project getProject() {
+	public ProjectTO getProject() {
 		return project;
 	}
 	
-	public void setProject(Project project) {
+	public void setProject(ProjectTO project) {
 		this.project = project;
 	}
 	
-	public List<Note> getNotes() {
+	public List<NoteTO> getNotes() {
 		return notes;
 	}
 	
-	public void setNotes(List<Note> notes) {
+	public void setNotes(List<NoteTO> notes) {
 		this.notes = notes;
 	}
 	

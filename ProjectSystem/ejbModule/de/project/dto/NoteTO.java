@@ -2,20 +2,16 @@ package de.project.dto;
 
 import java.io.Serializable;
 
-import de.project.entities.Appointment;
-import de.project.entities.Discussion;
-import de.project.entities.User;
-
 public class NoteTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	private long id;
 	private String note;
-	private User user;
+	private UserTO user;
 	private String createdAt;
-	private Discussion discussion;
-	private Appointment appointment;
+	private DiscussionTO discussion;
+	private AppointmentTO appointment;
 	
 	public long getId() {
 		return id;
@@ -33,11 +29,11 @@ public class NoteTO implements Serializable{
 		this.note = note;
 	}
 	
-	public User getUser() {
+	public UserTO getUser() {
 		return user;
 	}
 	
-	public void setUser(User user) {
+	public void setUser(UserTO user) {
 		this.user = user;
 	}
 	
@@ -53,19 +49,19 @@ public class NoteTO implements Serializable{
 		return serialVersionUID;
 	}
 
-	public Discussion getDiscussion() {
+	public DiscussionTO getDiscussion() {
 		return discussion;
 	}
 
-	public void setDiscussion(Discussion discussion) {
-		this.discussion = discussion;
+	public void setDiscussion(DiscussionTO discussionTO) {
+		this.discussion = discussionTO;
 	}
 
-	public Appointment getAppointment() {
+	public AppointmentTO getAppointment() {
 		return appointment;
 	}
 
-	public void setAppointment(Appointment appointment) {
+	public void setAppointment(AppointmentTO appointment) {
 		this.appointment = appointment;
 	}
 	

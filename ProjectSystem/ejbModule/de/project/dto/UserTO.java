@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import de.project.entities.Note;
-import de.project.entities.Project;
-
 public class UserTO implements Serializable{
 		
 	private static final long serialVersionUID = 1L;
@@ -15,8 +12,8 @@ public class UserTO implements Serializable{
 	private String firstName;
 	private String lastName;
 	private Date registrationDate;
-	private List<Project> projects;
-	private List<Note> notes;
+	private List<ProjectTO> projects;
+	private List<NoteTO> notes;
 	
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -50,19 +47,19 @@ public class UserTO implements Serializable{
 		this.registrationDate = date;
 	}
 	
-	public List<Project> getProjects() {
+	public List<ProjectTO> getProjects() {
 		return projects;
 	}
 	
-	public void setProjects(List<Project> projects) {
+	public void setProjects(List<ProjectTO> projects) {
 		this.projects = projects;
 	}
 	
-	public List<Note> getNotes() {
+	public List<NoteTO> getNotes() {
 		return notes;
 	}
 	
-	public void setNotes(List<Note> notes) {
+	public void setNotes(List<NoteTO> notes) {
 		this.notes = notes;
 	}
 }

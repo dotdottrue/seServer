@@ -3,15 +3,12 @@ package de.project.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import de.project.entities.User;
-
-
 public class ProjectSessionTO implements Serializable{
 
 	
 	private static final long serialVersionUID = 1L;	
 	private int id;
-	private User user;
+	private UserTO user;
 	private Date createdAt;
 	
 	public int getId() {
@@ -20,10 +17,10 @@ public class ProjectSessionTO implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUser() {
+	public UserTO getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserTO user) {
 		this.user = user;
 	}
 	public Date getCreatedAt() {

@@ -3,7 +3,6 @@ package de.project.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import de.project.entities.*;
 import de.project.enumerations.*;
 
 public class MilestoneTO implements Serializable{
@@ -13,7 +12,7 @@ public class MilestoneTO implements Serializable{
 	private long id;
 	private Date createdAt;
 	private String milestoneName;
-	private Project project;
+	private ProjectTO project;
 	private MilestoneStatus status;
 	
 	public long getId() {
@@ -40,11 +39,11 @@ public class MilestoneTO implements Serializable{
 		this.milestoneName = milestoneName;
 	}
 	
-	public Project getProject() {
+	public ProjectTO getProject() {
 		return project;
 	}
 	
-	public void setProject(Project project) {
+	public void setProject(ProjectTO project) {
 		this.project = project;
 	}
 	
