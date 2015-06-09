@@ -1,14 +1,10 @@
 package de.project.dao;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.entities.ProjectSession;
