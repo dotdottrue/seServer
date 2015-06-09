@@ -1,22 +1,31 @@
 package de.project.integration;
 
-import javax.ejb.EJB;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+
+import de.project.assembler.ProjectDTOAssembler;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
+import de.project.dto.ProjectResponse;
 import de.project.dto.ProjectTO;
 import de.project.dto.ReturncodeResponse;
 import de.project.entities.Project;
 import de.project.entities.User;
 
+@Stateless
 public class ProjectIntegration {
 	
-	@EJB(beanName="ProjectProjectDAO", beanInterface=de.project.dao.local.ProjectProjectDAOLocal.class)
+	@EJB(beanInterface=de.project.dao.local.ProjectProjectDAOLocal.class)
 	private ProjectProjectDAOLocal projectDAO;
 	
-	@EJB(beanName="ProjectUserDAO", beanInterface=de.project.dao.local.ProjectUserDAOLocal.class)
+	@EJB(beanInterface=de.project.dao.local.ProjectUserDAOLocal.class)
 	private ProjectUserDAOLocal userDAO;
 
+	@EJB
+	private ProjectDTOAssembler assembler;
 	
 	public ReturncodeResponse createProject(String phoneNumber, ProjectTO project){
 		
@@ -31,8 +40,26 @@ public class ProjectIntegration {
 		
 		projectDAO.createProject(newProject);
 		
-		return new ReturncodeResponse();
+		return new ReturncodeResponse();				
+	}
+	
+	public ProjectResponse getProjectsByPhoneNumber(String phoneNumber){
 		
+		User user = userDAO.findUserByNumber(phoneNumber);
+
+		// Projekte finden und in DTOs wandeln
+		List<Project> projects = projectDAO.findProjects(user);
+		List<ProjectTO> projectsTO = new ArrayList<ProjectTO>();
+		for(Project project : projects){
+			projectsTO.add(assembler.makeDTO(project));
+		}
+		
+		// Response Objekt erzeugen
+		ProjectResponse response = new ProjectResponse();
+		response.setPhonenumber(phoneNumber);
+		response.setProjects(projectsTO);
+		
+		return response;
 		
 	}
 	
