@@ -19,18 +19,16 @@ public class Request {
 	@GeneratedValue
 	private long id;
 	
-	private User sourceUser;
-	private Project targetUser;
-	
 	@ManyToOne
 	private Project project;
 	
-	
-	private String note;
-	private Calendar updatedAt;
-	
 	@Enumerated(EnumType.ORDINAL)
 	private RequestStatus status;
+	
+	private User sourceUser;
+	private Project targetUser;
+	private String note;
+	private Calendar updatedAt;
 
 	public long getId() {
 		return id;

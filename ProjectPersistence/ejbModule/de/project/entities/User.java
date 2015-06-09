@@ -7,7 +7,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class User implements Serializable{
@@ -26,9 +25,6 @@ public class User implements Serializable{
 	
 	@ManyToMany
 	private List<Discussion> discussions;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Note> notes;
 	
 	public User() {
 		super();

@@ -11,7 +11,9 @@ public class NoteDTOAssembler {
 	public NoteTO makeDTO(Note note) {
 		NoteTO dto = new NoteTO();
 		dto.setId(note.getId());
-		dto.setUserNote(note.getUserNote());
+		dto.setNote(note.getNote());
+		dto.setUser(note.getUser());
+		dto.setCreatedAt(note.getCreatedAt());
 		
 		return dto;
 	}

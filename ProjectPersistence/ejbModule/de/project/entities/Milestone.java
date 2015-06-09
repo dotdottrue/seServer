@@ -1,6 +1,6 @@
 package de.project.entities;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,12 +16,13 @@ public class Milestone {
 	
 	@Id
 	@GeneratedValue
-	private long id;	
+	private long id;
 	
+	private Date createdAt;
+	private String milestoneName;
+
 	@ManyToOne//oder doch ManyToMany
 	private Project project;
-	
-	private Calendar createdAt;
 	
 	@Enumerated(EnumType.ORDINAL)
 	private MilestoneStatus status;
@@ -42,11 +43,11 @@ public class Milestone {
 		this.project = project;
 	}
 
-	public Calendar getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Calendar createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -56,6 +57,14 @@ public class Milestone {
 
 	public void setStatus(MilestoneStatus status) {
 		this.status = status;
+	}
+	
+	public String getMilestoneName() {
+		return milestoneName;
+	}
+
+	public void setMilestoneName(String milestoneName) {
+		this.milestoneName = milestoneName;
 	}
 	
 }

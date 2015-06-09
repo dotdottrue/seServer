@@ -14,14 +14,12 @@ public class Note {
 	@GeneratedValue
 	private long id;
 	private String note;
+	private User user;
 	private String createdAt;
 	
 	@ManyToOne
 	@JoinColumn(name = "discussion_id") 
 	private Discussion discussion;
-	
-	@ManyToOne
-	private User user;
 	
 	@OneToOne
 	private Appointment appointment;
@@ -61,6 +59,23 @@ public class Note {
 
 	public void setDiscussion(Discussion discussion) {
 		this.discussion = discussion;
-	}	
+	}
 
+	public Appointment getAppointment() {
+		return appointment;
+	}
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}	
+	
+	
 }
