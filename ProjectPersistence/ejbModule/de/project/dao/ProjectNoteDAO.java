@@ -21,7 +21,7 @@ public class ProjectNoteDAO implements ProjectNoteDAOLocal {
 	@Override
 	public void editNote(long noteId, String newNote) {
 		Note notice = em.find(Note.class, noteId);
-		notice.setUserNote(newNote);
+		notice.setNote(newNote);
 	}
 
 }

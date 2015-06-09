@@ -31,6 +31,12 @@ public class Project {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
 	private List<Milestone> milestones;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
+	private List<Appointment> appointments;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
+	private List<Discussion> discussions;
+	
 	private User owner;
 	private Date updatedOn;
 	private String projectName;
@@ -75,12 +81,6 @@ public class Project {
 		this.milestones = milestone;
 	}
 
-	@Override
-	public String toString() {
-		return "Project [id=" + id + ", projectStatus=" + projectStatus
-				+ ", member=" + members + "]";
-	}
-
 	public Date getUpdatedOn() {
 		return updatedOn;
 	}
@@ -95,6 +95,12 @@ public class Project {
 
 	public void setOwner(User owner) {
 		this.owner = owner;
-	}	
+	}
+	
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", projectStatus=" + projectStatus
+				+ ", member=" + members + "]";
+	}
 	
 }

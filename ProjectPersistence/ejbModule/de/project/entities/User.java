@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -25,8 +24,10 @@ public class User implements Serializable{
 	@ManyToMany
 	private List<Project> projects;
 	
-	@OneToMany
-	@JoinColumn(name = "user_note_id")
+	@ManyToMany
+	private List<Discussion> discussions;
+	
+	@OneToMany(mappedBy = "user")
 	private List<Note> notes;
 	
 	public User() {
