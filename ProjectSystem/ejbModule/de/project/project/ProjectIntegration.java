@@ -22,7 +22,6 @@ public class ProjectIntegration {
 		
 		User user = userDAO.findUserByNumber(phoneNumber);
 		Project newProject = new Project();
-		newProject.setId(project.getId());
 		newProject.setMembers(project.getMembers());
 		newProject.setOwner(user);
 		newProject.setMilestones(project.getMilestone());
@@ -30,7 +29,7 @@ public class ProjectIntegration {
 		newProject.setProjectStatus(project.getProjectStatus());
 		newProject.setUpdatedOn(project.getUpdatedOn());
 		
-		projectDAO.createProject(newProject, newProject.getProjectName(), newProject.getMembers());
+		projectDAO.createProject(newProject);
 		
 		return new ReturncodeResponse();
 		

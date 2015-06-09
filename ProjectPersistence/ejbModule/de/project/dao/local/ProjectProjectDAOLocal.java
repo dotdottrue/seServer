@@ -23,6 +23,6 @@ public interface ProjectProjectDAOLocal {
 	
     public List<Milestone> getMilestones(Project project);
 
-	public Project createProject(Project project, String projectName, List<User> member);
+	public Project createProject(Project project);
 	
 }

@@ -35,9 +35,7 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 		}
 
 		@Override
-		public Project createProject(Project project, String projectName, List<User> members) {
-			project.setProjectName(projectName);
-			project.setMembers(members);
+		public Project createProject(Project project) {
 			em.persist(project);
 			
 			return project;
