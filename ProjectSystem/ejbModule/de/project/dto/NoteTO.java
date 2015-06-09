@@ -2,13 +2,15 @@ package de.project.dto;
 
 import java.io.Serializable;
 
+import de.project.entities.User;
+
 public class NoteTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	private long id;
 	private String note;
-	private UserTO user;
+	private User user;
 	private String createdAt;
 	private DiscussionTO discussion;
 	private AppointmentTO appointment;
@@ -29,11 +31,11 @@ public class NoteTO implements Serializable{
 		this.note = note;
 	}
 	
-	public UserTO getUser() {
+	public User getUser() {
 		return user;
 	}
 	
-	public void setUser(UserTO user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	

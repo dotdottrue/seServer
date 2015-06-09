@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import de.project.dto.NoteTO;
+import de.project.entities.Note;
 
 @Stateless
 public class NoteDTOAssembler {
@@ -14,7 +15,7 @@ public class NoteDTOAssembler {
 	@EJB
 	private AppointmentDTOAssembler appointmentDtoAssembler;
 	
-	public NoteTO makeDTO(NoteTO note) {
+	public NoteTO makeDTO(Note note) {
 		NoteTO dto = new NoteTO();
 		dto.setId(note.getId());
 		dto.setNote(note.getNote());

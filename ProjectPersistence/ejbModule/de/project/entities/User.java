@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User implements Serializable{
@@ -25,6 +28,9 @@ public class User implements Serializable{
 	
 	@ManyToMany
 	private List<Discussion> discussions;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+	private List<Note> Notes;
 	
 	public User() {
 		super();
@@ -76,6 +82,23 @@ public class User implements Serializable{
 		this.projects = projects;
 	}
 	
+	
+	public List<Discussion> getDiscussions() {
+		return discussions;
+	}
+
+	public void setDiscussions(List<Discussion> discussions) {
+		this.discussions = discussions;
+	}
+
+	public List<Note> getNotes() {
+		return Notes;
+	}
+
+	public void setNotes(List<Note> notes) {
+		Notes = notes;
+	}
+
 	@Override
 	public String toString() {
 		return "Die Telefonnummer lautet: " + phoneNumber;

@@ -13,14 +13,14 @@ public class ProjectTO implements Serializable{
 	
 	private long id;
 	private ProjectStatus projectStatus;
-	private List<UserTO> members;
-	private List<MilestoneTO> milestones;
+	private List<User> members;
+	private List<Milestone> milestones;
 	private List<AppointmentTO> appointments;
 	private List<DiscussionTO> discussions;
 	private User owner;
 	private Date updatedOn;
 	private String projectName;
-
+	
 	public long getId() {
 		return id;
 	}
@@ -37,40 +37,19 @@ public class ProjectTO implements Serializable{
 		this.projectStatus = projectStatus;
 	}
 
-	public List<UserTO> getMembers() {
+	public List<User> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<UserTO> members) {
+	public void setMembers(List<User> members) {
 		this.members = members;
 	}
 
-	public List<MilestoneTO> getMilestone() {
+	public List<Milestone> getMilestones() {
 		return milestones;
 	}
 
-	public void setMilestone(List<MilestoneTO> milestones) {
-		this.milestones = milestones;
-	}
-
-	public Date getUpdatedOn() {
-		return updatedOn;
-	}
-
-	public void setUpdatedOn(Date date) {
-		this.updatedOn = date;
-	}
-	
-	public String toString() {
-		return "Project [id=" + id + ", projectStatus=" + projectStatus
-				+ ", member=" + members + "]";
-	}
-
-	public List<MilestoneTO> getMilestones() {
-		return milestones;
-	}
-
-	public void setMilestones(List<MilestoneTO> milestones) {
+	public void setMilestones(List<Milestone> milestones) {
 		this.milestones = milestones;
 	}
 
@@ -98,6 +77,14 @@ public class ProjectTO implements Serializable{
 		this.owner = owner;
 	}
 
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
 	public String getProjectName() {
 		return projectName;
 	}
@@ -109,9 +96,12 @@ public class ProjectTO implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
-		
+
+	public String toString() {
+		return "Project [id=" + id + ", projectStatus=" + projectStatus
+				+ ", member=" + members + "]";
+	}
+			
 }
 	
 	

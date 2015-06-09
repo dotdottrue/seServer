@@ -14,7 +14,6 @@ public class Note {
 	@GeneratedValue
 	private long id;
 	private String note;
-	private User user;
 	private String createdAt;
 	
 	@ManyToOne
@@ -23,6 +22,9 @@ public class Note {
 	
 	@OneToOne
 	private Appointment appointment;
+	
+	@ManyToOne
+	private User user;
 	
 	public Note() {
 		super();

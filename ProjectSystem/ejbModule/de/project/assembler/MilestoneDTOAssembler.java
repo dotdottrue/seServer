@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import de.project.dto.MilestoneTO;
+import de.project.entities.Milestone;
 
 @Stateless
 public class MilestoneDTOAssembler {
@@ -11,7 +12,7 @@ public class MilestoneDTOAssembler {
 	@EJB
 	private ProjectDTOAssembler projectDtoAssembler;
 	
-	public MilestoneTO makeDTO(MilestoneTO milestone) {
+	public MilestoneTO makeDTO(Milestone milestone) {
 		MilestoneTO dto = new MilestoneTO();
 		dto.setId(milestone.getId());
 		dto.setCreatedAt(milestone.getCreatedAt());
