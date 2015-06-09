@@ -48,11 +48,11 @@ public class Discussion {
 		this.users = users;
 	}
 
-	public Project getProjects() {
+	public Project getProject() {
 		return project;
 	}
 
-	public void setProjects(Project project) {
+	public void setProject(Project project) {
 		this.project = project;
 	}
 

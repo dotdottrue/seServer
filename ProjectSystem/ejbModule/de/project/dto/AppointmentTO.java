@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import de.project.entities.Note;
-import de.project.entities.User;
-
 public class AppointmentTO implements Serializable {
 
 	private static final long serialVersionUID = 4225307722069711177L;
 	
 	private long id;
 	private ProjectTO project;
-	private List<User> users;
-	private Note shortNote;
+	private List<UserTO> users;
+	private NoteTO shortNote;
 	private String topic;
 	private Date appointmentDate;
 	
@@ -34,19 +31,19 @@ public class AppointmentTO implements Serializable {
 		this.project = project;
 	}
 	
-	public List<User> getUsers() {
+	public List<UserTO> getUsers() {
 		return users;
 	}
 	
-	public void setUsers(List<User> list) {
+	public void setUsers(List<UserTO> list) {
 		this.users = list;
 	}
 	
-	public Note getShortNote() {
+	public NoteTO getShortNote() {
 		return shortNote;
 	}
 	
-	public void setShortNote(Note note) {
+	public void setShortNote(NoteTO note) {
 		this.shortNote = note;
 	}
 	

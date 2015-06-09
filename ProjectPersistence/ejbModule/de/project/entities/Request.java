@@ -26,7 +26,7 @@ public class Request {
 	private RequestStatus status;
 	
 	private User sourceUser;
-	private Project targetUser;
+	private User targetUser;
 	private String note;
 	private Date updatedAt;
 
@@ -46,11 +46,11 @@ public class Request {
 		this.sourceUser = sourceUser;
 	}
 
-	public Project getTargetUser() {
+	public User getTargetUser() {
 		return targetUser;
 	}
 
-	public void setTargetUser(Project targetUser) {
+	public void setTargetUser(User targetUser) {
 		this.targetUser = targetUser;
 	}
 

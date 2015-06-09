@@ -96,7 +96,24 @@ public class Project {
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
+
 	
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public List<Discussion> getDiscussions() {
+		return discussions;
+	}
+
+	public void setDiscussions(List<Discussion> discussions) {
+		this.discussions = discussions;
+	}
+
 	@Override
 	public String toString() {
 		return "Project [id=" + id + ", projectStatus=" + projectStatus

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import de.project.entities.*;
 import de.project.enumerations.*;
 
 
@@ -13,11 +12,11 @@ public class ProjectTO implements Serializable{
 
 	private long id;
 	private ProjectStatus projectStatus;
-	private List<User> members;
-	private List<Milestone> milestones;
+	private List<UserTO> members;
+	private List<MilestoneTO> milestones;
 	private List<AppointmentTO> appointments;
 	private List<DiscussionTO> discussions;
-	private User owner;
+	private UserTO owner;
 	private Date updatedOn;
 	private String projectName;
 	
@@ -37,19 +36,19 @@ public class ProjectTO implements Serializable{
 		this.projectStatus = projectStatus;
 	}
 
-	public List<User> getMembers() {
+	public List<UserTO> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<User> members) {
+	public void setMembers(List<UserTO> members) {
 		this.members = members;
 	}
 
-	public List<Milestone> getMilestones() {
+	public List<MilestoneTO> getMilestones() {
 		return milestones;
 	}
 
-	public void setMilestones(List<Milestone> milestones) {
+	public void setMilestones(List<MilestoneTO> milestones) {
 		this.milestones = milestones;
 	}
 
@@ -69,12 +68,12 @@ public class ProjectTO implements Serializable{
 		this.discussions = discussions;
 	}
 
-	public User getOwner() {
+	public UserTO getOwner() {
 		return owner;
 	}
 
-	public void setOwner(User owner) {
-		this.owner = owner;
+	public void setOwner(UserTO user) {
+		this.owner = user;
 	}
 
 	public Date getUpdatedOn() {

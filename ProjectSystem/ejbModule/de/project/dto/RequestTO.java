@@ -3,8 +3,6 @@ package de.project.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import de.project.entities.Project;
-import de.project.entities.User;
 import de.project.enumerations.RequestStatus;
 
 public class RequestTO implements Serializable {
@@ -12,9 +10,9 @@ public class RequestTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private long id;
-	private User sourceUser;
-	private Project targetUser;
-	private Project project;
+	private UserTO sourceUser;
+	private UserTO targetUser;
+	private ProjectTO project;
 	private String note;
 	private Date updatedAt;
 	private RequestStatus status;
@@ -27,28 +25,28 @@ public class RequestTO implements Serializable {
 		this.id = id;
 	}
 	
-	public User getSourceUser() {
+	public UserTO getSourceUser() {
 		return sourceUser;
 	}
 	
-	public void setSourceUser(User sourceUser) {
+	public void setSourceUser(UserTO sourceUser) {
 		this.sourceUser = sourceUser;
 	}
 	
-	public Project getTargetUser() {
+	public UserTO getTargetUser() {
 		return targetUser;
 	}
 	
-	public void setTargetUser(Project targetUser) {
+	public void setTargetUser(UserTO targetUser) {
 		this.targetUser = targetUser;
 	}
 	
-	public Project getProject() {
+	public ProjectTO getProject() {
 		return project;
 	}
 	
-	public void setProject(Project project2) {
-		this.project = project2;
+	public void setProject(ProjectTO project) {
+		this.project = project;
 	}
 	
 	public String getNote() {
