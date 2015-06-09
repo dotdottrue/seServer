@@ -10,68 +10,94 @@ import de.project.enumerations.*;
 
 public class ProjectTO implements Serializable{		
 	private static final long serialVersionUID = 1L;
-		private long id;
-		private ProjectStatus projectStatus;
-		private List<User> members;
-		private List<Milestone> milestone;
-		private Date updatedOn;
-		private String projectName;
+
+	private long id;
+	private ProjectStatus projectStatus;
+	private List<User> members;
+	private List<Milestone> milestones;
+	private List<AppointmentTO> appointments;
+	private List<DiscussionTO> discussions;
+	private User owner;
+	private Date updatedOn;
+	private String projectName;
 	
-		public String getProjectName() {
-			return projectName;
-		}
+	public long getId() {
+		return id;
+	}
 
-		public void setProjectName(String projectName) {
-			this.projectName = projectName;
-		}
+	public void setId(long id) {
+		this.id = id;
+	}
 
-		public String toString() {
-			return "Project [id=" + id + ", projectStatus=" + projectStatus
-					+ ", member=" + members + "]";
-		}
+	public ProjectStatus getProjectStatus() {
+		return projectStatus;
+	}
 
-		public long getId() {
-			return id;
-		}
+	public void setProjectStatus(ProjectStatus projectStatus) {
+		this.projectStatus = projectStatus;
+	}
 
-		public void setId(long id) {
-			this.id = id;
-		}
+	public List<User> getMembers() {
+		return members;
+	}
 
-		public ProjectStatus getProjectStatus() {
-			return projectStatus;
-		}
+	public void setMembers(List<User> members) {
+		this.members = members;
+	}
 
-		public void setProjectStatus(ProjectStatus projectStatus) {
-			this.projectStatus = projectStatus;
-		}
+	public List<Milestone> getMilestones() {
+		return milestones;
+	}
 
-		public List<User> getMembers() {
-			return members;
-		}
+	public void setMilestones(List<Milestone> milestones) {
+		this.milestones = milestones;
+	}
 
-		public void setMembers(List<User> members) {
-			this.members = members;
-		}
+	public List<AppointmentTO> getAppointments() {
+		return appointments;
+	}
 
-		public List<Milestone> getMilestone() {
-			return milestone;
-		}
+	public void setAppointments(List<AppointmentTO> appointments) {
+		this.appointments = appointments;
+	}
 
-		public void setMilestone(List<Milestone> milestone) {
-			this.milestone = milestone;
-		}
+	public List<DiscussionTO> getDiscussions() {
+		return discussions;
+	}
 
-		public Date getUpdatedOn() {
-			return updatedOn;
-		}
+	public void setDiscussions(List<DiscussionTO> discussions) {
+		this.discussions = discussions;
+	}
 
-		public void setUpdatedOn(Date date) {
-			this.updatedOn = date;
-		}
-		
-		
-		
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String toString() {
+		return "Project [id=" + id + ", projectStatus=" + projectStatus
+				+ ", member=" + members + "]";
+	}
+			
 }
 	
 	

@@ -1,7 +1,5 @@
 package de.project.dao.local;
 
-import java.util.List;
-
 import javax.ejb.Local;
 
 import de.project.entities.ProjectSession;

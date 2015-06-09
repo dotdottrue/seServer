@@ -16,7 +16,7 @@ public abstract class UserDTOAssembler {
 		dto.setLastName(user.getLastName());
 		dto.setProjects(user.getProjects());
 		dto.setRegistrationDate(user.getRegistrationDate());
-		
+		dto.setNotes(user.getNotes());
 		return dto;
 	}
 

@@ -1,6 +1,6 @@
 package de.project.entities;
 
-import java.util.Calendar;
+import java.sql.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,18 +19,16 @@ public class Request {
 	@GeneratedValue
 	private long id;
 	
-	private User sourceUser;
-	private Project targetUser;
-	
 	@ManyToOne
 	private Project project;
 	
-	
-	private String note;
-	private Calendar updatedAt;
-	
 	@Enumerated(EnumType.ORDINAL)
 	private RequestStatus status;
+	
+	private User sourceUser;
+	private Project targetUser;
+	private String note;
+	private Date updatedAt;
 
 	public long getId() {
 		return id;
@@ -72,11 +70,11 @@ public class Request {
 		this.note = note;
 	}
 
-	public Calendar getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(Calendar updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 

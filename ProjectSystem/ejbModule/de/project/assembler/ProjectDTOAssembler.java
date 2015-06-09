@@ -13,7 +13,7 @@ public class ProjectDTOAssembler {
 		ProjectTO dto = new ProjectTO();
 		dto.setId(project.getId());
 		dto.setMembers(project.getMembers());
-		dto.setMilestone(project.getMilestones());
+		dto.setMilestones(project.getMilestones());
 		dto.setProjectStatus(project.getProjectStatus());
 		dto.setUpdatedOn(project.getUpdatedOn());
 		

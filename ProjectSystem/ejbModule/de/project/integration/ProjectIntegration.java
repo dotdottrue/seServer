@@ -24,7 +24,7 @@ public class ProjectIntegration {
 		Project newProject = new Project();
 		newProject.setMembers(project.getMembers());
 		newProject.setOwner(user);
-		newProject.setMilestones(project.getMilestone());
+		newProject.setMilestones(project.getMilestones());
 		newProject.setProjectName(project.getProjectName());
 		newProject.setProjectStatus(project.getProjectStatus());
 		newProject.setUpdatedOn(project.getUpdatedOn());
