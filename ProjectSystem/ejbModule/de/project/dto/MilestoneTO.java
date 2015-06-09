@@ -55,9 +55,4 @@ public class MilestoneTO implements Serializable{
 		this.status = status;
 	}
 	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	
 }
