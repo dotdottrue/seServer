@@ -31,10 +31,10 @@ public class Project {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
 	private List<Milestone> milestones;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
 	private List<Appointment> appointments;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
 	private List<Discussion> discussions;
 	
 	private User owner;

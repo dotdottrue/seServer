@@ -34,9 +34,6 @@ public class AppointmentDTOAssembler {
 	@EJB
 	private DiscussionDTOAssembler discussionDtoAssembler;
 	
-	@EJB
-	private AppointmentDTOAssembler appointmentDtoAssembler;
-	
 	public AppointmentTO makeDTO(Appointment appointment) {
 		AppointmentTO dto = new AppointmentTO();
 		dto.setId(appointment.getId());
@@ -97,7 +94,7 @@ public class AppointmentDTOAssembler {
 			noteTO.setCreatedAt(note.getCreatedAt());
 			noteTO.setUser(userDtoAssembler.makeDTO(note.getUser()));
 			noteTO.setDiscussion(discussionDtoAssembler.makeDTO(note.getDiscussion()));
-			noteTO.setAppointment(appointmentDtoAssembler.makeDTO(note.getAppointment()));
+			noteTO.setAppointment(makeDTO(note.getAppointment()));
 			
 			dto.add(noteTO);
 		}
@@ -134,7 +131,7 @@ public class AppointmentDTOAssembler {
 			noteTO.setCreatedAt(note.getCreatedAt());
 			noteTO.setUser(userDtoAssembler.makeDTO(note.getUser()));
 			noteTO.setDiscussion(discussionDtoAssembler.makeDTO(note.getDiscussion()));
-			noteTO.setAppointment(appointmentDtoAssembler.makeDTO(note.getAppointment()));
+			noteTO.setAppointment(makeDTO(note.getAppointment()));
 			
 			dto.add(noteTO);
 		}

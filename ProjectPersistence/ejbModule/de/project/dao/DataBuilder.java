@@ -23,7 +23,7 @@ public class DataBuilder {
 	private EntityManager em;
 	
 	@Resource
-	private String phoneNumber1, phoneNumber2, projectName;
+	private String phoneNumber1, phoneNumber2;
 	
 	@PostConstruct
 	private void init() {

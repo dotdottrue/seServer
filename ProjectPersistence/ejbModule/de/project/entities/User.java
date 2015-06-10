@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -17,6 +18,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	//@GeneratedValue
 	private String phoneNumber;
 	private String firstName;
 	private String lastName;
