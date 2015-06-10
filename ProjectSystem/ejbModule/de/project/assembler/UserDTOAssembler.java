@@ -20,7 +20,7 @@ import de.project.entities.Project;
 import de.project.entities.User;
 
 @Stateless
-public abstract class UserDTOAssembler {
+public class UserDTOAssembler {
 	
 	@EJB
 	private ProjectDTOAssembler projectDtoAssembler;

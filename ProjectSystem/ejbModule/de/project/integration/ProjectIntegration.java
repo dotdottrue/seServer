@@ -1,4 +1,4 @@
-package de.project.integration;
+/*package de.project.integration;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -55,3 +55,4 @@ public class ProjectIntegration {
 	
 
 }
+*/
