@@ -3,8 +3,6 @@
 	<name>ProjectEAR</name>
 	<comment></comment>
 	<projects>
-		<project>ProjectSystem</project>
-		<project>ProjectPersistence</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
