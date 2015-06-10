@@ -1,6 +1,6 @@
 package de.project.exception;
 
-import de.project.enumerations.*;
+import de.project.enumerations.ReturnCode;
 
 public class ProjectException extends Exception {
 
