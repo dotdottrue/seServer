@@ -21,17 +21,11 @@ public class User implements Serializable{
 	private String phoneNumber;
 	private String firstName;
 	private String lastName;
-
 	private Date registrationDate;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="members")
 	private List<Project> projects;
 	
-	@ManyToMany
-	private List<Discussion> discussions;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
-	private List<Note> Notes;
 	
 	public User() {
 		super();
@@ -81,23 +75,6 @@ public class User implements Serializable{
 
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
-	}
-	
-	
-	public List<Discussion> getDiscussions() {
-		return discussions;
-	}
-
-	public void setDiscussions(List<Discussion> discussions) {
-		this.discussions = discussions;
-	}
-
-	public List<Note> getNotes() {
-		return Notes;
-	}
-
-	public void setNotes(List<Note> notes) {
-		Notes = notes;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package de.project.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,8 +13,13 @@ import javax.persistence.ManyToOne;
 import de.project.enumerations.MilestoneStatus;
 
 @Entity
-public class Milestone {
+public class Milestone implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private long id;
@@ -21,9 +27,6 @@ public class Milestone {
 	private Date createdAt;
 	private String milestoneName;
 
-	@ManyToOne//oder doch ManyToMany
-	private Project project;
-	
 	@Enumerated(EnumType.ORDINAL)
 	private MilestoneStatus status;
 	
@@ -33,14 +36,6 @@ public class Milestone {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
 	}
 
 	public Date getCreatedAt() {

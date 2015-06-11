@@ -1,5 +1,6 @@
 package de.project.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,20 +12,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Appointment {
+public class Appointment implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private long id;
-	
-	@ManyToOne
-	private Project project;
-	
-	@ManyToMany
-	private List<User> users;
-	
-	@OneToOne(mappedBy = "appointment")
+		
+	/*@OneToOne(mappedBy = "appointment")
 	private Note shortNote;
+	*/ 
 	
 	private String topic;
 	private Date appointmentDate;
@@ -36,23 +37,7 @@ public class Appointment {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	public Project getProject() {
-		return project;
-	}
-	
-	public void setProject(Project project) {
-		this.project = project;
-	}
-	
-	public List<User> getUsers() {
-		return users;
-	}
-	
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-	
+	/*
 	public Note getShortNote() {
 		return shortNote;
 	}
@@ -60,7 +45,7 @@ public class Appointment {
 	public void setShortNote(Note shortNote) {
 		this.shortNote = shortNote;
 	}
-	
+	*/
 	public String getTopic() {
 		return topic;
 	}
