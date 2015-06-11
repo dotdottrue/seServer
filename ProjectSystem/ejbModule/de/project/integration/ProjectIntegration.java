@@ -11,18 +11,19 @@ import org.jboss.logging.Logger;
 import org.jboss.ws.api.annotation.WebContext;
 
 import de.project.assembler.ProjectDTOAssembler;
-import de.project.assembler.UserDTOAssembler;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.dto.MilestoneTO;
-import de.project.dto.ProjectResponse;
-import de.project.dto.ProjectTO;
 import de.project.dto.ReturncodeResponse;
-import de.project.dto.UserTO;
+import de.project.dto.project.ProjectResponse;
+import de.project.dto.project.ProjectTO;
+import de.project.dto.user.UserTO;
 import de.project.entities.Milestone;
 import de.project.entities.Project;
+import de.project.entities.ProjectSession;
 import de.project.entities.User;
-import de.project.exception.ProjectException;
+import de.project.enumerations.ReturnCode;
+import de.project.exception.ProjectValidationException;
 
 @WebService
 @WebContext(contextRoot = "/project")
@@ -41,50 +42,52 @@ public class ProjectIntegration {
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
 	
-	public ReturncodeResponse createProject(String phoneNumber, ProjectTO project){
-		//ReturncodeResponse response = new ReturncodeResponse(); 
+	public ReturncodeResponse createProject(String phoneNumber, ProjectTO project, int sessionId) {
+		ReturncodeResponse response = new ReturncodeResponse(); 
 		
 		try{
-			User user = userDAO.findUserByNumber(phoneNumber);
+			ProjectSession session = userDAO.getSession(sessionId);
 			Project newProject = new Project();
 			
 			List<User> users = new ArrayList<User>();
 			List<UserTO> usersTO = new ArrayList<UserTO>();
 			
-			for(UserTO userto : usersTO){
+			for(UserTO userTO : usersTO) {
 				User u = new User();
-				u.setPhoneNumber(userto.getPhoneNumber());
-				u.setFirstName(userto.getFirstName());
-				u.setLastName(userto.getLastName());
+				u.setPhoneNumber(userTO.getPhoneNumber());
+				u.setFirstName(userTO.getFirstName());
+				u.setLastName(userTO.getLastName());
 				users.add(u);
 			}
 			
 			List<Milestone> milestones = new ArrayList<Milestone>();
 			List<MilestoneTO> milestonesTO = new ArrayList<MilestoneTO>();
 			
-			for(MilestoneTO mileto : milestonesTO){
+			for(MilestoneTO milestoneTO : milestonesTO) {
 				Milestone m = new Milestone();
-				m.setId(mileto.getId());
-				m.setMilestoneName(mileto.getMilestoneName());
-				m.setStatus(mileto.getStatus());			
+				m.setId(milestoneTO.getId());
+				m.setMilestoneName(milestoneTO.getMilestoneName());
+				m.setStatus(milestoneTO.getStatus());			
 			}
 			
 			newProject.setMembers(users);
-			newProject.setOwner(user);
+			newProject.setOwner(session.getUser());
 			newProject.setMilestones(milestones);
 			newProject.setProjectName(project.getProjectName());
 			newProject.setProjectStatus(project.getProjectStatus());
 			newProject.setUpdatedOn(project.getUpdatedOn());
 			
-			projectDAO.createProject(newProject);
+			if(newProject.projectValidation()) {
+				projectDAO.createProject(newProject);
+				LOGGER.info("Project wurde erfolgreich angelegt");
+			}else {
+				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefüllt waren.");
+				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefüllt");
+			}
 			
-			LOGGER.info("Project wurde erfolgreich angelegt");
-			
-			
-			
-			}catch(Exception ex) {
-				//response.setReturnCode(ex.getErrorCode());
-				//response.setMessage(ex.getMessage());
+			}catch(ProjectValidationException ex) {
+				response.setReturnCode(ex.getErrorCode());
+				response.setMessage(ex.getMessage());
 			}
 		return new ReturncodeResponse();
 	}

@@ -15,30 +15,19 @@ import de.project.entities.Note;
 public class DiscussionDTOAssembler {
 	
 	@EJB
-	private ProjectDTOAssembler projectDtoAssembler;
-	
-	@EJB
-	private UserDTOAssembler userDtoAssembler;
-	
-	@EJB
-	private DiscussionDTOAssembler discussionDtoAssembler;
-	
-	@EJB
-	private AppointmentDTOAssembler appointmentDtoAssembler;
+	private NoteDTOAssembler noteDtoAssembler;
 	
 	public DiscussionTO makeDTO(Discussion discussion){	
 		DiscussionTO dto = new DiscussionTO();
 		dto.setId(discussion.getId());
 		dto.setTopic(discussion.getTopic());
 		dto.setCreatedAt(discussion.getCreatedAt());
-		dto.setTopic(discussion.getTopic());
-		dto.setProject(projectDtoAssembler.makeDTO(discussion.getProject()));
 		dto.setNotes(makeDTO(discussion.getNotes(), dto));
 		
 		return dto;
 	}
 	
-	private List<NoteTO> makeDTO(List<Note> notes, DiscussionTO dto2) {
+	private List<NoteTO> makeDTO(List<Note> notes, DiscussionTO discussionTO) {
 
 		List<NoteTO> dto = new ArrayList<>();
 
@@ -47,9 +36,6 @@ public class DiscussionDTOAssembler {
 			noteTO.setId(note.getId());
 			noteTO.setNote(note.getNote());
 			noteTO.setCreatedAt(note.getCreatedAt());
-			noteTO.setUser(userDtoAssembler.makeDTO(note.getUser()));
-			noteTO.setDiscussion(discussionDtoAssembler.makeDTO(note.getDiscussion()));
-			noteTO.setAppointment(appointmentDtoAssembler.makeDTO(note.getAppointment()));
 			
 			dto.add(noteTO);
 		}

@@ -1,26 +1,19 @@
 package de.project.entities;
 
-import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Note implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Note {
+
 	@Id
 	@GeneratedValue
 	private long id;
 	private String note;
-	private String createdAt;
+	private Date createdAt;
 	
 	/*
 	@OneToOne
@@ -48,11 +41,11 @@ public class Note implements Serializable {
 		this.note = userNote;
 	}
 
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 

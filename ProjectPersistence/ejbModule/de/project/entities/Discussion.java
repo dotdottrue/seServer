@@ -1,6 +1,5 @@
 package de.project.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -8,18 +7,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Discussion implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Discussion {
 
 	@Id
 	@GeneratedValue
@@ -29,7 +20,6 @@ public class Discussion implements Serializable{
 	private List<Note> notes;
 	
 	private String topic;
-	
 	private Date createdAt;
 
 	public long getId() {

@@ -12,7 +12,6 @@ public class MilestoneTO implements Serializable{
 	private long id;
 	private Date createdAt;
 	private String milestoneName;
-	private ProjectTO project;
 	private MilestoneStatus status;
 	
 	public long getId() {
@@ -37,14 +36,6 @@ public class MilestoneTO implements Serializable{
 	
 	public void setMilestoneName(String milestoneName) {
 		this.milestoneName = milestoneName;
-	}
-	
-	public ProjectTO getProject() {
-		return project;
-	}
-	
-	public void setProject(ProjectTO project) {
-		this.project = project;
 	}
 	
 	public MilestoneStatus getStatus() {

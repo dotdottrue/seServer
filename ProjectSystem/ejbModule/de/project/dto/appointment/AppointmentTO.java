@@ -1,17 +1,13 @@
-package de.project.dto;
+package de.project.dto.appointment;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class AppointmentTO implements Serializable {
 
 	private static final long serialVersionUID = 4225307722069711177L;
 	
 	private long id;
-	private ProjectTO project;
-	private List<UserTO> users;
-	private NoteTO shortNote;
 	private String topic;
 	private Date appointmentDate;
 	
@@ -21,30 +17,6 @@ public class AppointmentTO implements Serializable {
 	
 	public void setId(long id) {
 		this.id = id;
-	}
-	
-	public ProjectTO getProject() {
-		return project;
-	}
-	
-	public void setProject(ProjectTO project) {
-		this.project = project;
-	}
-	
-	public List<UserTO> getUsers() {
-		return users;
-	}
-	
-	public void setUsers(List<UserTO> list) {
-		this.users = list;
-	}
-	
-	public NoteTO getShortNote() {
-		return shortNote;
-	}
-	
-	public void setShortNote(NoteTO note) {
-		this.shortNote = note;
 	}
 	
 	public String getTopic() {
@@ -63,8 +35,5 @@ public class AppointmentTO implements Serializable {
 		this.appointmentDate = appointmentDate;
 	}
 	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
 }

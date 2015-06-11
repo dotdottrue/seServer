@@ -1,6 +1,7 @@
 package de.project.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class NoteTO implements Serializable{
 	
@@ -8,10 +9,7 @@ public class NoteTO implements Serializable{
 	
 	private long id;
 	private String note;
-	private UserTO user;
-	private String createdAt;
-	private DiscussionTO discussion;
-	private AppointmentTO appointment;
+	private Date createdAt;
 	
 	public long getId() {
 		return id;
@@ -29,40 +27,12 @@ public class NoteTO implements Serializable{
 		this.note = note;
 	}
 	
-	public UserTO getUser() {
-		return user;
-	}
-	
-	public void setUser(UserTO user) {
-		this.user = user;
-	}
-	
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 	
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
-	}
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public DiscussionTO getDiscussion() {
-		return discussion;
-	}
-
-	public void setDiscussion(DiscussionTO discussionTO) {
-		this.discussion = discussionTO;
-	}
-
-	public AppointmentTO getAppointment() {
-		return appointment;
-	}
-
-	public void setAppointment(AppointmentTO appointment) {
-		this.appointment = appointment;
 	}
 	
 }

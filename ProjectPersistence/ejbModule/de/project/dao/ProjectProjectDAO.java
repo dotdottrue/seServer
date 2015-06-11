@@ -36,6 +36,7 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 
 		@Override
 		public Project createProject(Project project) {
+			project.setProjectStatus(ProjectStatus.INTIME);
 			em.persist(project);
 			
 			return project;

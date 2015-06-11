@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 public class User implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6846170565657858908L;
 	
 	@Id
 	//@GeneratedValue
@@ -32,8 +29,10 @@ public class User implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(String phoneNumber, Date registrationDate) {
+	public User(String phoneNumber, String firstName, String lastName, Date registrationDate) {
 		this.phoneNumber = phoneNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.registrationDate = registrationDate;
 	}
 	

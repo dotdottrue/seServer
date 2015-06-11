@@ -9,8 +9,6 @@ public class DiscussionTO implements Serializable{
 	private static final long serialVersionUID = -7131993484423007681L;
 	
 	private long id;
-	private List<UserTO> users;
-	private ProjectTO project;
 	private List<NoteTO> notes;
 	private String topic;
 	private Date createdAt;
@@ -21,22 +19,6 @@ public class DiscussionTO implements Serializable{
 	
 	public void setId(long id) {
 		this.id = id;
-	}
-	
-	public List<UserTO> getUsers() {
-		return users;
-	}
-	
-	public void setUsers(List<UserTO> users) {
-		this.users = users;
-	}
-	
-	public ProjectTO getProject() {
-		return project;
-	}
-	
-	public void setProject(ProjectTO project) {
-		this.project = project;
 	}
 	
 	public List<NoteTO> getNotes() {
@@ -62,5 +44,5 @@ public class DiscussionTO implements Serializable{
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-
+	
 }

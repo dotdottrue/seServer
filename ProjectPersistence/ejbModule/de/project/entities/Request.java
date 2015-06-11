@@ -14,7 +14,6 @@ import de.project.enumerations.RequestStatus;
 @Entity
 public class Request {
 	
-	
 	@Id
 	@GeneratedValue
 	private long id;

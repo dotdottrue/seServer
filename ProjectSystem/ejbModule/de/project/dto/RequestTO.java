@@ -3,6 +3,8 @@ package de.project.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import de.project.dto.project.ProjectTO;
+import de.project.dto.user.UserTO;
 import de.project.enumerations.RequestStatus;
 
 public class RequestTO implements Serializable {

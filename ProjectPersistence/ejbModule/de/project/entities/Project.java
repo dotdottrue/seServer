@@ -1,31 +1,22 @@
 package de.project.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
 
 import de.project.enumerations.ProjectStatus;
 
 @Entity
-public class Project implements Serializable {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Project {
 
 	@Id
 	@GeneratedValue
@@ -48,7 +39,6 @@ public class Project implements Serializable {
 	
 	@ManyToOne
 	private User owner;
-	
 	
 	private Date updatedOn;
 	private String projectName;
@@ -128,8 +118,14 @@ public class Project implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", projectStatus=" + projectStatus
-				+ ", member=" + members + "]";
+		return "Project: " + id + "von " + owner ;
+	}
+	
+	public boolean projectValidation() {
+		if((projectName != null) && (owner != null)) 
+			return true;
+		else
+			return false;			
 	}
 	
 }

@@ -1,8 +1,10 @@
-package de.project.dto;
+package de.project.dto.user;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import de.project.dto.project.ProjectTO;
 
 public class UserTO implements Serializable{
 		
@@ -13,8 +15,6 @@ public class UserTO implements Serializable{
 	private String lastName;
 	private Date registrationDate;
 	private List<ProjectTO> projects;
-	private List<DiscussionTO> discussions;
-	private List<NoteTO> Notes;
 	
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -55,22 +55,5 @@ public class UserTO implements Serializable{
 	public void setProjects(List<ProjectTO> projects) {
 		this.projects = projects;
 	}
-	
-	public List<DiscussionTO> getDiscussions() {
-		return discussions;
-	}
-	
-	public void setDiscussions(List<DiscussionTO> discussions) {
-		this.discussions = discussions;
-	}
-	
-	public List<NoteTO> getNotes() {
-		return Notes;
-	}
-	
-	public void setNotes(List<NoteTO> notes) {
-		Notes = notes;
-	}
-	
-	
+		
 }

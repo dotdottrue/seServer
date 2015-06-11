@@ -1,6 +1,5 @@
 package de.project.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -8,17 +7,11 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import de.project.enumerations.MilestoneStatus;
 
 @Entity
-public class Milestone implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Milestone {
 
 	@Id
 	@GeneratedValue

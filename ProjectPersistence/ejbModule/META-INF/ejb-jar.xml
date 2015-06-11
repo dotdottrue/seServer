@@ -14,6 +14,26 @@
         <env-entry-type>java.lang.String</env-entry-type>
         <env-entry-value>testnummer2</env-entry-value>
       </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/firstName1</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>firstName1</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/firstName2</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>firstName2</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/lastName1</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>lastName1</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/lastName2</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>lastName2</env-entry-value>
+      </env-entry>
     </session>
   </enterprise-beans>
 </ejb-jar>

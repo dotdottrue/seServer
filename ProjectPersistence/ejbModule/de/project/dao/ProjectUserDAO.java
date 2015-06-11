@@ -22,8 +22,8 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
 	}
 	
 	@Override
-    public User createUser(String phoneNumber) {
-    	User user = new User(phoneNumber, new Date());
+    public User createUser(String phoneNumber, String firstName, String lastName) {
+    	User user = new User(phoneNumber, firstName, lastName, new Date());
     	em.persist(user);
     	return user;
     }
@@ -45,7 +45,7 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
     }
     
     @Override
-    public boolean closeSession(int sessionId) {
+    public boolean endSession(int sessionId) {
     	ProjectSession session = em.find(ProjectSession.class, sessionId);
     	if(session != null) {
     		em.remove(session);
