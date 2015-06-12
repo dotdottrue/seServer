@@ -42,7 +42,7 @@ public class UserIntegration {
 				ProjectSession session = userDAO.createSession(user);
 				LOGGER.info("Session mit dem Benutzer " + user + " wurde aufgebaut");
 			
-				response.setProjectSession(projectSessionDtoAssembler.makeDTO(session));
+				response.setSession(projectSessionDtoAssembler.makeDTO(session));
 			}else{
 				LOGGER.info("Registrierung fehlgeschlagen. Benutzer existiert bereits:");
 				
@@ -65,7 +65,7 @@ public class UserIntegration {
 				ProjectSession session = userDAO.createSession(user);
 				LOGGER.info("Benutzer wurde erfolgreich eingeloggt. Die Session lautet: "+ session);
 				
-				response.setProjectSession(projectSessionDtoAssembler.makeDTO(session));
+				response.setSession(projectSessionDtoAssembler.makeDTO(session));
 			}else{
 				LOGGER.info("Login fehlgeschlagen. Benutzer existiert noch nicht.");
 				throw new InvalidLoginException(ReturnCode.ERROR, "Die Nummer bzw. der Benutzer existiert noch nicht!");
