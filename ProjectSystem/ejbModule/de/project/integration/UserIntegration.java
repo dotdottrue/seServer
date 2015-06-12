@@ -25,7 +25,7 @@ public class UserIntegration {
 	
 	private static final Logger LOGGER = Logger.getLogger(UserIntegration.class);
 	
-	@EJB(beanInterface=de.project.dao.local.ProjectUserDAOLocal.class)
+	@EJB(beanName= "ProjectUserDAO", beanInterface = ProjectUserDAOLocal.class)
 	private ProjectUserDAOLocal userDAO;
 	
 	@EJB

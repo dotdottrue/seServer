@@ -23,20 +23,8 @@ import de.project.entities.User;
 public class ProjectDTOAssembler {
 	
 	@EJB
-	private ProjectDTOAssembler projectDtoAssembler;
-	
-	@EJB
-	private DiscussionDTOAssembler discussionDtoAssembler;
-	
-	@EJB
-	private AppointmentDTOAssembler appointmentDtoAssembler;
-	
-	@EJB
 	private UserDTOAssembler userDtoAssembler;
-	
-	@EJB
-	private NoteDTOAssembler noteDtoAssembler;
-	
+		
 	public ProjectTO makeDTO(Project project){
 		
 		ProjectTO dto = new ProjectTO();

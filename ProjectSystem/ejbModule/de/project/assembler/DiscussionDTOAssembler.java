@@ -3,7 +3,6 @@ package de.project.assembler;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import de.project.dto.DiscussionTO;
@@ -13,9 +12,6 @@ import de.project.entities.Note;
 
 @Stateless
 public class DiscussionDTOAssembler {
-	
-	@EJB
-	private NoteDTOAssembler noteDtoAssembler;
 	
 	public DiscussionTO makeDTO(Discussion discussion){	
 		DiscussionTO dto = new DiscussionTO();

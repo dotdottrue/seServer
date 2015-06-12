@@ -30,10 +30,10 @@ import de.project.exception.ProjectValidationException;
 @Stateless
 public class ProjectIntegration {
 	
-	@EJB(beanInterface=de.project.dao.local.ProjectProjectDAOLocal.class)
+	@EJB(beanName = "ProjectProjectDAO", beanInterface = ProjectProjectDAOLocal.class)
 	private ProjectProjectDAOLocal projectDAO;
 	
-	@EJB(beanInterface=de.project.dao.local.ProjectUserDAOLocal.class)
+	@EJB(beanName = "ProjectUserDAO", beanInterface = ProjectUserDAOLocal.class)
 	private ProjectUserDAOLocal userDAO;
 	
 	@EJB
