@@ -29,10 +29,8 @@ public class User implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 	
-	public User(String phoneNumber, String firstName, String lastName, Date registrationDate) {
+	public User(String phoneNumber, Date registrationDate) {
 		this.phoneNumber = phoneNumber;
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.registrationDate = registrationDate;
 	}
 	

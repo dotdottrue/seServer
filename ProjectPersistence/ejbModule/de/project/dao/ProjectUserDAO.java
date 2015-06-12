@@ -22,8 +22,8 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
 	}
 	
 	@Override
-    public User createUser(String phoneNumber, String firstName, String lastName) {
-    	User user = new User(phoneNumber, firstName, lastName, new Date());
+    public User createUser(String phoneNumber) {
+    	User user = new User(phoneNumber, new Date());
     	em.persist(user);
     	return user;
     }

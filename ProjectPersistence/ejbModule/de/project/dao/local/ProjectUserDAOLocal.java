@@ -12,7 +12,7 @@ public interface ProjectUserDAOLocal {
 
     public ProjectSession createSession(User user);
 
-    public User createUser(String phoneNumber, String firstName, String lastName);
+    public User createUser(String phoneNumber);
 
     public boolean endSession(int sessionId);
 

@@ -31,12 +31,12 @@ public class UserIntegration {
 	@EJB
 	private ProjectSessionDTOAssembler projectSessionDtoAssembler;
 	
-	public ProjectUserResponse registerUser(String phonenumber, String firstName, String lastName){
+	public ProjectUserResponse registerUser(String phonenumber) {
 		ProjectUserResponse response = new ProjectUserResponse();
 		try {
 			User user = userDAO.findUserByNumber(phonenumber);
 			if(user == null){
-				user = userDAO.createUser(phonenumber, firstName, lastName);
+				user = userDAO.createUser(phonenumber);
 				LOGGER.info("Benutzer " + user + " erfolgreich angelegt.");
 				
 				ProjectSession session = userDAO.createSession(user);

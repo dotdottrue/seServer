@@ -4,6 +4,7 @@
     <session>
       <ejb-name>DataBuilder</ejb-name>
       <ejb-class>de.project.dao.DataBuilder</ejb-class>
+      <session-type>Singleton</session-type>
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/phoneNumber1</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>

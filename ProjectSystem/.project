@@ -3,6 +3,7 @@
 	<name>ProjectSystem</name>
 	<comment></comment>
 	<projects>
+		<project>ProjectPersistence</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

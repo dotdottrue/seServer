@@ -23,14 +23,14 @@ public class DataBuilder {
 	private EntityManager em;
 	
 	@Resource
-	private String phoneNumber1, phoneNumber2, firstName1, firstName2, lastName1, lastName2;
+	private String phoneNumber1, phoneNumber2;
 	
 	@PostConstruct
 	private void init() {
 		User user1 = em.find(User.class, phoneNumber1); 
 		if (phoneNumber1 == null) {
 			//Benutzer muss erst angelegt werden
-			user1 = new User(phoneNumber1, firstName1, lastName1, new Date());
+			user1 = new User(phoneNumber1, new Date());
 			em.persist(user1);		
 		}
 		LOGGER.info("Neu angelegt: " + user1);
@@ -38,7 +38,7 @@ public class DataBuilder {
 		User user2 = em.find(User.class, phoneNumber2); 
 		if (phoneNumber1 == null) {
 			//Benutzer muss erst angelegt werden
-			user2 = new User(phoneNumber1, firstName2, lastName2, new Date());
+			user2 = new User(phoneNumber1, new Date());
 			em.persist(user2);	
 		}
 		LOGGER.info("Neu angelegt: " + user2);
