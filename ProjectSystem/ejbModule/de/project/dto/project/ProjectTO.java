@@ -24,6 +24,7 @@ public class ProjectTO implements Serializable{
 	private UserTO owner;
 	private Date updatedOn;
 	private String projectName;
+	private String description;
 	
 	public long getId() {
 		return id;
@@ -95,7 +96,15 @@ public class ProjectTO implements Serializable{
 	
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
-	}	
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 			
 }
 	

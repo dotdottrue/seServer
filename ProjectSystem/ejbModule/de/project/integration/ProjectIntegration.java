@@ -1,6 +1,7 @@
 package de.project.integration;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -16,12 +17,14 @@ import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.dto.MilestoneTO;
 import de.project.dto.ReturncodeResponse;
 import de.project.dto.project.ProjectResponse;
+import de.project.dto.project.ProjectsResponse;
 import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
 import de.project.entities.Milestone;
 import de.project.entities.Project;
 import de.project.entities.ProjectSession;
 import de.project.entities.User;
+import de.project.enumerations.ProjectStatus;
 import de.project.enumerations.ReturnCode;
 import de.project.exception.ProjectValidationException;
 
@@ -42,7 +45,7 @@ public class ProjectIntegration {
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
 	
-	public ReturncodeResponse createProject(String phoneNumber, ProjectTO project, int sessionId) {
+	public ReturncodeResponse createProject(String phoneNumber, String projectName, String description, int sessionId) {
 		ReturncodeResponse response = new ReturncodeResponse(); 
 		
 		try{
@@ -73,9 +76,9 @@ public class ProjectIntegration {
 			newProject.setMembers(users);
 			newProject.setOwner(session.getUser());
 			newProject.setMilestones(milestones);
-			newProject.setProjectName(project.getProjectName());
-			newProject.setProjectStatus(project.getProjectStatus());
-			newProject.setUpdatedOn(project.getUpdatedOn());
+			newProject.setProjectName(projectName);
+			newProject.setProjectStatus(ProjectStatus.INTIME);
+			newProject.setUpdatedOn(new Date());
 			
 			if(newProject.projectValidation()) {
 				projectDAO.createProject(newProject);
@@ -92,13 +95,13 @@ public class ProjectIntegration {
 		return new ReturncodeResponse();
 	}
 	
-	public ProjectResponse getProjectsByPhone(String phonenumber){
+	public ProjectsResponse getProjectsByPhone(String phonenumber){
 		
 		try {
 			
 			User user = userDAO.findUserByNumber(phonenumber);
 			List<Project> projects = projectDAO.findProjects(user);
-			ProjectResponse response = new ProjectResponse();
+			ProjectsResponse response = new ProjectsResponse();
 			List<ProjectTO> projectsTO = new ArrayList<ProjectTO>();
 			
 			for(Project p : projects){
@@ -116,10 +119,16 @@ public class ProjectIntegration {
 			return null;
 		}
 		
-		
-		
-		
 	}
 	
-
+	public ProjectResponse updateProject(long id) {
+		
+		try {
+			Project project = projectDAO.findProjectById(id);
+			
+		}
+		
+		return null;		
+	}
+	
 }

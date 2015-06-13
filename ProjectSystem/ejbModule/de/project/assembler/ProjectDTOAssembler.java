@@ -31,6 +31,7 @@ public class ProjectDTOAssembler {
 		dto.setId(project.getId());
 		dto.setOwner(userDtoAssembler.makeDTO(project.getOwner()));
 		dto.setProjectName(project.getProjectName());
+		dto.setDescription(project.getDescription());
 		dto.setProjectStatus(project.getProjectStatus());
 		dto.setUpdatedOn(project.getUpdatedOn());
 		dto.setMembers(makeDTO(project.getMembers()));
@@ -114,6 +115,7 @@ public class ProjectDTOAssembler {
 			projectTO.setId(project.getId());
 			projectTO.setOwner(userDtoAssembler.makeDTO(project.getOwner()));
 			projectTO.setProjectName(project.getProjectName());
+			projectTO.setDescription(project.getDescription());
 			projectTO.setProjectStatus(project.getProjectStatus());
 			projectTO.setUpdatedOn(project.getUpdatedOn());
 			projectTO.setAppointments(makeDTO2(project.getAppointments()));

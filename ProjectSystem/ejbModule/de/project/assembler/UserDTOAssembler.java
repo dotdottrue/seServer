@@ -46,6 +46,7 @@ public class UserDTOAssembler {
 			projectTO.setId(project.getId());
 			projectTO.setOwner(userDtoAssembler.makeDTO(project.getOwner()));
 			projectTO.setProjectName(project.getProjectName());
+			projectTO.setDescription(project.getDescription());
 			projectTO.setProjectStatus(project.getProjectStatus());
 			projectTO.setUpdatedOn(project.getUpdatedOn());
 			projectTO.setAppointments(makeDTO2(project.getAppointments()));

@@ -19,7 +19,7 @@ import de.project.exception.UserLogoutException;
 import de.project.exception.UserRegistrationException;
 
 @WebService
-@WebContext(contextRoot = "/user")
+@WebContext(contextRoot = "/project")
 @Stateless
 public class UserIntegration {
 	

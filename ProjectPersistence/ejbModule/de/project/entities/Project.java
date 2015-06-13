@@ -42,6 +42,7 @@ public class Project {
 	
 	private Date updatedOn;
 	private String projectName;
+	private String description;
 	
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
@@ -114,6 +115,14 @@ public class Project {
 
 	public void setDiscussions(List<Discussion> discussions) {
 		this.discussions = discussions;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override
