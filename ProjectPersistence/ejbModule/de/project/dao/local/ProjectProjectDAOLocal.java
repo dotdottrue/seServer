@@ -13,7 +13,7 @@ public interface ProjectProjectDAOLocal {
 
 	public Project findProjectById(long id);
 	
-	public void saveProject(Project project);
+	public void updateProject(Project project);
 	
 	public List<Project> findProjects(User currentUser);
 	

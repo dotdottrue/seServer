@@ -26,6 +26,8 @@ import de.project.entities.ProjectSession;
 import de.project.entities.User;
 import de.project.enumerations.ProjectStatus;
 import de.project.enumerations.ReturnCode;
+import de.project.exception.PermissionDeniedException;
+import de.project.exception.ProjectNotExistException;
 import de.project.exception.ProjectValidationException;
 
 @WebService
@@ -97,38 +99,60 @@ public class ProjectIntegration {
 	
 	public ProjectsResponse getProjectsByPhone(String phonenumber){
 		
-		try {
-			
-			User user = userDAO.findUserByNumber(phonenumber);
-			List<Project> projects = projectDAO.findProjects(user);
-			ProjectsResponse response = new ProjectsResponse();
-			List<ProjectTO> projectsTO = new ArrayList<ProjectTO>();
-			
-			for(Project p : projects){
-				projectsTO.add(projectassembler.makeDTO(p));
-			}
-					
-			response.setProjects(projectsTO);
-			response.setPhonenumber(phonenumber);
-			
-			return response;
-			
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-			return null;
+		ProjectsResponse response = new ProjectsResponse();
+	
+		User user = userDAO.findUserByNumber(phonenumber);
+		List<Project> projects = projectDAO.findProjects(user);
+		List<ProjectTO> projectsTO = new ArrayList<ProjectTO>();
+		
+		for(Project p : projects){
+			projectsTO.add(projectassembler.makeDTO(p));
 		}
+				
+		response.setProjects(projectsTO);
+		response.setPhonenumber(phonenumber);
+		if(projectsTO.isEmpty()) {
+			LOGGER.info("Eine Liste der Projekte für den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
+		}else{
+			LOGGER.info("Eine Liste der Projekte für den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
+		}
+		
+		return response;
 		
 	}
 	
-	public ProjectResponse updateProject(long id) {
+	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {
+		
+		ProjectResponse response = new ProjectResponse();
 		
 		try {
 			Project project = projectDAO.findProjectById(id);
 			
+			if(project == null){
+				LOGGER.info("Es wurde kein Project mit der ID: " + id + "gefunden.");
+				throw new ProjectNotExistException("Es gibt kein Project mit der angefragten ID.");
+			}
+			
+			ProjectSession session = userDAO.getSession(sessionId);
+			ArrayList<User> members = new ArrayList<User>();
+			if((project.getOwner().equals(session.getUser())) || members.contains(session.getUser())){
+				project.setProjectName(projectName);
+				project.setDescription(projectDescription);
+				projectDAO.updateProject(project);
+				
+				LOGGER.info("Project mit der id " + project.getId() + "wurde aktualisiert.");
+			}else{
+				LOGGER.info("Zugriff für den Benutzer verweigert.");
+				throw new PermissionDeniedException("Zugriff verweigert!");
+			}
+			
+			
+		}catch(ProjectNotExistException | PermissionDeniedException ex ){
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());	
 		}
 		
-		return null;		
+		return response;		
 	}
 	
 }

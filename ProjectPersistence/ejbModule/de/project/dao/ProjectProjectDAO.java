@@ -77,8 +77,9 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 		}
 
 		@Override
-		public void saveProject(Project project) {
-			em.persist(project);		
+		public void updateProject(Project project) {
+			project.setUpdatedOn(new Date());
+			em.merge(project);		
 		}
 
 }
