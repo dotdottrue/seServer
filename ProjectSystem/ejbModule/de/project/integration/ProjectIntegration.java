@@ -17,6 +17,7 @@ import org.jboss.ws.api.annotation.WebContext;
 
 
 
+
 import de.project.assembler.DiscussionDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
 import de.project.dao.local.ProjectProjectDAOLocal;
@@ -31,6 +32,7 @@ import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
 import de.project.entities.Discussion;
 import de.project.entities.Milestone;
+import de.project.entities.Note;
 import de.project.entities.Project;
 import de.project.entities.ProjectSession;
 import de.project.entities.User;
@@ -184,6 +186,7 @@ public class ProjectIntegration {
 		Project project = projectDAO.findProjectById(projectId);
 		
 		Discussion discussion = new Discussion();
+		discussion.setNotes(new ArrayList<Note>());
 		discussion.setCreatedAt(new Date());
 		discussion.setTopic(topic);
 		project.getDiscussions().add(discussion);
