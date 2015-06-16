@@ -38,11 +38,11 @@ public class UserIntegration {
 			if(user == null){
 				user = this.userDAO.createUser(phonenumber);
 				LOGGER.info("Benutzer " + user + " erfolgreich angelegt.");
-				/*
+				
 				ProjectSession session = userDAO.createSession(user);
 				LOGGER.info("Session mit dem Benutzer " + user + " wurde aufgebaut");
 			
-				response.setSession(projectSessionDtoAssembler.makeDTO(session));*/
+				response.setSession(projectSessionDtoAssembler.makeDTO(session));
 			}else{
 				LOGGER.info("Registrierung fehlgeschlagen. Benutzer existiert bereits:");
 				

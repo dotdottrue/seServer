@@ -19,7 +19,6 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,15 +31,13 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "createProject", propOrder = {
     "arg0",
     "arg1",
-    "arg2",
-    "arg3"
+    "arg2"
 })
 public class CreateProject {
 
     protected String arg0;
     protected String arg1;
     protected String arg2;
-    protected int arg3;
 
     /**
      * Ruft den Wert der arg0-Eigenschaft ab.
@@ -112,22 +109,6 @@ public class CreateProject {
      */
     public void setArg2(String value) {
         this.arg2 = value;
-    }
-
-    /**
-     * Ruft den Wert der arg3-Eigenschaft ab.
-     * 
-     */
-    public int getArg3() {
-        return arg3;
-    }
-
-    /**
-     * Legt den Wert der arg3-Eigenschaft fest.
-     * 
-     */
-    public void setArg3(int value) {
-        this.arg3 = value;
     }
 
 }

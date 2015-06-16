@@ -24,12 +24,12 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _RegisterUser_QNAME = new QName("http://integration.project.de/", "registerUser");
-    private final static QName _RegisterUserResponse_QNAME = new QName("http://integration.project.de/", "registerUserResponse");
-    private final static QName _Login_QNAME = new QName("http://integration.project.de/", "login");
-    private final static QName _Logout_QNAME = new QName("http://integration.project.de/", "logout");
-    private final static QName _LoginResponse_QNAME = new QName("http://integration.project.de/", "loginResponse");
-    private final static QName _LogoutResponse_QNAME = new QName("http://integration.project.de/", "logoutResponse");
+    private final static QName _CreateProject_QNAME = new QName("http://integration.project.de/", "createProject");
+    private final static QName _CreateProjectResponse_QNAME = new QName("http://integration.project.de/", "createProjectResponse");
+    private final static QName _UpdateProjectResponse_QNAME = new QName("http://integration.project.de/", "updateProjectResponse");
+    private final static QName _GetProjectsByPhone_QNAME = new QName("http://integration.project.de/", "getProjectsByPhone");
+    private final static QName _GetProjectsByPhoneResponse_QNAME = new QName("http://integration.project.de/", "getProjectsByPhoneResponse");
+    private final static QName _UpdateProject_QNAME = new QName("http://integration.project.de/", "updateProject");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: de.project.integration
@@ -39,59 +39,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Logout }
+     * Create an instance of {@link UpdateProject }
      * 
      */
-    public Logout createLogout() {
-        return new Logout();
+    public UpdateProject createUpdateProject() {
+        return new UpdateProject();
     }
 
     /**
-     * Create an instance of {@link LoginResponse }
+     * Create an instance of {@link UpdateProjectResponse }
      * 
      */
-    public LoginResponse createLoginResponse() {
-        return new LoginResponse();
+    public UpdateProjectResponse createUpdateProjectResponse() {
+        return new UpdateProjectResponse();
     }
 
     /**
-     * Create an instance of {@link LogoutResponse }
+     * Create an instance of {@link CreateProject }
      * 
      */
-    public LogoutResponse createLogoutResponse() {
-        return new LogoutResponse();
+    public CreateProject createCreateProject() {
+        return new CreateProject();
     }
 
     /**
-     * Create an instance of {@link RegisterUser }
+     * Create an instance of {@link CreateProjectResponse }
      * 
      */
-    public RegisterUser createRegisterUser() {
-        return new RegisterUser();
+    public CreateProjectResponse createCreateProjectResponse() {
+        return new CreateProjectResponse();
     }
 
     /**
-     * Create an instance of {@link Login }
+     * Create an instance of {@link GetProjectsByPhone }
      * 
      */
-    public Login createLogin() {
-        return new Login();
+    public GetProjectsByPhone createGetProjectsByPhone() {
+        return new GetProjectsByPhone();
     }
 
     /**
-     * Create an instance of {@link RegisterUserResponse }
+     * Create an instance of {@link GetProjectsByPhoneResponse }
      * 
      */
-    public RegisterUserResponse createRegisterUserResponse() {
-        return new RegisterUserResponse();
-    }
-
-    /**
-     * Create an instance of {@link ProjectUserResponse }
-     * 
-     */
-    public ProjectUserResponse createProjectUserResponse() {
-        return new ProjectUserResponse();
+    public GetProjectsByPhoneResponse createGetProjectsByPhoneResponse() {
+        return new GetProjectsByPhoneResponse();
     }
 
     /**
@@ -119,11 +111,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ProjectSessionTO }
+     * Create an instance of {@link ProjectResponse }
      * 
      */
-    public ProjectSessionTO createProjectSessionTO() {
-        return new ProjectSessionTO();
+    public ProjectResponse createProjectResponse() {
+        return new ProjectResponse();
+    }
+
+    /**
+     * Create an instance of {@link ProjectsResponse }
+     * 
+     */
+    public ProjectsResponse createProjectsResponse() {
+        return new ProjectsResponse();
     }
 
     /**
@@ -159,57 +159,57 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RegisterUser }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateProject }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://integration.project.de/", name = "registerUser")
-    public JAXBElement<RegisterUser> createRegisterUser(RegisterUser value) {
-        return new JAXBElement<RegisterUser>(_RegisterUser_QNAME, RegisterUser.class, null, value);
+    @XmlElementDecl(namespace = "http://integration.project.de/", name = "createProject")
+    public JAXBElement<CreateProject> createCreateProject(CreateProject value) {
+        return new JAXBElement<CreateProject>(_CreateProject_QNAME, CreateProject.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RegisterUserResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreateProjectResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://integration.project.de/", name = "registerUserResponse")
-    public JAXBElement<RegisterUserResponse> createRegisterUserResponse(RegisterUserResponse value) {
-        return new JAXBElement<RegisterUserResponse>(_RegisterUserResponse_QNAME, RegisterUserResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://integration.project.de/", name = "createProjectResponse")
+    public JAXBElement<CreateProjectResponse> createCreateProjectResponse(CreateProjectResponse value) {
+        return new JAXBElement<CreateProjectResponse>(_CreateProjectResponse_QNAME, CreateProjectResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Login }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateProjectResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://integration.project.de/", name = "login")
-    public JAXBElement<Login> createLogin(Login value) {
-        return new JAXBElement<Login>(_Login_QNAME, Login.class, null, value);
+    @XmlElementDecl(namespace = "http://integration.project.de/", name = "updateProjectResponse")
+    public JAXBElement<UpdateProjectResponse> createUpdateProjectResponse(UpdateProjectResponse value) {
+        return new JAXBElement<UpdateProjectResponse>(_UpdateProjectResponse_QNAME, UpdateProjectResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Logout }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProjectsByPhone }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://integration.project.de/", name = "logout")
-    public JAXBElement<Logout> createLogout(Logout value) {
-        return new JAXBElement<Logout>(_Logout_QNAME, Logout.class, null, value);
+    @XmlElementDecl(namespace = "http://integration.project.de/", name = "getProjectsByPhone")
+    public JAXBElement<GetProjectsByPhone> createGetProjectsByPhone(GetProjectsByPhone value) {
+        return new JAXBElement<GetProjectsByPhone>(_GetProjectsByPhone_QNAME, GetProjectsByPhone.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link LoginResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetProjectsByPhoneResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://integration.project.de/", name = "loginResponse")
-    public JAXBElement<LoginResponse> createLoginResponse(LoginResponse value) {
-        return new JAXBElement<LoginResponse>(_LoginResponse_QNAME, LoginResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://integration.project.de/", name = "getProjectsByPhoneResponse")
+    public JAXBElement<GetProjectsByPhoneResponse> createGetProjectsByPhoneResponse(GetProjectsByPhoneResponse value) {
+        return new JAXBElement<GetProjectsByPhoneResponse>(_GetProjectsByPhoneResponse_QNAME, GetProjectsByPhoneResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link LogoutResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdateProject }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://integration.project.de/", name = "logoutResponse")
-    public JAXBElement<LogoutResponse> createLogoutResponse(LogoutResponse value) {
-        return new JAXBElement<LogoutResponse>(_LogoutResponse_QNAME, LogoutResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://integration.project.de/", name = "updateProject")
+    public JAXBElement<UpdateProject> createUpdateProject(UpdateProject value) {
+        return new JAXBElement<UpdateProject>(_UpdateProject_QNAME, UpdateProject.class, null, value);
     }
 
 }

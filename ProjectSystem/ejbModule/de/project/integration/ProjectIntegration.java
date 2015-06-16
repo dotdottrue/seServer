@@ -50,13 +50,11 @@ public class ProjectIntegration {
 
 	
 	public ReturncodeResponse createProject(String phoneNumber, String projectName, String description /*, int sessionId*/ ) {
-		//ReturncodeResponse response = new ReturncodeResponse(); 
+		ReturncodeResponse response = new ReturncodeResponse(); 
 		LOGGER.info(phoneNumber+" "+projectName);
 		try{
 			//ProjectSession session = userDAO.getSession(sessionId);
 			Project newProject = new Project();
-			
-			//List<User> users = new ArrayList<User>();
 			
 			User owner = userDAO.findUserByNumber(phoneNumber);
 			
@@ -73,7 +71,7 @@ public class ProjectIntegration {
 			
 			projectDAO.createProject(newProject);
 			
-			}
+			
 			
 			
 			
@@ -108,15 +106,15 @@ public class ProjectIntegration {
 			
 			if(newProject.projectValidation()) {
 				projectDAO.createProject(newProject);
-				LOGGER.info("Project wurde erfolgreich angelegt");
+				LOGGER.info("Project wurde erfolgreich angelegt");*/
 			}else {
 				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefï¿½llt waren.");
 				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefï¿½llt");
 			}
-			*/
-			}catch(Exception ex) {
-				//response.setReturnCode(ex.getErrorCode());
-				//response.setMessage(ex.getMessage());
+			
+			}catch(ProjectValidationException ex) {
+				response.setReturnCode(ex.getErrorCode());
+				response.setMessage(ex.getMessage());
 			}
 		return new ReturncodeResponse();
 	}
@@ -171,7 +169,7 @@ public class ProjectIntegration {
 				
 				LOGGER.info("Project mit der id " + project.getId() + "wurde aktualisiert.");
 			}else{
-				LOGGER.info("Zugriff fï¿½r den Benutzer verweigert.");
+				LOGGER.info("Zugriff fŸr den Benutzer verweigert.");
 				throw new PermissionDeniedException("Zugriff verweigert!");
 			}
 			
