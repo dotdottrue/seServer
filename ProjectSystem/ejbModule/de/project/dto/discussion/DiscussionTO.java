@@ -1,8 +1,10 @@
-package de.project.dto;
+package de.project.dto.discussion;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import de.project.dto.NoteTO;
 
 public class DiscussionTO implements Serializable{
 

@@ -13,15 +13,23 @@ import org.jboss.ws.api.annotation.WebContext;
 
 
 
+
+
+
+
+import de.project.assembler.DiscussionDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.dto.MilestoneTO;
 import de.project.dto.ReturncodeResponse;
+import de.project.dto.discussion.DiscussionResponse;
+import de.project.dto.discussion.DiscussionTO;
 import de.project.dto.project.ProjectResponse;
 import de.project.dto.project.ProjectsResponse;
 import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
+import de.project.entities.Discussion;
 import de.project.entities.Milestone;
 import de.project.entities.Project;
 import de.project.entities.ProjectSession;
@@ -45,6 +53,9 @@ public class ProjectIntegration {
 	
 	@EJB
 	private ProjectDTOAssembler projectassembler;
+	
+	@EJB
+	private DiscussionDTOAssembler discussionassembler;
 
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
@@ -63,6 +74,8 @@ public class ProjectIntegration {
 			if(owner != null){
 			
 			List<User> members = new ArrayList<User>();
+			List<Discussion> discussions = new ArrayList<Discussion>();
+			
 			members.add(owner);
 			
 			newProject.setOwner(owner);
@@ -70,6 +83,7 @@ public class ProjectIntegration {
 			newProject.setProjectName(projectName);
 			newProject.setUpdatedOn(new Date());
 			newProject.setMembers(members);
+			newProject.setDiscussions(discussions);
 			
 			projectDAO.createProject(newProject);
 			
@@ -146,9 +160,41 @@ public class ProjectIntegration {
 			LOGGER.info("Eine Liste der Projekte f�r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
 		}
 		
-		return response;
-		
+		return response;		
 	}
+	
+	public DiscussionResponse getDiscussionsByProject(long projectId){
+		
+		DiscussionResponse response = new DiscussionResponse();
+		Project project = projectDAO.getProject(projectId);
+		List<Discussion> discussions = project.getDiscussions();
+		List<DiscussionTO> discussionsTO = new ArrayList<DiscussionTO>();
+		
+		for(Discussion disc : discussions){
+			discussionsTO.add(discussionassembler.makeDTO(disc));
+		}
+		
+		response.setDiscussions(discussionsTO);
+		
+		return response;
+	}
+	
+	public ReturncodeResponse addDiscussionToProject(long projectId, String topic){
+		
+		Project project = projectDAO.findProjectById(projectId);
+		
+		Discussion discussion = new Discussion();
+		discussion.setCreatedAt(new Date());
+		discussion.setTopic(topic);
+		project.getDiscussions().add(discussion);
+		
+		projectDAO.updateProject(project);
+			
+		return new ReturncodeResponse();
+	}
+	
+	
+	
 	
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {
 		

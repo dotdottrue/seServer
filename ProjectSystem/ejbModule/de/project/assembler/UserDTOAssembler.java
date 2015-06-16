@@ -6,10 +6,10 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import de.project.dto.DiscussionTO;
 import de.project.dto.MilestoneTO;
 import de.project.dto.NoteTO;
 import de.project.dto.appointment.AppointmentTO;
+import de.project.dto.discussion.DiscussionTO;
 import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
 import de.project.entities.Appointment;
