@@ -14,7 +14,7 @@ public class UserTO implements Serializable{
 	private String firstName;
 	private String lastName;
 	private Date registrationDate;
-	private List<ProjectTO> projects;
+	//private List<ProjectTO> projects;
 	
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -48,12 +48,12 @@ public class UserTO implements Serializable{
 		this.registrationDate = registrationDate;
 	}
 	
-	public List<ProjectTO> getProjects() {
+/*	public List<ProjectTO> getProjects() {
 		return projects;
 	}
 	
 	public void setProjects(List<ProjectTO> projects) {
 		this.projects = projects;
-	}
+	}*/
 		
 }

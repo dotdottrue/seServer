@@ -11,6 +11,8 @@ import javax.jws.WebService;
 import org.jboss.logging.Logger;
 import org.jboss.ws.api.annotation.WebContext;
 
+
+
 import de.project.assembler.ProjectDTOAssembler;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
@@ -47,15 +49,36 @@ public class ProjectIntegration {
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
 	
-	public ReturncodeResponse createProject(String phoneNumber, String projectName, String description, int sessionId) {
-		ReturncodeResponse response = new ReturncodeResponse(); 
-		
+	public ReturncodeResponse createProject(String phoneNumber, String projectName, String description /*, int sessionId*/ ) {
+		//ReturncodeResponse response = new ReturncodeResponse(); 
+		LOGGER.info(phoneNumber+" "+projectName);
 		try{
-			ProjectSession session = userDAO.getSession(sessionId);
+			//ProjectSession session = userDAO.getSession(sessionId);
 			Project newProject = new Project();
 			
-			List<User> users = new ArrayList<User>();
-			List<UserTO> usersTO = new ArrayList<UserTO>();
+			//List<User> users = new ArrayList<User>();
+			
+			User owner = userDAO.findUserByNumber(phoneNumber);
+			
+			if(owner != null){
+			
+			List<User> members = new ArrayList<User>();
+			members.add(owner);
+			
+			newProject.setOwner(owner);
+			newProject.setDescription(description);
+			newProject.setProjectName(projectName);
+			newProject.setUpdatedOn(new Date());
+			newProject.setMembers(members);
+			
+			projectDAO.createProject(newProject);
+			
+			}
+			
+			
+			
+			
+			/*List<UserTO> usersTO = new ArrayList<UserTO>();
 			
 			for(UserTO userTO : usersTO) {
 				User u = new User();
@@ -63,12 +86,13 @@ public class ProjectIntegration {
 				u.setFirstName(userTO.getFirstName());
 				u.setLastName(userTO.getLastName());
 				users.add(u);
-			}
+			}*/
 			
-			List<Milestone> milestones = new ArrayList<Milestone>();
-			List<MilestoneTO> milestonesTO = new ArrayList<MilestoneTO>();
 			
-			for(MilestoneTO milestoneTO : milestonesTO) {
+			//List<Milestone> milestones = new ArrayList<Milestone>();
+			//List<MilestoneTO> milestonesTO = new ArrayList<MilestoneTO>();
+			
+			/*for(MilestoneTO milestoneTO : milestonesTO) {
 				Milestone m = new Milestone();
 				m.setId(milestoneTO.getId());
 				m.setMilestoneName(milestoneTO.getMilestoneName());
@@ -86,13 +110,13 @@ public class ProjectIntegration {
 				projectDAO.createProject(newProject);
 				LOGGER.info("Project wurde erfolgreich angelegt");
 			}else {
-				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefŸllt waren.");
-				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefŸllt");
+				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefï¿½llt waren.");
+				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefï¿½llt");
 			}
-			
-			}catch(ProjectValidationException ex) {
-				response.setReturnCode(ex.getErrorCode());
-				response.setMessage(ex.getMessage());
+			*/
+			}catch(Exception ex) {
+				//response.setReturnCode(ex.getErrorCode());
+				//response.setMessage(ex.getMessage());
 			}
 		return new ReturncodeResponse();
 	}
@@ -102,7 +126,11 @@ public class ProjectIntegration {
 		ProjectsResponse response = new ProjectsResponse();
 	
 		User user = userDAO.findUserByNumber(phonenumber);
-		List<Project> projects = projectDAO.findProjects(user);
+		List<Project> projects = user.getProjects();
+		
+		if(!projects.isEmpty()) LOGGER.info(projects.get(0).getProjectName());
+		else LOGGER.info("is empty");
+				//projectDAO.findProjects(user);
 		List<ProjectTO> projectsTO = new ArrayList<ProjectTO>();
 		
 		for(Project p : projects){
@@ -112,9 +140,10 @@ public class ProjectIntegration {
 		response.setProjects(projectsTO);
 		response.setPhonenumber(phonenumber);
 		if(projectsTO.isEmpty()) {
-			LOGGER.info("Eine Liste der Projekte fŸr den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
+			LOGGER.info("Eine Liste der Projekte fï¿½r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
+			return new ProjectsResponse();
 		}else{
-			LOGGER.info("Eine Liste der Projekte fŸr den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
+			LOGGER.info("Eine Liste der Projekte fï¿½r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
 		}
 		
 		return response;
@@ -142,7 +171,7 @@ public class ProjectIntegration {
 				
 				LOGGER.info("Project mit der id " + project.getId() + "wurde aktualisiert.");
 			}else{
-				LOGGER.info("Zugriff fŸr den Benutzer verweigert.");
+				LOGGER.info("Zugriff fï¿½r den Benutzer verweigert.");
 				throw new PermissionDeniedException("Zugriff verweigert!");
 			}
 			
