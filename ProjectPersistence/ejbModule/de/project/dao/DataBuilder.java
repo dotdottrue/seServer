@@ -20,7 +20,7 @@ public class DataBuilder {
 	private static final Logger LOGGER = Logger.getLogger(DataBuilder.class);
 	
 	@PersistenceContext
-	private EntityManager em;
+	EntityManager em;
 	
 	@Resource
 	private String phoneNumber1, phoneNumber2;

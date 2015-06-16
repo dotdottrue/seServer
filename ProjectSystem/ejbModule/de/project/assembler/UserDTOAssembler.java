@@ -32,7 +32,7 @@ public class UserDTOAssembler {
 		dto.setFirstName(user.getFirstName());
 		dto.setLastName(user.getLastName());
 		dto.setRegistrationDate(user.getRegistrationDate());
-		dto.setProjects(makeDTO(user.getProjects()));
+		//dto.setProjects(makeDTO(user.getProjects()));
 		
 		return dto;
 	}
@@ -115,7 +115,7 @@ public class UserDTOAssembler {
 			userTO.setPhoneNumber(user.getPhoneNumber());
 			userTO.setFirstName(user.getFirstName());
 			userTO.setLastName(user.getLastName());
-			userTO.setProjects(makeDTO(user.getProjects()));
+	//		userTO.setProjects(makeDTO(user.getProjects()));
 			userTO.setRegistrationDate(user.getRegistrationDate());
 			
 			dto.add(userTO);

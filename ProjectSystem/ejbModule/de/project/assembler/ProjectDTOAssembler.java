@@ -51,7 +51,7 @@ public class ProjectDTOAssembler {
 			userTO.setPhoneNumber(user.getPhoneNumber());
 			userTO.setFirstName(user.getFirstName());
 			userTO.setLastName(user.getLastName());
-			userTO.setProjects(makeDTO5(user.getProjects()));
+			//userTO.setProjects(makeDTO5(user.getProjects()));
 			userTO.setRegistrationDate(user.getRegistrationDate());
 			
 			dto.add(userTO);
