@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
@@ -12,7 +11,7 @@ import javax.persistence.OneToOne;
 public class ProjectSession {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue
 	private int id;
 	
 	@OneToOne
@@ -21,6 +20,7 @@ public class ProjectSession {
 	
 	public ProjectSession() {
 		super();
+		this.createdAt = new Date();
 	}
 	
 	public ProjectSession(User user) {

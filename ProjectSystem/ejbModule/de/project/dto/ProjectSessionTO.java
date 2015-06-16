@@ -32,9 +32,13 @@ public class ProjectSessionTO implements Serializable{
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-	
+
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 	
+	@Override
+	public String toString() {
+		return String.valueOf(id);
+	}
 }
