@@ -73,10 +73,7 @@ public class ProjectIntegration {
 			
 			projectDAO.createProject(newProject);
 			
-			}
-			
-			
-			
+			}	
 			
 			/*List<UserTO> usersTO = new ArrayList<UserTO>();
 			
@@ -140,10 +137,10 @@ public class ProjectIntegration {
 		response.setProjects(projectsTO);
 		response.setPhonenumber(phonenumber);
 		if(projectsTO.isEmpty()) {
-			LOGGER.info("Eine Liste der Projekte fï¿½r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
+			LOGGER.info("Eine Liste der Projekte fŸr den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
 			return new ProjectsResponse();
 		}else{
-			LOGGER.info("Eine Liste der Projekte fï¿½r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
+			LOGGER.info("Eine Liste der Projekte fŸr den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
 		}
 		
 		return response;
