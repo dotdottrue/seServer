@@ -89,15 +89,7 @@ public class ProjectIntegration {
 			newProject.setDiscussions(discussions);
 			
 			projectDAO.createProject(newProject);
-			
-<<<<<<< HEAD
-			
-			
-			
-			
-=======
-			}	
->>>>>>> refs/remotes/origin/ksoap
+
 			
 			/*List<UserTO> usersTO = new ArrayList<UserTO>();
 			
