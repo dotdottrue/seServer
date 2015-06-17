@@ -1,4 +1,4 @@
-package de.project.dto;
+package de.project.dto.note;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,7 +10,18 @@ public class NoteTO implements Serializable{
 	private long id;
 	private String note;
 	private Date createdAt;
+	private String user;
 	
+	
+	
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
 	public long getId() {
 		return id;
 	}

@@ -14,12 +14,21 @@ public class Note {
 	private long id;
 	private String note;
 	private Date createdAt;
+	private String user;
 	
 	/*
 	@OneToOne
 	private Appointment appointment;
 	*/
 	
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
 	public Note() {
 		super();
 		// TODO Auto-generated constructor stub
