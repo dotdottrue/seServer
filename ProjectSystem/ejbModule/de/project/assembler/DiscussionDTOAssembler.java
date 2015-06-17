@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
-import de.project.dto.DiscussionTO;
-import de.project.dto.NoteTO;
+import de.project.dto.discussion.DiscussionTO;
+import de.project.dto.note.NoteTO;
 import de.project.entities.Discussion;
 import de.project.entities.Note;
 

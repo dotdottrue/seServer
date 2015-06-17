@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import de.project.dto.DiscussionTO;
 import de.project.dto.MilestoneTO;
 import de.project.dto.appointment.AppointmentTO;
+import de.project.dto.discussion.DiscussionTO;
 import de.project.dto.user.UserTO;
 import de.project.enumerations.*;
 

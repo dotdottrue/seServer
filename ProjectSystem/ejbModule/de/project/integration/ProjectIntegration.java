@@ -11,18 +11,25 @@ import javax.jws.WebService;
 import org.jboss.logging.Logger;
 import org.jboss.ws.api.annotation.WebContext;
 
-
-
+import de.project.assembler.DiscussionDTOAssembler;
+import de.project.assembler.NoteDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
+import de.project.dao.local.ProjectDiscussionDAOLocal;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.dto.MilestoneTO;
 import de.project.dto.ReturncodeResponse;
+import de.project.dto.discussion.DiscussionResponse;
+import de.project.dto.discussion.DiscussionTO;
+import de.project.dto.note.NoteTO;
+import de.project.dto.note.NotesResponse;
 import de.project.dto.project.ProjectResponse;
 import de.project.dto.project.ProjectsResponse;
 import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
+import de.project.entities.Discussion;
 import de.project.entities.Milestone;
+import de.project.entities.Note;
 import de.project.entities.Project;
 import de.project.entities.ProjectSession;
 import de.project.entities.User;
@@ -43,8 +50,17 @@ public class ProjectIntegration {
 	@EJB(beanName = "ProjectUserDAO", beanInterface = ProjectUserDAOLocal.class)
 	private ProjectUserDAOLocal userDAO;
 	
+	@EJB(beanName = "ProjectDiscussionDAO", beanInterface = ProjectDiscussionDAOLocal.class)
+	private ProjectDiscussionDAOLocal discussionDAO;
+	
 	@EJB
 	private ProjectDTOAssembler projectassembler;
+	
+	@EJB
+	private DiscussionDTOAssembler discussionassembler;
+	
+	@EJB
+	private NoteDTOAssembler noteassembler;
 
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
@@ -61,6 +77,8 @@ public class ProjectIntegration {
 			if(owner != null){
 			
 			List<User> members = new ArrayList<User>();
+			List<Discussion> discussions = new ArrayList<Discussion>();
+			
 			members.add(owner);
 			
 			newProject.setOwner(owner);
@@ -68,13 +86,18 @@ public class ProjectIntegration {
 			newProject.setProjectName(projectName);
 			newProject.setUpdatedOn(new Date());
 			newProject.setMembers(members);
+			newProject.setDiscussions(discussions);
 			
 			projectDAO.createProject(newProject);
 			
+<<<<<<< HEAD
 			
 			
 			
 			
+=======
+			}	
+>>>>>>> refs/remotes/origin/ksoap
 			
 			/*List<UserTO> usersTO = new ArrayList<UserTO>();
 			
@@ -138,15 +161,77 @@ public class ProjectIntegration {
 		response.setProjects(projectsTO);
 		response.setPhonenumber(phonenumber);
 		if(projectsTO.isEmpty()) {
-			LOGGER.info("Eine Liste der Projekte fï¿½r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
+			LOGGER.info("Eine Liste der Projekte fŸr den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
 			return new ProjectsResponse();
 		}else{
-			LOGGER.info("Eine Liste der Projekte fï¿½r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
+			LOGGER.info("Eine Liste der Projekte fŸr den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
 		}
 		
-		return response;
-		
+		return response;		
 	}
+	
+	public DiscussionResponse getDiscussionsByProject(long projectId){
+		
+		DiscussionResponse response = new DiscussionResponse();
+		Project project = projectDAO.getProject(projectId);
+		List<Discussion> discussions = project.getDiscussions();
+		List<DiscussionTO> discussionsTO = new ArrayList<DiscussionTO>();
+		
+		for(Discussion disc : discussions){
+			discussionsTO.add(discussionassembler.makeDTO(disc));
+		}
+		
+		response.setDiscussions(discussionsTO);
+		
+		return response;
+	}
+	
+	public ReturncodeResponse addDiscussionToProject(long projectId, String topic){
+		
+		Project project = projectDAO.findProjectById(projectId);
+		
+		Discussion discussion = new Discussion();
+		discussion.setNotes(new ArrayList<Note>());
+		discussion.setCreatedAt(new Date());
+		discussion.setTopic(topic);
+		project.getDiscussions().add(discussion);
+		
+		projectDAO.updateProject(project);
+			
+		return new ReturncodeResponse();
+	}
+	
+	
+	public ReturncodeResponse addNoteToDiscussion(long discussionId, String note, String phonenumber){
+		Discussion discussion = discussionDAO.getDisccusionById(discussionId);
+		Note newNote = new Note();
+		newNote.setNote(note);
+		newNote.setCreatedAt(new Date());
+		newNote.setUser(phonenumber);
+		discussion.getNotes().add(newNote);
+		discussionDAO.updateDiscussion(discussion);
+				
+		return new ReturncodeResponse();
+	}
+	
+	
+	public NotesResponse getNotesByDiscussion(long discussionId){
+		NotesResponse response = new NotesResponse();
+		Discussion discusssion = discussionDAO.getDisccusionById(discussionId);
+		List<Note> notes = discusssion.getNotes();
+		List<NoteTO> notesTO = new ArrayList<NoteTO>();
+		
+		for(Note n : notes){
+			notesTO.add(noteassembler.makeDTO(n));
+			
+		}
+		response.setNotes(notesTO);
+		
+		return response;
+	}
+	
+	
+	
 	
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {
 		
