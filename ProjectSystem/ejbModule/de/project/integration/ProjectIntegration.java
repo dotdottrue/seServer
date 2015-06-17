@@ -22,9 +22,12 @@ import org.jboss.ws.api.annotation.WebContext;
 
 
 
+
+
 import de.project.assembler.DiscussionDTOAssembler;
 import de.project.assembler.NoteDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
+import de.project.assembler.UserDTOAssembler;
 import de.project.dao.local.ProjectDiscussionDAOLocal;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
@@ -38,6 +41,7 @@ import de.project.dto.project.ProjectResponse;
 import de.project.dto.project.ProjectsResponse;
 import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
+import de.project.dto.user.UsersResponse;
 import de.project.entities.Discussion;
 import de.project.entities.Milestone;
 import de.project.entities.Note;
@@ -72,6 +76,9 @@ public class ProjectIntegration {
 	
 	@EJB
 	private NoteDTOAssembler noteassembler;
+	
+	@EJB
+	private UserDTOAssembler userassembler;
 
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
@@ -239,6 +246,30 @@ public class ProjectIntegration {
 		return response;
 	}
 	
+	public UsersResponse comparePhonebook (String ...params){
+		
+		List<User> usersServer = userDAO.findAllUsers();
+		List<User> comparedUsers = new ArrayList<User>();
+		
+		for(int i = 0; i < params.length; i++){
+			
+			for(User u : usersServer){
+				if(u.getPhoneNumber().equals(params[i])){
+					comparedUsers.add(u);
+					break;
+				}
+			}
+		}
+		List<UserTO> comparedTO = new ArrayList<UserTO>();
+		for(User u : comparedUsers){
+			comparedTO.add(userassembler.makeDTO(u));
+		}
+		UsersResponse response = new UsersResponse();
+		response.setUsers(comparedTO);
+		
+		return response;
+		
+	}
 	
 	
 	

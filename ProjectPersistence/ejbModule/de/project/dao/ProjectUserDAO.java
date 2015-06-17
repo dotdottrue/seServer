@@ -1,10 +1,12 @@
 package de.project.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.entities.ProjectSession;
@@ -27,6 +29,8 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
     	em.persist(user);
     	return user;
     }
+	
+	
 
 	/*@Override
 	public List<User> searchUsers(String phoneNumber) {
@@ -60,5 +64,13 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
     	ProjectSession session = em.find(ProjectSession.class, sessionId);
     	return session;
     }
+
+	@Override
+	public List<User> findAllUsers() {
+		TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
+		List<User> results = query.getResultList();
+		
+		return results;
+	}
 
 }
