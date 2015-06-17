@@ -25,8 +25,7 @@ public class ProjectIntegretionTest {
 
 	private static ProjectIntegration remote;
 	
-	private static ProjectSessionTO userSession; 
-	
+	private static ProjectSessionTO userSession; 	
 	
 	/**
 	 * Verbindungsaufbau zum Server.
@@ -45,8 +44,7 @@ public class ProjectIntegretionTest {
 			userResponse = userIntegrationPort.login("01607798983");
 		}
 		
-		userSession = userResponse.getSession();
-		
+		userSession = userResponse.getSession();		
 		
 	}
 	
