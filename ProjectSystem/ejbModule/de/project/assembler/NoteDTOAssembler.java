@@ -2,7 +2,7 @@ package de.project.assembler;
 
 import javax.ejb.Stateless;
 
-import de.project.dto.NoteTO;
+import de.project.dto.note.NoteTO;
 import de.project.entities.Note;
 
 @Stateless

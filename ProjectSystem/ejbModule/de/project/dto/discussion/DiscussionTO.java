@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import de.project.dto.NoteTO;
+import de.project.dto.note.NoteTO;
 
 public class DiscussionTO implements Serializable{
 

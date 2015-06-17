@@ -1,4 +1,4 @@
-package de.project.dto;
+package de.project.dto.note;
 
 import java.io.Serializable;
 import java.util.Date;
