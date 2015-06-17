@@ -216,6 +216,7 @@ public class ProjectIntegration {
 		Note newNote = new Note();
 		newNote.setNote(note);
 		newNote.setCreatedAt(new Date());
+		newNote.setUser(phonenumber);
 		discussion.getNotes().add(newNote);
 		discussionDAO.updateDiscussion(discussion);
 				

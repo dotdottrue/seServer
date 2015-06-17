@@ -13,6 +13,7 @@ public class NoteDTOAssembler {
 		dto.setId(note.getId());
 		dto.setNote(note.getNote());
 		dto.setCreatedAt(note.getCreatedAt());
+		dto.setUser(note.getUser());
 		
 		return dto;
 	}
