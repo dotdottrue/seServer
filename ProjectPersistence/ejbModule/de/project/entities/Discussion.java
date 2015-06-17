@@ -52,6 +52,11 @@ public class Discussion {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return "Diskussion mit der ID: " + id + "wurde dem Projekt zugeordnet.";
+	}
 	
 }

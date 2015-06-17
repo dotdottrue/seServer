@@ -1,14 +1,12 @@
 package de.project.dto.note;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class NotesResponse implements Serializable{
+import de.project.dto.ReturncodeResponse;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class NotesResponse extends ReturncodeResponse {
+
+	private static final long serialVersionUID = 2385393882387556600L;
 	
 	private List<NoteTO> notes;
 
@@ -20,6 +18,4 @@ public class NotesResponse implements Serializable{
 		this.notes = notes;
 	}
 	
-	
-
 }

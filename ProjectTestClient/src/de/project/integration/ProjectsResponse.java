@@ -17,12 +17,12 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;complexType name="projectsResponse">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://integration.project.de/}returncodeResponse">
  *       &lt;sequence>
  *         &lt;element name="phonenumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="projects" type="{http://integration.project.de/}projectTO" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -34,7 +34,9 @@ import javax.xml.bind.annotation.XmlType;
     "phonenumber",
     "projects"
 })
-public class ProjectsResponse {
+public class ProjectsResponse
+    extends ReturncodeResponse
+{
 
     protected String phonenumber;
     @XmlElement(nillable = true)

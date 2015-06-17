@@ -7,7 +7,7 @@ import de.project.entities.Discussion;
 @Local
 public interface ProjectDiscussionDAOLocal {
 
-	public Discussion getDisccusionById(long id);
+	public Discussion getDiscussionById(long id);
 	
 	public void updateDiscussion(Discussion discussion);
 }

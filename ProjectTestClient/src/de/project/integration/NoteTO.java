@@ -21,6 +21,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="createdAt" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="note" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="user" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,7 +34,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlType(name = "noteTO", propOrder = {
     "createdAt",
     "id",
-    "note"
+    "note",
+    "user"
 })
 public class NoteTO {
 
@@ -41,6 +43,7 @@ public class NoteTO {
     protected XMLGregorianCalendar createdAt;
     protected long id;
     protected String note;
+    protected String user;
 
     /**
      * Ruft den Wert der createdAt-Eigenschaft ab.
@@ -104,6 +107,30 @@ public class NoteTO {
      */
     public void setNote(String value) {
         this.note = value;
+    }
+
+    /**
+     * Ruft den Wert der user-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUser() {
+        return user;
+    }
+
+    /**
+     * Legt den Wert der user-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUser(String value) {
+        this.user = value;
     }
 
 }

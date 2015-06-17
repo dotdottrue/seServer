@@ -1,10 +1,10 @@
 package de.project.dto.project;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectsResponse implements Serializable{
+import de.project.dto.ReturncodeResponse;
+
+public class ProjectsResponse extends ReturncodeResponse{
 
 	private static final long serialVersionUID = 8173234950970923486L;
 	
