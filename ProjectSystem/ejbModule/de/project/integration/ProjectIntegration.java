@@ -11,17 +11,6 @@ import javax.jws.WebService;
 import org.jboss.logging.Logger;
 import org.jboss.ws.api.annotation.WebContext;
 
-
-
-
-
-
-
-
-
-
-
-
 import de.project.assembler.DiscussionDTOAssembler;
 import de.project.assembler.NoteDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
