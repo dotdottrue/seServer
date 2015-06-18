@@ -36,5 +36,13 @@ public class ProjectDiscussionDAO implements ProjectDiscussionDAOLocal {
 		em.merge(discussion);
 	}
 	
+	/**
+	 * Lšschen der Diskussion aus der Datenbank
+	 */
+	@Override
+	public void removeDiscussion(Discussion discussion) {
+		em.remove(discussion);
+	}
+	
 
 }

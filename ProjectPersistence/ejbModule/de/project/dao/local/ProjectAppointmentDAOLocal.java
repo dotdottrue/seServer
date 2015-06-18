@@ -4,6 +4,11 @@ import javax.ejb.Local;
 
 import de.project.entities.Appointment;
 
+/**
+ * 
+ * @author Tobias Kappert
+ *
+ */
 @Local
 public interface ProjectAppointmentDAOLocal {
 	
