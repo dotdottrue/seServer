@@ -12,7 +12,7 @@ public class AppointmentDTOAssembler {
 		AppointmentTO dto = new AppointmentTO();
 		dto.setId(appointment.getId());
 		dto.setTopic(appointment.getTopic());
-		dto.setAppointmentDate(appointment.getAppointmentDate());
+		dto.setAppointmentDate(appointment.getAppointmentDate().getTime());
 		dto.setDescription(appointment.getDescription());
 		
 		return dto;

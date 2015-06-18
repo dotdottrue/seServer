@@ -67,7 +67,7 @@ public class ProjectDTOAssembler {
 			AppointmentTO appointmentTO = new AppointmentTO();
 			appointmentTO.setId(appointment.getId());
 			appointmentTO.setTopic(appointment.getTopic());
-			appointmentTO.setAppointmentDate(appointment.getAppointmentDate());
+			appointmentTO.setAppointmentDate(appointment.getAppointmentDate().getTime());
 			
 			dto.add(appointmentTO);
 		}

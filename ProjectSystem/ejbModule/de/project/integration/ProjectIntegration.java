@@ -11,6 +11,7 @@ import javax.jws.WebService;
 import org.jboss.logging.Logger;
 import org.jboss.ws.api.annotation.WebContext;
 
+import de.project.assembler.AppointmentDTOAssembler;
 import de.project.assembler.DiscussionDTOAssembler;
 import de.project.assembler.NoteDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
@@ -20,6 +21,8 @@ import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.dto.MilestoneTO;
 import de.project.dto.ReturncodeResponse;
+import de.project.dto.appointment.AppointmentResponse;
+import de.project.dto.appointment.AppointmentTO;
 import de.project.dto.discussion.DiscussionResponse;
 import de.project.dto.discussion.DiscussionTO;
 import de.project.dto.note.NoteTO;
@@ -29,6 +32,7 @@ import de.project.dto.project.ProjectsResponse;
 import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
 import de.project.dto.user.UsersResponse;
+import de.project.entities.Appointment;
 import de.project.entities.Discussion;
 import de.project.entities.Milestone;
 import de.project.entities.Note;
@@ -69,6 +73,9 @@ public class ProjectIntegration {
 	
 	@EJB
 	private UserDTOAssembler userassembler;
+	
+	@EJB
+	private AppointmentDTOAssembler appointmentassembler;
 
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
@@ -86,6 +93,7 @@ public class ProjectIntegration {
 			
 				List<User> members = new ArrayList<User>();
 				List<Discussion> discussions = new ArrayList<Discussion>();
+				List<Appointment> appointments = new ArrayList<Appointment>();
 				
 				members.add(owner);
 				
@@ -295,11 +303,53 @@ public class ProjectIntegration {
 		return new ReturncodeResponse();
 	}
 	
+	public ReturncodeResponse addAppointmentToProject(long projectId, String topic, String description, long date){
+		
+		try {
+			
+			Project project = projectDAO.findProjectById(projectId);
+			List<Appointment> appointments = project.getAppointments();
+			Appointment appointment = new Appointment();
+			appointment.setTopic(topic);
+			appointment.setDescription(description);
+			Date newdate = new Date();
+			newdate.setTime(date);
+			appointment.setAppointmentDate(newdate);
+			appointments.add(appointment);
+			projectDAO.updateProject(project);
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ReturncodeResponse();
+	}
 	
+	public AppointmentResponse getAppointmentsByProject(long projectId){
+		
+		AppointmentResponse response = new AppointmentResponse();
+		
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			List<Appointment> appointments = project.getAppointments();
+			List<AppointmentTO> appointmentsTO = new ArrayList<AppointmentTO>();
+			
+			for(Appointment a : appointments){
+				appointmentsTO.add(appointmentassembler.makeDTO(a));
+			}
+			
+			response.setAppointments(appointmentsTO);
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
 	
-	
-
-	
+		
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
 		ProjectResponse response = new ProjectResponse();
 		try {
