@@ -211,7 +211,7 @@ public class ProjectIntegration {
 				discussion.setTopic(topic);
 				project.getDiscussions().add(discussion);
 				
-				LOGGER.info("Eine Diskussion mit der ID " + discussion.getId() + "wurde dem Project mit der ID " + project.getId() + "hinzugef�gt.");
+				LOGGER.info("Eine Diskussion mit der ID " + discussion.getId() + " wurde dem Project mit der ID " + project.getId() + "hinzugefuegt.");
 				projectDAO.updateProject(project);
 			}else{
 				LOGGER.info("Project mit der ID:" + projectId + "existiert nicht.");
@@ -240,7 +240,7 @@ public class ProjectIntegration {
 			
 			if(discussion.getNotes().isEmpty() || noteListLength == discussion.getNotes().size()){
 				LOGGER.info("Der Diskussion mit der ID " + discussion.getId() + "wurde keine Notiz hinterlegt.");
-				throw new DiscussionNotExistsException("Es konnte der Diskussion keine Nachricht hinzugef�gt werden oder die Diskussion existiert nicht.");
+				throw new DiscussionNotExistsException("Es konnte der Diskussion keine Nachricht hinzugefuegt werden oder die Diskussion existiert nicht.");
 			}
 			LOGGER.info("Es wurde der Diskussion mit der ID " + discussion.getId() + "eine Notiz hinterlegt.");
 			discussionDAO.updateDiscussion(discussion);
