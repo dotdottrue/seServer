@@ -61,7 +61,7 @@ public class ProjectIntegration {
 	
 	@EJB(beanName = "ProjectDiscussionDAO", beanInterface = ProjectDiscussionDAOLocal.class)
 	private ProjectDiscussionDAOLocal discussionDAO;
-	
+		
 	@EJB
 	private ProjectDTOAssembler projectassembler;
 	
@@ -203,6 +203,21 @@ public class ProjectIntegration {
 		return response;
 	}	
 	
+	public ReturncodeResponse removeProjectDiscussion(long projectId, long discussionId){
+		
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			Discussion discussion = discussionDAO.getDiscussionById(discussionId);
+			List<Discussion> discussions = project.getDiscussions();
+			discussions.remove(discussion);
+			projectDAO.updateProject(project);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new ReturncodeResponse();
+	}
+	
 	public ReturncodeResponse addNoteToDiscussion(long discussionId, String note, String phonenumber){
 		ReturncodeResponse response = new ReturncodeResponse();
 		try{
@@ -262,7 +277,6 @@ public class ProjectIntegration {
 			List<User> comparedUsers = new ArrayList<User>();
 			
 			for(int i = 0; i < params.length; i++){
-				
 				for(User u : usersServer){
 					System.out.println(params[i]+"("+params[i].length()+") = "+u.getPhoneNumber()+"("+u.getPhoneNumber().length()+")");
 					if(u.getPhoneNumber().equals(params[i])){
@@ -326,6 +340,7 @@ public class ProjectIntegration {
 		return new ReturncodeResponse();
 	}
 	
+	
 	public AppointmentResponse getAppointmentsByProject(long projectId){
 		
 		AppointmentResponse response = new AppointmentResponse();
@@ -348,6 +363,25 @@ public class ProjectIntegration {
 		
 		return response;
 	}
+	
+	
+	public ReturncodeResponse removeProjectMember(long projectId, String phoneNumber){
+		
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			User user = userDAO.findUserByNumber(phoneNumber);
+			List<User> members = project.getMembers();
+			members.remove(user);
+			
+			projectDAO.updateProject(project);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new ReturncodeResponse();
+	}
+	
+	
 	
 		
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
