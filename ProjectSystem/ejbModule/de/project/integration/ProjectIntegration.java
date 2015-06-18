@@ -141,28 +141,28 @@ public class ProjectIntegration {
 		ProjectsResponse response = new ProjectsResponse();
 		try{
 			User user = userDAO.findUserByNumber(phonenumber);
-			List<Project> projects = user.getProjects();
-			
-			if(!projects.isEmpty()){
-				LOGGER.info(projects.get(0).getProjectName());
+			if(user == null) {
+				LOGGER.info("Eine Liste der Projekte für den Benutzer mit der Telefonnummer: " + phonenumber + " konnte nicht erzeugt werden.");
+				throw new ProjectNotExistException("Es existieren keine Projekte für den benutzer mit der Telefonnummer: " + phonenumber);		
 			}else{
-				LOGGER.info("List projects ist leer!");
-			}
-			//projectDAO.findProjects(user);
-			List<ProjectTO> projectsTO = new ArrayList<ProjectTO>();
-			
-			for(Project p : projects){
-				projectsTO.add(projectassembler.makeDTO(p));
-			}
-					
-			response.setProjects(projectsTO);
-			response.setPhonenumber(phonenumber);
-			
-			if(projectsTO.isEmpty() || projectsTO == null) {
-				LOGGER.info("Eine Liste der Projekte für den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
-				throw new ProjectNotExistException("Es existieren keine Projekte für den benutzer mit der Telefonnummer: " + phonenumber);
-			}else{
-				LOGGER.info("Eine Liste der Projekte für den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
+				List<Project> projects = user.getProjects();
+				
+				if(!projects.isEmpty() || user == null){
+					LOGGER.info(projects.get(0).getProjectName());
+				}else{
+					LOGGER.info("Projektliste ist leer!");
+				}
+				//projectDAO.findProjects(user);
+				List<ProjectTO> projectsTO = new ArrayList<ProjectTO>();
+				
+				for(Project p : projects){
+					projectsTO.add(projectassembler.makeDTO(p));
+				}
+						
+				response.setProjects(projectsTO);
+				response.setPhonenumber(phonenumber);
+				
+				LOGGER.info("Eine Liste der Projekte für den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ " wurde erzeugt.");
 			}
 		}catch(ProjectNotExistException ex){
 			response.setReturnCode(ex.getErrorCode());
@@ -175,7 +175,7 @@ public class ProjectIntegration {
 		DiscussionResponse response = new DiscussionResponse();
 		try{
 			Project project = projectDAO.getProject(projectId);
-			if(!project.getDiscussions().isEmpty() && project != null){
+			if(project != null){
 				List<Discussion> discussions = project.getDiscussions();
 				List<DiscussionTO> discussionsTO = new ArrayList<DiscussionTO>();
 				
@@ -197,7 +197,7 @@ public class ProjectIntegration {
 	public ReturncodeResponse addDiscussionToProject(long projectId, String topic){
 		ReturncodeResponse response = new ReturncodeResponse();
 		try{
-			Project project = projectDAO.findProjectById(projectId);
+			Project project = projectDAO.getProject(projectId);
 			if(project != null){
 				Discussion discussion = new Discussion();
 				discussion.setNotes(new ArrayList<Note>());
@@ -222,20 +222,19 @@ public class ProjectIntegration {
 		ReturncodeResponse response = new ReturncodeResponse();
 		try{
 			Discussion discussion = discussionDAO.getDiscussionById(discussionId);
+			
+			if(discussion == null){
+				LOGGER.info("Der Diskussion mit der ID " + discussionId + " wurde keine Notiz hinterlegt.");
+				throw new DiscussionNotExistsException("Es konnte der Diskussion keine Nachricht hinzugefügt werden oder die Diskussion existiert nicht.");
+			}
+
 			Note newNote = new Note();
 			newNote.setNote(note);
 			newNote.setCreatedAt(new Date());
 			newNote.setUser(phonenumber);
 			
-			List<Note> noteList = discussion.getNotes();
-			int noteListLength = noteList.size();
-			
 			discussion.getNotes().add(newNote);
 			
-			if(discussion.getNotes().isEmpty() || noteListLength == discussion.getNotes().size()){
-				LOGGER.info("Der Diskussion mit der ID " + discussion.getId() + "wurde keine Notiz hinterlegt.");
-				throw new DiscussionNotExistsException("Es konnte der Diskussion keine Nachricht hinzugefügt werden oder die Diskussion existiert nicht.");
-			}
 			LOGGER.info("Es wurde der Diskussion mit der ID " + discussion.getId() + "eine Notiz hinterlegt.");
 			discussionDAO.updateDiscussion(discussion);
 		}catch(ProjectException ex){
@@ -250,6 +249,12 @@ public class ProjectIntegration {
 		NotesResponse response = new NotesResponse();
 		try{
 			Discussion discussion = discussionDAO.getDiscussionById(discussionId);
+			
+			if(discussion == null){
+				LOGGER.info("Es konnten keine Notizen von der Diskussion abgerufen werden oder es existiert keine Notiz.");
+				throw new NotesNotExistException("");
+			}
+			
 			List<Note> notes = discussion.getNotes();
 			List<NoteTO> notesTO = new ArrayList<NoteTO>();
 			
@@ -258,11 +263,7 @@ public class ProjectIntegration {
 			}
 			response.setNotes(notesTO);
 			
-			if(notesTO.isEmpty()){
-				LOGGER.info("Es konnten keine Notizen von der Diskussion abgerufen werden oder es existiert keine Notiz.");
-				throw new NotesNotExistException("");
-			}
-			LOGGER.info("Es wurde erfolgreich Notizen aus der Diskussion mit der ID: " + discussionId + "ausgelesen.");
+			LOGGER.info("Es wurde erfolgreich Notizen aus der Diskussion mit der ID: " + discussionId + " ausgelesen.");
 		}catch(ProjectException ex){
 			response.setReturnCode(ex.getErrorCode());
 			response.setMessage(ex.getMessage());
@@ -274,7 +275,7 @@ public class ProjectIntegration {
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
 		ProjectResponse response = new ProjectResponse();
 		try {
-			Project project = projectDAO.findProjectById(id);
+			Project project = projectDAO.getProject(id);
 			
 			if(project == null){
 				LOGGER.info("Es wurde kein Project mit der ID: " + id + "gefunden.");

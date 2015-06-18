@@ -10,8 +10,6 @@ import de.project.entities.User;
 
 @Local
 public interface ProjectProjectDAOLocal {
-
-	public Project findProjectById(long id);
 	
 	public void updateProject(Project project);
 	

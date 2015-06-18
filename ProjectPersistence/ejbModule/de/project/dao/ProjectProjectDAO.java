@@ -27,12 +27,6 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 		public Project getProject(long projectId){
 			return em.find(Project.class, projectId);
 		}
-		
-		//glaube brauchen wir gar nicht
-		@Override
-		public Project findProjectById(long id) {
-			return em.find(Project.class, id);
-		}
 
 		@Override
 		public Project createProject(Project project) {

@@ -97,18 +97,31 @@ public class ProjectIntegretionTest {
 	 */
 	@Test
 	public void getNoProjectsByPhoneTest() {		
-		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01608898983");
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("0160xx98983");
 		Assert.assertEquals(projectsResponse.getReturnCode(), ReturnCode.ERROR);
 	}
 	
 	/**
-	 * Test zum Prüfen ob eine Discussion einem Project zugeordnet werden kann. Es wird der ReturnCode OK erwartet.
+	 * Test zum Prüfen ob eine Diskussion einem Project zugeordnet werden kann. Es wird der ReturnCode OK erwartet.
 	 */
 	@Test
 	public void cAddDiscussionsByProjectTest() {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
 		ReturncodeResponse discussionProject = remote.addDiscussionToProject(projectsResponse.getProjects().get(0).getId(), "DiskussionThema");
 		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Test zum Prüfen ob keine Diskussion einem Project zugeordnet wurde. Es wird der ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void addNoDiscussionsByProjectTest() {
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("0160xy98983");
+		if(projectsResponse.getReturnCode().equals(ReturnCode.ERROR)){
+			Assert.assertEquals(projectsResponse.getReturnCode(), ReturnCode.ERROR);
+		}else{
+			ReturncodeResponse discussionProject = remote.addDiscussionToProject(projectsResponse.getProjects().get(0).getId(), "DiskussionThema");			
+		}
 	}
 	
 	/**
@@ -132,6 +145,27 @@ public class ProjectIntegretionTest {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01609998983");
 		DiscussionResponse discussionProject = remote.getDiscussionsByProject(projectsResponse.getProjects().get(0).getId());
 		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum hinzufügen einer Notiz zu einer Diskussion. Es wird der ReturnCode OK erwartet.
+	 */
+	@Test
+	public void dAddNoteToDiscussionTest() {
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
+		ReturncodeResponse noteRepsonse = remote.addNoteToDiscussion(projectsResponse.getProjects().get(0).getDiscussions().get(0).getId(), "Das ist eine Testnotiz.", "01607798983");
+		Assert.assertEquals(noteRepsonse.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Test zum hinzufügen einer Notiz zu einer Diskussion.
+	 * Es wird der ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void addNoNoteToDiscussionTest() {
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01609998983");
+		ReturncodeResponse noteRepsonse = remote.addNoteToDiscussion(projectsResponse.getProjects().get(0).getDiscussions().get(0).getId(), "Das ist eine Testnotiz.", "01607798983");
+		Assert.assertEquals(noteRepsonse.getReturnCode(), ReturnCode.OK);
 	}
 	
 	/**
