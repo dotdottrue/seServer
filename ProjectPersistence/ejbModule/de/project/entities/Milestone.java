@@ -10,6 +10,11 @@ import javax.persistence.Id;
 
 import de.project.enumerations.MilestoneStatus;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
 public class Milestone {
 

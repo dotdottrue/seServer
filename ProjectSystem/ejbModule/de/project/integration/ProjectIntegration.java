@@ -41,33 +41,63 @@ import de.project.exception.PermissionDeniedException;
 import de.project.exception.ProjectException;
 import de.project.exception.ProjectNotExistException;
 import de.project.exception.ProjectValidationException;
-
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ *Diese Klasse hält die Schnittstellen/Methoden für die Projektsperifischen UseCases bereit.
+ *
+ */
 @WebService
 @WebContext(contextRoot = "/project")
 @Stateless
 public class ProjectIntegration {
 	
+	/**
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist für Datenbankabfragen gedacht.
+	 */
 	@EJB(beanName = "ProjectProjectDAO", beanInterface = ProjectProjectDAOLocal.class)
 	private ProjectProjectDAOLocal projectDAO;
 	
+	/**
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist für Datenbankabfragen gedacht.
+	 */
 	@EJB(beanName = "ProjectUserDAO", beanInterface = ProjectUserDAOLocal.class)
 	private ProjectUserDAOLocal userDAO;
 	
+	/**
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist für Datenbankabfragen gedacht.
+	 */
 	@EJB(beanName = "ProjectDiscussionDAO", beanInterface = ProjectDiscussionDAOLocal.class)
 	private ProjectDiscussionDAOLocal discussionDAO;
 	
+	/**
+	 * DataTransferObject wird via EJB erzeugt.
+	 */
 	@EJB
 	private ProjectDTOAssembler projectassembler;
 	
+	/**
+	 * DataTransferObject wird via EJB erzeugt.
+	 */
 	@EJB
 	private DiscussionDTOAssembler discussionassembler;
 	
+	/**
+	 * DataTransferObject wird via EJB erzeugt.
+	 */
 	@EJB
 	private NoteDTOAssembler noteassembler;
 
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
-	
+	/**
+	 * Die Methode erzeugt ein Projekt. Falls es den Benutzer nicht gibt wird eine Exception geschmissen.
+	 * @param phoneNumber = Telefonnummer des Appanwenders.
+	 * @param projectName = Name des zu erstellenden Projektes.
+	 * @param description = Beschreibung des Projektes.
+	 * @return = Rückgabe des RückgabeCodes.
+	 */
 	public ReturncodeResponse createProject(String phoneNumber, String projectName, String description /*, int sessionId*/ ) {
 		ReturncodeResponse response = new ReturncodeResponse(); 
 		LOGGER.info(phoneNumber+" "+projectName);
@@ -137,6 +167,11 @@ public class ProjectIntegration {
 		return response;
 	}
 	
+	/**
+	 * Diese Methode erzegt eine Liste aller Projekte die einem Benutzer zugeordnet sind.
+	 * @param phonenumber = Übergabeparameter ist die Telefonnummer des App-Anwenders.
+	 * @return = Es wird eine Liste der Projekte an den AppAnwender zurückgegeben.
+	 */
 	public ProjectsResponse getProjectsByPhone(String phonenumber){	
 		ProjectsResponse response = new ProjectsResponse();
 		try{
@@ -171,6 +206,11 @@ public class ProjectIntegration {
 		return response;
 	}
 	
+	/**
+	 * Diese Methode erzeugt bei Anfrage eine Liste aller Diskussionen eines Objektes.
+	 * @param projectId = Dort wird eine Projektnummer/Id von App-Anwender übergeben
+	 * @return = Die Rückgabe enthält eine Liste von Diskussionen im Projekt.
+	 */
 	public DiscussionResponse getDiscussionsByProject(long projectId){
 		DiscussionResponse response = new DiscussionResponse();
 		try{
@@ -194,6 +234,12 @@ public class ProjectIntegration {
 		return response;
 	}
 	
+	/**
+	 * Diese Schnittstelle/Methode fügt eine Diskussion zu einem Projekt hinzu.
+	 * @param projectId = Dort wird eine Projektnummer/Id von App-Anwender übergeben
+	 * @param topic = Beinhaltet die Überschrift einer Diskussion.
+	 * @return = Beim erfolgreichen Anlegen wird ein OK-Code gesendet ansonstne ein Error-Code.
+	 */
 	public ReturncodeResponse addDiscussionToProject(long projectId, String topic){
 		ReturncodeResponse response = new ReturncodeResponse();
 		try{
@@ -218,6 +264,13 @@ public class ProjectIntegration {
 		return response;
 	}	
 	
+	/**
+	 * Diese Schnittstelle/Methode erstellt eine Notiz bei der jeweiligen Diskussion die ausgewählt wurde bzw geöffnet ist.
+	 * @param discussionId = Diskussionsnummer um die richtige Diskussion anzusprechen.
+	 * @param note = Die Notiz die geschrieben wurde.
+	 * @param phonenumber = Telefonnummerdes Benutzers.
+	 * @return = Bei erfolgreicher Erstellung wird ein OK-Code beim Fehler ein Error-Code gesendet.
+	 */
 	public ReturncodeResponse addNoteToDiscussion(long discussionId, String note, String phonenumber){
 		ReturncodeResponse response = new ReturncodeResponse();
 		try{
@@ -244,7 +297,12 @@ public class ProjectIntegration {
 				
 		return response;
 	}
-		
+	
+	/**
+	 * Mit dieser Methode werden die Beiträge in einer Diskussion ausder Datenbank geholt und dem Client übergeben.
+	 * @param discussionId = Diskussionsnummer um die richtige Diskussion anzusprechen.
+	 * @return = Als Rückgabe wird ein ReturnCorde geschickt und eine Liste an Notizen/Beiträgen. Im Fehlerfall eine Nachricht und ein Fehlercode.
+	 */
 	public NotesResponse getNotesByDiscussion(long discussionId){
 		NotesResponse response = new NotesResponse();
 		try{

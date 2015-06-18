@@ -8,6 +8,11 @@ import de.project.entities.Milestone;
 import de.project.entities.Project;
 import de.project.entities.User;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Local
 public interface ProjectProjectDAOLocal {
 	

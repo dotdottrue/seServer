@@ -13,7 +13,7 @@ import de.project.integration.UserIntegrationService;
 /**
  * 
  * Testet alle Server-Schnittstellen der UserIntegration.
- * @author tobiaskappert
+ * @author Tobias Kappert
  *
  */
 public class UserIntegrationTest {

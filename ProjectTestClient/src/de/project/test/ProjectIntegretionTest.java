@@ -6,7 +6,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import de.project.dao.ProjectProjectDAO;
 import de.project.integration.NotesResponse;
 import de.project.integration.DiscussionResponse;
 import de.project.integration.ProjectsResponse;
@@ -23,7 +22,7 @@ import de.project.integration.UserIntegrationService;
 /**
  * 
  * Testet alle Server-Schnittstellen der projectIntegration.
- * @author tobiaskappert
+ * @author Tobias Kappert
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

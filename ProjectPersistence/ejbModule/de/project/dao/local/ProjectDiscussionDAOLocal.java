@@ -4,6 +4,11 @@ import javax.ejb.Local;
 
 import de.project.entities.Discussion;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Local
 public interface ProjectDiscussionDAOLocal {
 

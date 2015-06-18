@@ -15,6 +15,11 @@ import javax.persistence.CascadeType;
 
 import de.project.enumerations.ProjectStatus;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
 public class Project {
 

@@ -13,6 +13,11 @@ import org.jboss.logging.Logger;
 
 import de.project.entities.User;
 
+/**
+ * 
+ * @author Tobias Kappert
+ *
+ */
 @Startup
 @Singleton
 public class DataBuilder {
