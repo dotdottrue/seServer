@@ -361,9 +361,6 @@ public class ProjectIntegration {
 		
 	}
 	
-	
-
-	
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
 		ProjectResponse response = new ProjectResponse();
 		try {

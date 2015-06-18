@@ -9,7 +9,7 @@ import de.project.entities.Discussion;
 
 /**
  * 
- * @author Tobias Kappert
+ * @author Eduard Schartner
  *
  */
 @Stateless
