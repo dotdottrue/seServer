@@ -127,14 +127,15 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return "Project: " + id + "von " + owner ;
+		return "Project: " + id + "von " + owner + "." ;
 	}
 	
 	public boolean projectValidation() {
-		if((projectName != null) && (owner != null)) 
+		if((projectName != null) && (owner != null)){
 			return true;
-		else
-			return false;			
+		}else{
+			return false;
+		}
 	}
 	
 }

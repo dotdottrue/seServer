@@ -16,10 +16,8 @@ public class ProjectDiscussionDAO implements ProjectDiscussionDAOLocal {
 	private EntityManager em;
 	
 	@Override
-	public Discussion getDisccusionById(long id) {
-		
-		Discussion discussion = em.find(Discussion.class, id);
-		
+	public Discussion getDiscussionById(long id) {		
+		Discussion discussion = em.find(Discussion.class, id);	
 		return discussion;
 	}
 

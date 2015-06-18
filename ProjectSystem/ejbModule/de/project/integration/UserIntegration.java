@@ -34,15 +34,15 @@ public class UserIntegration {
 	public ProjectUserResponse registerUser(String phonenumber) {
 		ProjectUserResponse response = new ProjectUserResponse();
 		try {
-			User user = userDAO.findUserByNumber(phonenumber);
+			User user = this.userDAO.findUserByNumber(phonenumber);
 			if(user == null){
-				user = userDAO.createUser(phonenumber);
+				user = this.userDAO.createUser(phonenumber);
 				LOGGER.info("Benutzer " + user + " erfolgreich angelegt.");
-				/*
+				
 				ProjectSession session = userDAO.createSession(user);
 				LOGGER.info("Session mit dem Benutzer " + user + " wurde aufgebaut");
 			
-				response.setSession(projectSessionDtoAssembler.makeDTO(session));*/
+				response.setSession(projectSessionDtoAssembler.makeDTO(session));
 			}else{
 				LOGGER.info("Registrierung fehlgeschlagen. Benutzer existiert bereits:");
 				

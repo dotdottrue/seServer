@@ -1,14 +1,12 @@
 package de.project.dto.discussion;
 
-import java.io.Serializable;
 import java.util.List;
 
+import de.project.dto.ReturncodeResponse;
 
-public class DiscussionResponse implements Serializable {
 
-	/**
-	 * 
-	 */
+public class DiscussionResponse extends ReturncodeResponse {
+
 	private static final long serialVersionUID = 5490499269768302179L;
 	
 	private List<DiscussionTO> discussions;
@@ -20,8 +18,5 @@ public class DiscussionResponse implements Serializable {
 	public void setDiscussions(List<DiscussionTO> discussions) {
 		this.discussions = discussions;
 	} 
-	
-	
-	
 
 }
