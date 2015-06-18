@@ -6,6 +6,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import de.project.dao.ProjectProjectDAO;
 import de.project.integration.NotesResponse;
 import de.project.integration.DiscussionResponse;
 import de.project.integration.ProjectsResponse;
@@ -46,6 +47,7 @@ public class ProjectIntegretionTest {
 		ProjectUserResponse userResponse = userIntegrationPort.registerUser("01607798983");
 		userIntegrationPort.registerUser("01608898983");
 		userIntegrationPort.registerUser("01609998983");
+		userIntegrationPort.registerUser("01600098983");
 		
 		if(userResponse.getReturnCode().equals(ReturnCode.ERROR)){
 			userResponse = userIntegrationPort.login("01607798983");
@@ -53,6 +55,7 @@ public class ProjectIntegretionTest {
 //		userSession = userResponse.getSession();
 		
 		remote.createProject("01609998983", "TestProject", "Kurzbeschreibung des Tests");
+		remote.createProject("01600098983", "TestProject", "Kurzbeschreibung des Tests");
 	}
 	
 	/**
@@ -128,7 +131,7 @@ public class ProjectIntegretionTest {
 	 * Test zum abrufen einer Diskussion welches einem Project zugeordnet wurde. Es wir der ReturnCode OK erwartet.
 	 */
 	@Test
-	public void getDiscussionByProjectTest() {
+	public void eGetDiscussionByProjectTest() {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
 		remote.addDiscussionToProject(projectsResponse.getProjects().get(0).getId(), "DiskussionThema1");
 		DiscussionResponse discussionProject = remote.getDiscussionsByProject(projectsResponse.getProjects().get(0).getId());
@@ -141,9 +144,9 @@ public class ProjectIntegretionTest {
 	 * Es wir der ReturnCode ERROR erwartet.
 	 */
 	@Test
-	public void eGetNoDiscussionByProjectTest() {
-		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01609998983");
-		DiscussionResponse discussionProject = remote.getDiscussionsByProject(projectsResponse.getProjects().get(0).getId());
+	public void getNoDiscussionByProjectTest() {
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01600098983");
+		DiscussionResponse discussionProject = remote.getDiscussionsByProject(1);
 		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.ERROR);
 	}
 	
@@ -158,24 +161,14 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum hinzufügen einer Notiz zu einer Diskussion.
+	 * Test zum hinzufügen einer Notiz zu einer Diskussion welche fehlschlagen soll.
 	 * Es wird der ReturnCode ERROR erwartet.
 	 */
 	@Test
 	public void addNoNoteToDiscussionTest() {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01609998983");
-		ReturncodeResponse noteRepsonse = remote.addNoteToDiscussion(projectsResponse.getProjects().get(0).getDiscussions().get(0).getId(), "Das ist eine Testnotiz.", "01607798983");
-		Assert.assertEquals(noteRepsonse.getReturnCode(), ReturnCode.OK);
-	}
-	
-	/**
-	 * Test zum hinzufügen einer Notiz zu einer Diskussion. Es wird der ReturnCode OK erwartet.
-	 */
-	@Test
-	public void dAddNoteToDiscussionTest() {
-		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
-		ReturncodeResponse noteRepsonse = remote.addNoteToDiscussion(projectsResponse.getProjects().get(0).getDiscussions().get(0).getId(), "Das ist eine Testnotiz.", "01607798983");
-		Assert.assertEquals(noteRepsonse.getReturnCode(), ReturnCode.OK);
+		ReturncodeResponse noteRepsonse = remote.addNoteToDiscussion(1, "Das ist eine Testnotiz.", "01607798983");
+		Assert.assertEquals(noteRepsonse.getReturnCode(), ReturnCode.ERROR);
 	}
 	
 	/**
@@ -187,6 +180,17 @@ public class ProjectIntegretionTest {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
 		NotesResponse notesRepsonse = remote.getNotesByDiscussion(projectsResponse.getProjects().get(0).getDiscussions().get(0).getId());
 		Assert.assertEquals(notesRepsonse.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Test zum Abfragen einer Notiz aus einer Diskussion welcher fehlschlagen soll. 
+	 * Es wird der ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void getNoNotesByDiscussionTest() {
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01609998983");
+		NotesResponse notesRepsonse = remote.getNotesByDiscussion(1);
+		Assert.assertEquals(notesRepsonse.getReturnCode(), ReturnCode.ERROR);
 	}
 	
 }
