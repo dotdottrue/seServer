@@ -32,7 +32,7 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 		 * Suchen eines Projektes anhand der ProjektID in der Datenbank.
 		 */
 		@Override
-		public Project getProject(long projectId){
+		public Project findProjectById(long projectId){
 			return em.find(Project.class, projectId);
 		}
 		

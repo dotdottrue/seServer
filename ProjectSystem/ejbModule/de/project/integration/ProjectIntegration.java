@@ -11,6 +11,7 @@ import javax.jws.WebService;
 import org.jboss.logging.Logger;
 import org.jboss.ws.api.annotation.WebContext;
 
+import de.project.assembler.AppointmentDTOAssembler;
 import de.project.assembler.DiscussionDTOAssembler;
 import de.project.assembler.NoteDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
@@ -20,6 +21,8 @@ import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.dto.MilestoneTO;
 import de.project.dto.ReturncodeResponse;
+import de.project.dto.appointment.AppointmentResponse;
+import de.project.dto.appointment.AppointmentTO;
 import de.project.dto.discussion.DiscussionResponse;
 import de.project.dto.discussion.DiscussionTO;
 import de.project.dto.note.NoteTO;
@@ -29,6 +32,7 @@ import de.project.dto.project.ProjectsResponse;
 import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
 import de.project.dto.user.UsersResponse;
+import de.project.entities.Appointment;
 import de.project.entities.Discussion;
 import de.project.entities.Milestone;
 import de.project.entities.Note;
@@ -93,6 +97,9 @@ public class ProjectIntegration {
 	
 	@EJB
 	private UserDTOAssembler userassembler;
+	
+	@EJB
+	private AppointmentDTOAssembler appointmentassembler;
 
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
@@ -116,6 +123,7 @@ public class ProjectIntegration {
 			
 				List<User> members = new ArrayList<User>();
 				List<Discussion> discussions = new ArrayList<Discussion>();
+				List<Appointment> appointments = new ArrayList<Appointment>();
 				
 				members.add(owner);
 				
@@ -127,39 +135,7 @@ public class ProjectIntegration {
 				newProject.setDiscussions(discussions);
 				
 				projectDAO.createProject(newProject);
-
-			
-			/*List<UserTO> usersTO = new ArrayList<UserTO>();
-			
-			for(UserTO userTO : usersTO) {
-				User u = new User();
-				u.setPhoneNumber(userTO.getPhoneNumber());
-				u.setFirstName(userTO.getFirstName());
-				u.setLastName(userTO.getLastName());
-				users.add(u);
-			}*/
-			
-			
-			//List<Milestone> milestones = new ArrayList<Milestone>();
-			//List<MilestoneTO> milestonesTO = new ArrayList<MilestoneTO>();
-			
-			/*for(MilestoneTO milestoneTO : milestonesTO) {
-				Milestone m = new Milestone();
-				m.setId(milestoneTO.getId());
-				m.setMilestoneName(milestoneTO.getMilestoneName());
-				m.setStatus(milestoneTO.getStatus());			
-			}
-			
-			newProject.setMembers(users);
-			newProject.setOwner(session.getUser());
-			newProject.setMilestones(milestones);
-			newProject.setProjectName(projectName);
-			newProject.setProjectStatus(ProjectStatus.INTIME);
-			newProject.setUpdatedOn(new Date());
-			
-			if(newProject.projectValidation()) {
-				projectDAO.createProject(newProject);
-				LOGGER.info("Project wurde erfolgreich angelegt");*/
+				
 			}else {
 				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefï¿½llt waren.");
 				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefï¿½llt");
@@ -171,6 +147,7 @@ public class ProjectIntegration {
 			}
 		return response;
 	}
+	
 	
 	/**
 	 * Diese Methode erzegt eine Liste aller Projekte die einem Benutzer zugeordnet sind.
@@ -220,7 +197,7 @@ public class ProjectIntegration {
 	public DiscussionResponse getDiscussionsByProject(long projectId){
 		DiscussionResponse response = new DiscussionResponse();
 		try{
-			Project project = projectDAO.getProject(projectId);
+			Project project = projectDAO.findProjectById(projectId);
 			if(project != null){
 				List<Discussion> discussions = project.getDiscussions();
 				List<DiscussionTO> discussionsTO = new ArrayList<DiscussionTO>();
@@ -233,7 +210,7 @@ public class ProjectIntegration {
 				LOGGER.info("Es gibt keine Diskussionen fï¿½r das Projekt.");
 				throw new DiscussionNotExistsException("Es existiert keine Diskussion fï¿½r das angefragte Projekt.");
 			}
-		}catch(ProjectException ex){
+		}catch(DiscussionNotExistsException ex){
 			response.setReturnCode(ex.getErrorCode());
 			response.setMessage(ex.getMessage());
 		}	
@@ -249,7 +226,7 @@ public class ProjectIntegration {
 	public ReturncodeResponse addDiscussionToProject(long projectId, String topic){
 		ReturncodeResponse response = new ReturncodeResponse();
 		try{
-			Project project = projectDAO.getProject(projectId);
+			Project project = projectDAO.findProjectById(projectId);
 			if(project != null){
 				Discussion discussion = new Discussion();
 				discussion.setNotes(new ArrayList<Note>());
@@ -269,6 +246,21 @@ public class ProjectIntegration {
 		}		
 		return response;
 	}	
+	
+	public ReturncodeResponse removeProjectDiscussion(long projectId, long discussionId){
+		
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			Discussion discussion = discussionDAO.getDiscussionById(discussionId);
+			List<Discussion> discussions = project.getDiscussions();
+			discussions.remove(discussion);
+			projectDAO.updateProject(project);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new ReturncodeResponse();
+	}
 	
 	/**
 	 * Diese Schnittstelle/Methode erstellt eine Notiz bei der jeweiligen Diskussion die ausgewŠhlt wurde bzw gešffnet ist.
@@ -315,8 +307,8 @@ public class ProjectIntegration {
 			Discussion discussion = discussionDAO.getDiscussionById(discussionId);
 			
 			if(discussion == null){
-				LOGGER.info("Es konnten keine Notizen von der Diskussion abgerufen werden oder es existiert keine Notiz.");
-				throw new NotesNotExistException("");
+				LOGGER.info("Es konnten keine Notizen von der Diskussion abgerufen werden oder es existiert keine Diskussion.");
+				throw new NotesNotExistException("Es konnte keine Notiz von einer nicht Existenten Diskussion abgerufen werden.");
 			}
 			
 			List<Note> notes = discussion.getNotes();
@@ -326,45 +318,127 @@ public class ProjectIntegration {
 				notesTO.add(noteassembler.makeDTO(n));	
 			}
 			response.setNotes(notesTO);
-			
 			LOGGER.info("Es wurde erfolgreich Notizen aus der Diskussion mit der ID: " + discussionId + " ausgelesen.");
-		}catch(ProjectException ex){
+		}catch(NotesNotExistException ex){
 			response.setReturnCode(ex.getErrorCode());
 			response.setMessage(ex.getMessage());
 		}
-		
 		return response;
 	}
 	
 	public UsersResponse comparePhonebook (String ...params){
-		
-		List<User> usersServer = userDAO.findAllUsers();
-		List<User> comparedUsers = new ArrayList<User>();
-		
-		for(int i = 0; i < params.length; i++){
-			
-			for(User u : usersServer){
-				if(u.getPhoneNumber().equals(params[i])){
-					comparedUsers.add(u);
-					break;
-				}
-			}
-		}
-		List<UserTO> comparedTO = new ArrayList<UserTO>();
-		for(User u : comparedUsers){
-			comparedTO.add(userassembler.makeDTO(u));
-		}
 		UsersResponse response = new UsersResponse();
-		response.setUsers(comparedTO);
+		try {
+			List<User> usersServer = userDAO.findAllUsers();
+			List<User> comparedUsers = new ArrayList<User>();
+			
+			for(int i = 0; i < params.length; i++){
+				for(User u : usersServer){
+					System.out.println(params[i]+"("+params[i].length()+") = "+u.getPhoneNumber()+"("+u.getPhoneNumber().length()+")");
+					if(u.getPhoneNumber().equals(params[i])){
+						comparedUsers.add(u);
+						break;
+					}
+				}
+			} 
+			
+			List<UserTO> comparedTO = new ArrayList<UserTO>();
+			for(User u : comparedUsers){
+				comparedTO.add(userassembler.makeDTO(u));
+			}
+			
+			response.setUsers(comparedTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return response;
-		
 	}
 	
+	public ReturncodeResponse addUserToProject(String phoneNumber, long projectId){
+		
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			User user = userDAO.findUserByNumber(phoneNumber);
+			List<User> members = project.getMembers();
+			members.add(user);
+			projectDAO.updateProject(project);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ReturncodeResponse();
+	}
+	
+	public ReturncodeResponse addAppointmentToProject(long projectId, String topic, String description, long date){
+		
+		try {
+			
+			Project project = projectDAO.findProjectById(projectId);
+			List<Appointment> appointments = project.getAppointments();
+			Appointment appointment = new Appointment();
+			appointment.setTopic(topic);
+			appointment.setDescription(description);
+			Date newdate = new Date();
+			newdate.setTime(date);
+			appointment.setAppointmentDate(newdate);
+			appointments.add(appointment);
+			projectDAO.updateProject(project);
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return new ReturncodeResponse();
+	}
+	
+	
+	public AppointmentResponse getAppointmentsByProject(long projectId){
+		
+		AppointmentResponse response = new AppointmentResponse();
+		
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			List<Appointment> appointments = project.getAppointments();
+			List<AppointmentTO> appointmentsTO = new ArrayList<AppointmentTO>();
+			
+			for(Appointment a : appointments){
+				appointmentsTO.add(appointmentassembler.makeDTO(a));
+			}
+			
+			response.setAppointments(appointmentsTO);
+		
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	
+	public ReturncodeResponse removeProjectMember(long projectId, String phoneNumber) {
+		
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			User user = userDAO.findUserByNumber(phoneNumber);
+			List<User> members = project.getMembers();
+			members.remove(user);
+			
+			projectDAO.updateProject(project);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new ReturncodeResponse();
+	}
+
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
 		ProjectResponse response = new ProjectResponse();
 		try {
-			Project project = projectDAO.getProject(id);
+			Project project = projectDAO.findProjectById(id);
 			
 			if(project == null){
 				LOGGER.info("Es wurde kein Project mit der ID: " + id + "gefunden.");

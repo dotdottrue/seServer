@@ -24,6 +24,7 @@ public class Appointment {
 	*/ 
 	
 	private String topic;
+	private String description;
 	private Date appointmentDate;
 	
 	public long getId() {
@@ -48,6 +49,14 @@ public class Appointment {
 	
 	public void setAppointmentDate(Date appointmentDate) {
 		this.appointmentDate = appointmentDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

@@ -9,7 +9,8 @@ public class AppointmentTO implements Serializable {
 	
 	private long id;
 	private String topic;
-	private Date appointmentDate;
+	private String description;
+	private long appointmentDate;
 	
 	public long getId() {
 		return id;
@@ -27,13 +28,22 @@ public class AppointmentTO implements Serializable {
 		this.topic = topic;
 	}
 	
-	public Date getAppointmentDate() {
+	public long getAppointmentDate() {
 		return appointmentDate;
 	}
 	
-	public void setAppointmentDate(Date appointmentDate) {
+	public void setAppointmentDate(long appointmentDate) {
 		this.appointmentDate = appointmentDate;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	
 	
 }

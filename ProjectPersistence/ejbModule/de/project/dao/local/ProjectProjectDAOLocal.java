@@ -20,7 +20,7 @@ public interface ProjectProjectDAOLocal {
 	
 	public List<Project> findProjects(User currentUser);
 	
-	public Project getProject(long projectId);
+	public Project findProjectById(long projectId);
 	
 	public void cancelProject(Project projet);
 	
