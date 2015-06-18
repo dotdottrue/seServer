@@ -15,4 +15,6 @@ public interface ProjectDiscussionDAOLocal {
 	public Discussion getDiscussionById(long id);
 	
 	public void updateDiscussion(Discussion discussion);
+	
+	public void removeDiscussion(Discussion discussion);
 }

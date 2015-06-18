@@ -265,6 +265,7 @@ public class ProjectIntegration {
 			} 
 			List<Discussion> discussions = project.getDiscussions();
 			discussions.remove(discussion);
+			//discussionDAO.removeDiscussion(discussion);
 			projectDAO.updateProject(project);
 		} catch (ProjectNotExistException ex) {
 			response.setReturnCode(ex.getErrorCode());
