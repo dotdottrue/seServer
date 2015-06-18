@@ -41,6 +41,7 @@ import de.project.entities.ProjectSession;
 import de.project.entities.User;
 import de.project.enumerations.ProjectStatus;
 import de.project.enumerations.ReturnCode;
+import de.project.exception.CompareUsersNotExistException;
 import de.project.exception.DiscussionNotExistsException;
 import de.project.exception.NotesNotExistException;
 import de.project.exception.PermissionDeniedException;
@@ -247,19 +248,30 @@ public class ProjectIntegration {
 		return response;
 	}	
 	
+	/**
+	 * Methode/Schnittstelle zum entfernen einer Diskussion aus einem Projekt
+	 * @param projectId = Parameter zum bestimmen zu welchem Projekt die Diskussiong gehört.
+	 * @param discussionId = Die ID der jeweiligen Diskussion.
+	 * @return = Es wird bei Erfolg der ReturnCode OK bei misserfolg der ReturnCode Error zurückgegeben.
+	 */
 	public ReturncodeResponse removeProjectDiscussion(long projectId, long discussionId){
-		
+		ReturncodeResponse response = new ReturncodeResponse();
 		try {
 			Project project = projectDAO.findProjectById(projectId);
 			Discussion discussion = discussionDAO.getDiscussionById(discussionId);
+			if(project == null || discussion == null){
+				LOGGER.info("Es gibt kein Projekt mit der Id: " + projectId);
+				throw new ProjectNotExistException("Es gibt kein Projekt mit der ID: " + projectId);
+			} 
 			List<Discussion> discussions = project.getDiscussions();
 			discussions.remove(discussion);
 			projectDAO.updateProject(project);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (ProjectNotExistException ex) {
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();
 		}
-		
-		return new ReturncodeResponse();
+		return response;
 	}
 	
 	/**
@@ -326,9 +338,18 @@ public class ProjectIntegration {
 		return response;
 	}
 	
+	/**
+	 * Diese Methode/Schnitttelle vergleicht die Kontakte des Handybenutzers mit den Kontakten in der Datenbank.
+	 * @param params = der Parameter Params enthält ein String Array welches eine Dynamische länge von String  parametern fassen kann.
+	 * @return
+	 */
 	public UsersResponse comparePhonebook (String ...params){
 		UsersResponse response = new UsersResponse();
 		try {
+			if(params == null){
+				LOGGER.info("Es wurden keine Kontakte/Parameter übergeben! Oder die Übergabe war Fehlerhaft!");
+				throw new CompareUsersNotExistException("Es gab keine Benutzer zu vergleichen!");
+			}
 			List<User> usersServer = userDAO.findAllUsers();
 			List<User> comparedUsers = new ArrayList<User>();
 			
@@ -348,35 +369,43 @@ public class ProjectIntegration {
 			}
 			
 			response.setUsers(comparedTO);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (CompareUsersNotExistException ex) {
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();
 		}
-		
 		return response;
 	}
 	
 	public ReturncodeResponse addUserToProject(String phoneNumber, long projectId){
-		
+		ReturncodeResponse response = new ReturncodeResponse();
 		try {
 			Project project = projectDAO.findProjectById(projectId);
+			if(project == null){
+				LOGGER.info("Es gibt kein Projekt mit der Id: " + projectId);
+				throw new ProjectNotExistException("Es gibt kein Projekt mit der ID: " + projectId);
+			} 
+			
 			User user = userDAO.findUserByNumber(phoneNumber);
 			List<User> members = project.getMembers();
 			members.add(user);
 			projectDAO.updateProject(project);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch (ProjectNotExistException ex) {
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();
 		}
-		
-		return new ReturncodeResponse();
+		return response;
 	}
 	
 	public ReturncodeResponse addAppointmentToProject(long projectId, String topic, String description, long date){
-		
-		try {
-			
+		ReturncodeResponse response = new ReturncodeResponse();
+		try {	
 			Project project = projectDAO.findProjectById(projectId);
+			if(project == null){
+				LOGGER.info("Es gibt kein Projekt mit der Id: " + projectId);
+				throw new ProjectNotExistException("Es gibt kein Projekt mit der ID: " + projectId);
+			} 
 			List<Appointment> appointments = project.getAppointments();
 			Appointment appointment = new Appointment();
 			appointment.setTopic(topic);
@@ -387,21 +416,23 @@ public class ProjectIntegration {
 			appointments.add(appointment);
 			projectDAO.updateProject(project);
 		
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch (ProjectNotExistException ex) {
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();
 		}
-		
-		return new ReturncodeResponse();
+		return response;
 	}
 	
 	
-	public AppointmentResponse getAppointmentsByProject(long projectId){
-		
+	public AppointmentResponse getAppointmentsByProject(long projectId){	
 		AppointmentResponse response = new AppointmentResponse();
-		
 		try {
 			Project project = projectDAO.findProjectById(projectId);
+			if(project == null){
+				LOGGER.info("Es gibt kein Projekt mit der Id: " + projectId);
+				throw new ProjectNotExistException("Es gibt kein Projekt mit der ID: " + projectId);
+			} 
 			List<Appointment> appointments = project.getAppointments();
 			List<AppointmentTO> appointmentsTO = new ArrayList<AppointmentTO>();
 			
@@ -411,28 +442,34 @@ public class ProjectIntegration {
 			
 			response.setAppointments(appointmentsTO);
 		
-		}catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch (ProjectNotExistException ex) {
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();
 		}
 		return response;
 	}
 	
 	
 	public ReturncodeResponse removeProjectMember(long projectId, String phoneNumber) {
-		
+		ReturncodeResponse response = new ReturncodeResponse();
 		try {
 			Project project = projectDAO.findProjectById(projectId);
+			if(project == null){
+				LOGGER.info("Es gibt kein Projekt mit der Id: " + projectId);
+				throw new ProjectNotExistException("Es gibt kein Projekt mit der ID: " + projectId);
+			} 
 			User user = userDAO.findUserByNumber(phoneNumber);
 			List<User> members = project.getMembers();
 			members.remove(user);
 			
 			projectDAO.updateProject(project);
-		} catch (Exception e) {
-			e.printStackTrace();
+		}catch (ProjectNotExistException ex) {
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();
 		}
-		
-		return new ReturncodeResponse();
+		return response;
 	}
 
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	

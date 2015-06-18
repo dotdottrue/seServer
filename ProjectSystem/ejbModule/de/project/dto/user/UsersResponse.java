@@ -1,9 +1,10 @@
 package de.project.dto.user;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class UsersResponse implements Serializable{
+import de.project.dto.ReturncodeResponse;
+
+public class UsersResponse extends ReturncodeResponse{
 
 	private static final long serialVersionUID = -4472875215477094371L;	
 	
