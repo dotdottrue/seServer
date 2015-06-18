@@ -1,5 +1,7 @@
 package de.project.dao.local;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import de.project.entities.ProjectSession;
@@ -20,6 +22,8 @@ public interface ProjectUserDAOLocal {
     public User createUser(String phoneNumber);
 
     public boolean endSession(int sessionId);
+    
+    public List<User> findAllUsers();
 
     //public List<User> searchUsers(String phoneNumber);
 

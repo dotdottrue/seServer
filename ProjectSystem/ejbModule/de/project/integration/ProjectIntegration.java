@@ -14,6 +14,7 @@ import org.jboss.ws.api.annotation.WebContext;
 import de.project.assembler.DiscussionDTOAssembler;
 import de.project.assembler.NoteDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
+import de.project.assembler.UserDTOAssembler;
 import de.project.dao.local.ProjectDiscussionDAOLocal;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
@@ -27,6 +28,7 @@ import de.project.dto.project.ProjectResponse;
 import de.project.dto.project.ProjectsResponse;
 import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
+import de.project.dto.user.UsersResponse;
 import de.project.entities.Discussion;
 import de.project.entities.Milestone;
 import de.project.entities.Note;
@@ -88,6 +90,9 @@ public class ProjectIntegration {
 	 */
 	@EJB
 	private NoteDTOAssembler noteassembler;
+	
+	@EJB
+	private UserDTOAssembler userassembler;
 
 	private static final Logger LOGGER = Logger.getLogger(ProjectIntegration.class);
 
@@ -156,8 +161,8 @@ public class ProjectIntegration {
 				projectDAO.createProject(newProject);
 				LOGGER.info("Project wurde erfolgreich angelegt");*/
 			}else {
-				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefŸllt waren.");
-				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefŸllt");
+				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefï¿½llt waren.");
+				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefï¿½llt");
 			}
 			
 			}catch(ProjectValidationException ex) {
@@ -174,6 +179,7 @@ public class ProjectIntegration {
 	 */
 	public ProjectsResponse getProjectsByPhone(String phonenumber){	
 		ProjectsResponse response = new ProjectsResponse();
+
 		try{
 			User user = userDAO.findUserByNumber(phonenumber);
 			if(user == null) {
@@ -224,8 +230,8 @@ public class ProjectIntegration {
 				}	
 				response.setDiscussions(discussionsTO);
 			}else{
-				LOGGER.info("Es gibt keine Diskussionen fŸr das Projekt.");
-				throw new DiscussionNotExistsException("Es existiert keine Diskussion fŸr das angefragte Projekt.");
+				LOGGER.info("Es gibt keine Diskussionen fï¿½r das Projekt.");
+				throw new DiscussionNotExistsException("Es existiert keine Diskussion fï¿½r das angefragte Projekt.");
 			}
 		}catch(ProjectException ex){
 			response.setReturnCode(ex.getErrorCode());
@@ -251,7 +257,7 @@ public class ProjectIntegration {
 				discussion.setTopic(topic);
 				project.getDiscussions().add(discussion);
 				
-				LOGGER.info("Eine Diskussion mit der ID " + discussion.getId() + "wurde dem Project mit der ID " + project.getId() + "hinzugefŸgt.");
+				LOGGER.info("Eine Diskussion mit der ID " + discussion.getId() + " wurde dem Project mit der ID " + project.getId() + "hinzugefuegt.");
 				projectDAO.updateProject(project);
 			}else{
 				LOGGER.info("Project mit der ID:" + projectId + "existiert nicht.");
@@ -328,7 +334,35 @@ public class ProjectIntegration {
 		}
 		
 		return response;
-	}	
+	}
+	
+	public UsersResponse comparePhonebook (String ...params){
+		
+		List<User> usersServer = userDAO.findAllUsers();
+		List<User> comparedUsers = new ArrayList<User>();
+		
+		for(int i = 0; i < params.length; i++){
+			
+			for(User u : usersServer){
+				if(u.getPhoneNumber().equals(params[i])){
+					comparedUsers.add(u);
+					break;
+				}
+			}
+		}
+		List<UserTO> comparedTO = new ArrayList<UserTO>();
+		for(User u : comparedUsers){
+			comparedTO.add(userassembler.makeDTO(u));
+		}
+		UsersResponse response = new UsersResponse();
+		response.setUsers(comparedTO);
+		
+		return response;
+		
+	}
+	
+	
+
 	
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
 		ProjectResponse response = new ProjectResponse();
@@ -348,7 +382,7 @@ public class ProjectIntegration {
 				
 				LOGGER.info("Project mit der id " + project.getId() + "wurde aktualisiert.");
 			}else{
-				LOGGER.info("Zugriff fŸr den Benutzer verweigert.");
+				LOGGER.info("Zugriff fï¿½r den Benutzer verweigert.");
 				throw new PermissionDeniedException("Zugriff verweigert!");
 			}	
 		}catch(ProjectNotExistException | PermissionDeniedException ex ){
