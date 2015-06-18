@@ -97,39 +97,7 @@ public class ProjectIntegration {
 				newProject.setDiscussions(discussions);
 				
 				projectDAO.createProject(newProject);
-
-			
-			/*List<UserTO> usersTO = new ArrayList<UserTO>();
-			
-			for(UserTO userTO : usersTO) {
-				User u = new User();
-				u.setPhoneNumber(userTO.getPhoneNumber());
-				u.setFirstName(userTO.getFirstName());
-				u.setLastName(userTO.getLastName());
-				users.add(u);
-			}*/
-			
-			
-			//List<Milestone> milestones = new ArrayList<Milestone>();
-			//List<MilestoneTO> milestonesTO = new ArrayList<MilestoneTO>();
-			
-			/*for(MilestoneTO milestoneTO : milestonesTO) {
-				Milestone m = new Milestone();
-				m.setId(milestoneTO.getId());
-				m.setMilestoneName(milestoneTO.getMilestoneName());
-				m.setStatus(milestoneTO.getStatus());			
-			}
-			
-			newProject.setMembers(users);
-			newProject.setOwner(session.getUser());
-			newProject.setMilestones(milestones);
-			newProject.setProjectName(projectName);
-			newProject.setProjectStatus(ProjectStatus.INTIME);
-			newProject.setUpdatedOn(new Date());
-			
-			if(newProject.projectValidation()) {
-				projectDAO.createProject(newProject);
-				LOGGER.info("Project wurde erfolgreich angelegt");*/
+				
 			}else {
 				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gef�llt waren.");
 				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gef�llt");
@@ -141,6 +109,7 @@ public class ProjectIntegration {
 			}
 		return response;
 	}
+	
 	
 	public ProjectsResponse getProjectsByPhone(String phonenumber){	
 		ProjectsResponse response = new ProjectsResponse();
@@ -166,12 +135,12 @@ public class ProjectIntegration {
 			
 			if(projectsTO.isEmpty() || projectsTO == null) {
 				LOGGER.info("Eine Liste der Projekte f�r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "konnte nicht erzeugt werden.");
-				throw new ProjectNotExistException("Es existieren keine Projekte f�r den benutzer mit der Telefonnummer: " + phonenumber);
+				//throw new ProjectNotExistException("Es existieren keine Projekte f�r den benutzer mit der Telefonnummer: " + phonenumber);
 			}else{
 				LOGGER.info("Eine Liste der Projekte f�r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ "wurde erzeugt.");
 			}
-		}catch(ProjectNotExistException ex){
-			response.setReturnCode(ex.getErrorCode());
+		}catch(Exception ex){
+			//response.setReturnCode(ex.getErrorCode());
 			response.setMessage(ex.getMessage());
 		}
 		return response;
@@ -191,12 +160,14 @@ public class ProjectIntegration {
 				response.setDiscussions(discussionsTO);
 			}else{
 				LOGGER.info("Es gibt keine Diskussionen f�r das Projekt.");
-				throw new DiscussionNotExistsException("Es existiert keine Diskussion f�r das angefragte Projekt.");
+				//throw new DiscussionNotExistsException("Es existiert keine Diskussion f�r das angefragte Projekt.");
 			}
-		}catch(ProjectException ex){
-			response.setReturnCode(ex.getErrorCode());
+		}catch(Exception ex){
+			//response.setReturnCode(ex.getErrorCode());
 			response.setMessage(ex.getMessage());
 		}	
+		
+		//response.setDiscussions(new ArrayList<DiscussionTO>());
 		return response;
 	}
 	
@@ -266,41 +237,65 @@ public class ProjectIntegration {
 			
 			if(notesTO.isEmpty()){
 				LOGGER.info("Es konnten keine Notizen von der Diskussion abgerufen werden oder es existiert keine Notiz.");
-				throw new NotesNotExistException("");
+				//throw new NotesNotExistException("");
 			}
 			LOGGER.info("Es wurde erfolgreich Notizen aus der Diskussion mit der ID: " + discussionId + "ausgelesen.");
-		}catch(ProjectException ex){
-			response.setReturnCode(ex.getErrorCode());
+		}catch(Exception ex){
+			//response.setReturnCode(ex.getErrorCode());
 			response.setMessage(ex.getMessage());
+		}
+		return response;
+	}
+	
+	public UsersResponse comparePhonebook (String ...params){
+		UsersResponse response = new UsersResponse();
+		try {
+			List<User> usersServer = userDAO.findAllUsers();
+			List<User> comparedUsers = new ArrayList<User>();
+			
+			for(int i = 0; i < params.length; i++){
+				
+				for(User u : usersServer){
+					System.out.println(params[i]+"("+params[i].length()+") = "+u.getPhoneNumber()+"("+u.getPhoneNumber().length()+")");
+					if(u.getPhoneNumber().equals(params[i])){
+						comparedUsers.add(u);
+						break;
+					}
+				}
+			} 
+			
+			List<UserTO> comparedTO = new ArrayList<UserTO>();
+			for(User u : comparedUsers){
+				comparedTO.add(userassembler.makeDTO(u));
+			}
+			
+			response.setUsers(comparedTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return response;
 	}
 	
-	public UsersResponse comparePhonebook (String ...params){
+	
+	public ReturncodeResponse addUserToProject(String phoneNumber, long projectId){
 		
-		List<User> usersServer = userDAO.findAllUsers();
-		List<User> comparedUsers = new ArrayList<User>();
-		
-		for(int i = 0; i < params.length; i++){
-			
-			for(User u : usersServer){
-				if(u.getPhoneNumber().equals(params[i])){
-					comparedUsers.add(u);
-					break;
-				}
-			}
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			User user = userDAO.findUserByNumber(phoneNumber);
+			List<User> members = project.getMembers();
+			members.add(user);
+			projectDAO.updateProject(project);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		List<UserTO> comparedTO = new ArrayList<UserTO>();
-		for(User u : comparedUsers){
-			comparedTO.add(userassembler.makeDTO(u));
-		}
-		UsersResponse response = new UsersResponse();
-		response.setUsers(comparedTO);
 		
-		return response;
-		
+		return new ReturncodeResponse();
 	}
+	
+	
 	
 	
 
