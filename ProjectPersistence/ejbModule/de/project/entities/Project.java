@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.CascadeType;
+import javax.persistence.OrderBy;
 
 import de.project.enumerations.ProjectStatus;
 
@@ -38,6 +39,7 @@ public class Project {
 	private List<Milestone> milestones;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OrderBy("appointmentDate ASC")
 	private List<Appointment> appointments;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -17,6 +17,7 @@ import de.project.entities.Note;
 import de.project.entities.Project;
 import de.project.entities.User;
 import de.project.entities.Discussion;
+import de.project.enumerations.ProjectStatus;
 
 /**
  * 
@@ -55,6 +56,7 @@ public class DataBuilder {
 		}
 		LOGGER.info("Neu angelegt: " + user2);	
 	
+			
 		String[] phoneNumbers = { phoneNumber1, phoneNumber2 };
 		String[] projectNames = { projectName, projectName2, projectName3, projectName4 };
 		User[] users = { user1, user2 };
@@ -66,10 +68,10 @@ public class DataBuilder {
 			project.setUpdatedOn(new Date());
 			project.setProjectName(projectNames[i]);
 			project.setDescription(projectDescription);	
-			
+			project.setProjectStatus(ProjectStatus.INTIME);
 			ArrayList<Discussion> discussionsList = new ArrayList<>();
 			for(int j = 0; j < 4; j++){
-				Discussion discussion = new Discussion(discussionNames[i], new Date());
+				Discussion discussion = new Discussion(discussionNames[j], new Date());
 				discussionsList.add(discussion);
 			}
 			
@@ -83,14 +85,14 @@ public class DataBuilder {
 				notes.add(new Note(
 									"BeispielNotiz",
 									new Date(),
-									phoneNumbers[i%2]
+									phoneNumbers[l%2]
 								));
 			}
 			
 			for(int m = 0; m < 4; m++){
-				Discussion d = discussionsList.get(i);
+				Discussion d = discussionsList.get(m);
 				d.setNotes(notes);
-				discussionsList.set(i, d);
+				discussionsList.set(m, d);
 			}
 			
 			project.setDiscussions(discussionsList);
