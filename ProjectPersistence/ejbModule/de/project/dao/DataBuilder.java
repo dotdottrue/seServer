@@ -17,6 +17,7 @@ import de.project.entities.Note;
 import de.project.entities.Project;
 import de.project.entities.User;
 import de.project.entities.Discussion;
+import de.project.enumerations.ProjectStatus;
 
 /**
  * 
@@ -66,7 +67,7 @@ public class DataBuilder {
 			project.setUpdatedOn(new Date());
 			project.setProjectName(projectNames[i]);
 			project.setDescription(projectDescription);	
-			
+			project.setProjectStatus(ProjectStatus.INTIME);
 			ArrayList<Discussion> discussionsList = new ArrayList<>();
 			for(int j = 0; j < 4; j++){
 				Discussion discussion = new Discussion(discussionNames[i], new Date());
@@ -88,7 +89,7 @@ public class DataBuilder {
 			}
 			
 			for(int m = 0; m < 4; m++){
-				Discussion d = discussionsList.get(i);
+				Discussion d = discussionsList.get(m);
 				d.setNotes(notes);
 				discussionsList.set(i, d);
 			}
