@@ -8,32 +8,82 @@
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/phoneNumber1</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>testnummer1</env-entry-value>
+        <env-entry-value>4915144530578</env-entry-value>
       </env-entry>
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/phoneNumber2</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>testnummer2</env-entry-value>
+        <env-entry-value>4916096736450</env-entry-value>
       </env-entry>
       <env-entry>
-        <env-entry-name>de.project.dao.DataBuilder/firstName1</env-entry-name>
+        <env-entry-name>de.project.dao.DataBuilder/projectName</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>firstName1</env-entry-value>
+        <env-entry-value>TestProjekt</env-entry-value>
       </env-entry>
       <env-entry>
-        <env-entry-name>de.project.dao.DataBuilder/firstName2</env-entry-name>
+        <env-entry-name>de.project.dao.DataBuilder/projectName2</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>firstName2</env-entry-value>
+        <env-entry-value>TestProjekt2</env-entry-value>
       </env-entry>
       <env-entry>
-        <env-entry-name>de.project.dao.DataBuilder/lastName1</env-entry-name>
+        <env-entry-name>de.project.dao.DataBuilder/projectName3</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>lastName1</env-entry-value>
+        <env-entry-value>TestProjekt3</env-entry-value>
       </env-entry>
       <env-entry>
-        <env-entry-name>de.project.dao.DataBuilder/lastName2</env-entry-name>
+        <env-entry-name>de.project.dao.DataBuilder/projectName4</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>lastName2</env-entry-value>
+        <env-entry-value>TestProjekt4</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/projectDescription</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>Das ist eine Testbeschreibung für die Projekte.</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/discussionName</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>TestDisckussion</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/discussionName2</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>TestDisckussion2</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/discussionName3</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>TestDisckussion3</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/discussionName4</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>TestDisckussion4</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/appointmentName</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>TestTermin</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/appointmentName2</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>TestTermin2</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/appointmentName3</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>TestTermin3</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/appointmentName4</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>TestTermin4</env-entry-value>
+      </env-entry>
+      <env-entry>
+        <env-entry-name>de.project.dao.DataBuilder/appointmentDiscription</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>Das ist eine Terminbeschreibung.</env-entry-value>
       </env-entry>
     </session>
   </enterprise-beans>

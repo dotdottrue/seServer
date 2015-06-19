@@ -342,12 +342,13 @@ public class ProjectIntegration {
 	/**
 	 * Diese Methode/Schnitttelle vergleicht die Kontakte des Handybenutzers mit den Kontakten in der Datenbank.
 	 * @param params = der Parameter Params enthält ein String Array welches eine Dynamische länge von String  parametern fassen kann.
-	 * @return
+	 * @return = Alle Kontakte aus dem Telefonbuch welche auch diese App benutzen.
 	 */
-	public UsersResponse comparePhonebook (String ...params){
+	public UsersResponse comparePhonebook (long projectId, String ...params){
 		UsersResponse response = new UsersResponse();
 		try {
-			if(params == null){
+			Project project = projectDAO.findProjectById(projectId);
+			if(params == null || project == null){
 				LOGGER.info("Es wurden keine Kontakte/Parameter übergeben! Oder die Übergabe war Fehlerhaft!");
 				throw new CompareUsersNotExistException("Es gab keine Benutzer zu vergleichen!");
 			}
@@ -356,8 +357,8 @@ public class ProjectIntegration {
 			
 			for(int i = 0; i < params.length; i++){
 				for(User u : usersServer){
-					System.out.println(params[i]+"("+params[i].length()+") = "+u.getPhoneNumber()+"("+u.getPhoneNumber().length()+")");
-					if(u.getPhoneNumber().equals(params[i])){
+					LOGGER.info(params[i]+"("+params[i].length()+") = "+u.getPhoneNumber()+"("+u.getPhoneNumber().length()+")");
+					if(u.getPhoneNumber().equals(params[i]) && !project.getMembers().contains(u)){
 						comparedUsers.add(u);
 						break;
 					}
@@ -378,6 +379,12 @@ public class ProjectIntegration {
 		return response;
 	}
 	
+	/**
+	 * Diese Schnittstelle erlaubt das hinzufügen eines Benutzers/Users zu dem Projekt.
+	 * @param phoneNumber = Übergabeparameter Telefonnummer für den zu speichernden Benutzer.
+	 * @param projectId = Übergabe parameter ProjektId zur Bestimmung des Projektes.
+	 * @return = Gibt einen OK-Code bei erfolgreichem Anlegen zurück und einen Error-Code falls was nicht klappt.
+	 */
 	public ReturncodeResponse addUserToProject(String phoneNumber, long projectId){
 		ReturncodeResponse response = new ReturncodeResponse();
 		try {
@@ -399,6 +406,14 @@ public class ProjectIntegration {
 		return response;
 	}
 	
+	/**
+	 * Diese Methode/Schnittstelle fügt einen Termin bei einem Projekt hinzu.
+	 * @param projectId = Indentifizierung zu welchem Projekt der Termin hinzugefügt werden soll.
+	 * @param topic = Bezeichnung des Termins.
+	 * @param description = Beschreibung des Termins
+	 * @param date = Datum des Termins.
+	 * @return = Rückgabe bei Erfolg OK-Code bei Fehler ERROR-Code.
+	 */
 	public ReturncodeResponse addAppointmentToProject(long projectId, String topic, String description, long date){
 		ReturncodeResponse response = new ReturncodeResponse();
 		try {	
@@ -425,7 +440,11 @@ public class ProjectIntegration {
 		return response;
 	}
 	
-	
+	/**
+	 * Abrufen des Termins im jeweiligen Projekt.
+	 * @param projectId = Aufruf eines Projektes wo der Termin enthalten ist.
+	 * @return = Übergabe der Termine.
+	 */
 	public AppointmentResponse getAppointmentsByProject(long projectId){	
 		AppointmentResponse response = new AppointmentResponse();
 		try {
@@ -451,7 +470,12 @@ public class ProjectIntegration {
 		return response;
 	}
 	
-	
+	/**
+	 * Entfernen eines Projektmitglieds
+	 * @param projectId = Parameter zur Identifizierung des Projektes.
+	 * @param phoneNumber = Telefonnummer zur Identifizierung des Projektmitglieds.
+	 * @return = Rückgabe eines Statuscodes.
+	 */
 	public ReturncodeResponse removeProjectMember(long projectId, String phoneNumber) {
 		ReturncodeResponse response = new ReturncodeResponse();
 		try {
