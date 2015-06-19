@@ -147,7 +147,7 @@ public class ProjectIntegretionTest {
 	 */
 	@Test
 	public void getNoDiscussionByProjectTest() {
-		DiscussionResponse discussionProject = remote.getDiscussionsByProject(1);
+		DiscussionResponse discussionProject = remote.getDiscussionsByProject(2);
 		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.ERROR);
 	}
 	
@@ -173,7 +173,7 @@ public class ProjectIntegretionTest {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("0160xx98983");
 		Assert.assertEquals(projectsResponse.getReturnCode(), ReturnCode.ERROR);
 		
-		DiscussionResponse discussionProject = remote.getDiscussionsByProject(1);
+		DiscussionResponse discussionProject = remote.getDiscussionsByProject(2);
 		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.ERROR);
 	}
 	
@@ -226,7 +226,7 @@ public class ProjectIntegretionTest {
 	 */
 	@Test
 	public void failComparePhonebookTest(){
-		UsersResponse userResponse = remote.comparePhonebook(null);
+		UsersResponse userResponse = remote.comparePhonebook(999999, null);
 		Assert.assertEquals(userResponse.getReturnCode(), ReturnCode.ERROR);
 	}
 	
@@ -239,7 +239,8 @@ public class ProjectIntegretionTest {
 		List<String> userList = new ArrayList<>();
 		userList.add("01608898983");
 		userList.add("01609998983");
-		UsersResponse userResponse = remote.comparePhonebook(userList);
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
+		UsersResponse userResponse = remote.comparePhonebook(projectsResponse.getProjects().get(0).getId(), userList);
 		Assert.assertEquals(userResponse.getReturnCode(), ReturnCode.OK);
 	}
 	

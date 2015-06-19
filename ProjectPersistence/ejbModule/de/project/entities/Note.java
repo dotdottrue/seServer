@@ -1,6 +1,5 @@
 package de.project.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,9 +12,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Note implements Serializable {
-
-	private static final long serialVersionUID = 7541936733858468307L;
+public class Note {
 	
 	@Id
 	@GeneratedValue

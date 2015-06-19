@@ -79,6 +79,9 @@ public class ProjectIntegration {
 	@EJB(beanName = "ProjectDiscussionDAO", beanInterface = ProjectDiscussionDAOLocal.class)
 	private ProjectDiscussionDAOLocal discussionDAO;
 	
+	@EJB(beanName= "ProjectAppointmentDAO", beanInterface = ProjectAppointmentDAOLocal.class)
+	private ProjectAppointmentDAOLocal appointmentDAO;
+	
 	/**
 	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist f�r Datenbankabfragen gedacht.
 	 */	
@@ -140,6 +143,7 @@ public class ProjectIntegration {
 				newProject.setUpdatedOn(new Date());
 				newProject.setMembers(members);
 				newProject.setDiscussions(discussions);
+				newProject.setAppointments(appointments);
 				
 				projectDAO.createProject(newProject);
 				
@@ -465,7 +469,6 @@ public class ProjectIntegration {
 			for(Appointment a : appointments){
 				appointmentsTO.add(appointmentassembler.makeDTO(a));
 			}
-			
 			response.setAppointments(appointmentsTO);
 		
 		}catch (ProjectNotExistException ex) {
@@ -524,8 +527,30 @@ public class ProjectIntegration {
 		}
 		return response;
 	}
-
-	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
+	
+	public ReturncodeResponse removeProjectAppointment(long projectId, long appointmentId){
+		ReturncodeResponse response = new ReturncodeResponse();
+		try{
+			Project project = projectDAO.findProjectById(projectId);
+			Appointment appointment = appointmentDAO.findAppointmentById(appointmentId);
+			if(project == null || appointment == null){
+				LOGGER.info("Das Projekt oder den Termin gibt es nicht");
+				throw new ProjectNotExistException("Projekt oder Termin nicht vorhanden, ProjectId: "+projectId+", AppointmentId: "+appointmentId);
+			}
+			List<Appointment> appointments = project.getAppointments();
+			appointments.remove(appointment);
+			projectDAO.updateProject(project);
+			
+		}catch(ProjectNotExistException ex){
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();	
+		}
+		
+		return response;
+	}
+	
+	public ProjectResponse updateProject(long id, String projectName, String description, String projectStatus) {	
 		ProjectResponse response = new ProjectResponse();
 		try {
 			Project project = projectDAO.findProjectById(id);
@@ -534,19 +559,13 @@ public class ProjectIntegration {
 				LOGGER.info("Es wurde kein Project mit der ID: " + id + "gefunden.");
 				throw new ProjectNotExistException("Es gibt kein Project mit der angefragten ID.");
 			}			
-			ProjectSession session = userDAO.getSession(sessionId);
-			ArrayList<User> members = new ArrayList<User>();
-			if((project.getOwner().equals(session.getUser())) || members.contains(session.getUser())){
+				project.setDescription(description);
 				project.setProjectName(projectName);
-				project.setDescription(projectDescription);
+				project.setProjectStatus(ProjectStatus.valueOf(projectStatus));
 				projectDAO.updateProject(project);
 				
 				LOGGER.info("Project mit der id " + project.getId() + "wurde aktualisiert.");
-			}else{
-				LOGGER.info("Zugriff f�r den Benutzer verweigert.");
-				throw new PermissionDeniedException("Zugriff verweigert!");
-			}	
-		}catch(ProjectNotExistException | PermissionDeniedException ex ){
+		}catch(ProjectNotExistException ex){
 			response.setReturnCode(ex.getErrorCode());
 			response.setMessage(ex.getMessage());	
 		}		

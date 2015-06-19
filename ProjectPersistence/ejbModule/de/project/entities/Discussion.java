@@ -1,6 +1,5 @@
 package de.project.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +15,7 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-public class Discussion implements Serializable{
-
-	private static final long serialVersionUID = -6256616602720915105L;
+public class Discussion {
 
 	@Id
 	@GeneratedValue

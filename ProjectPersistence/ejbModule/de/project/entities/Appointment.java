@@ -1,7 +1,5 @@
 package de.project.entities;
 
-
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -14,9 +12,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Appointment implements Serializable{
-
-	private static final long serialVersionUID = -7313695809228105600L;
+public class Appointment{
 
 	@Id
 	@GeneratedValue
