@@ -68,39 +68,39 @@ public class DataBuilder {
 			project.setProjectName(projectNames[i]);
 			project.setDescription(projectDescription);	
 			project.setProjectStatus(ProjectStatus.INTIME);
-			ArrayList<Discussion> discussionsList = new ArrayList<>();
-			for(int j = 0; j < 4; j++){
-				Discussion discussion = new Discussion(discussionNames[i], new Date());
-				discussionsList.add(discussion);
-			}
-			
-			ArrayList<Appointment> appointments = new ArrayList<>();
-			for(int k = 0; k < 4; k++){
-				appointments.add(new Appointment(appointmentName, appointmentDiscription, new Date()));
-			}
-			
-			ArrayList<Note> notes = new ArrayList<>();
-			for(int l = 0; l < 5; l++){
-				notes.add(new Note(
-									"BeispielNotiz",
-									new Date(),
-									phoneNumbers[i%2]
-								));
-			}
-			
-			for(int m = 0; m < 4; m++){
-				Discussion d = discussionsList.get(m);
-				d.setNotes(notes);
-				discussionsList.set(i, d);
-			}
-			
-			project.setDiscussions(discussionsList);
-			project.setAppointments(appointments);
-
-			ArrayList<User> membersList = new ArrayList<>();
-			membersList.add(users[i%2]);
-			
-			project.setMembers(membersList);
+//			ArrayList<Discussion> discussionsList = new ArrayList<>();
+//			for(int j = 0; j < 4; j++){
+//				Discussion discussion = new Discussion(discussionNames[i], new Date());
+//				discussionsList.add(discussion);
+//			}
+//			
+//			ArrayList<Appointment> appointments = new ArrayList<>();
+//			for(int k = 0; k < 4; k++){
+//				appointments.add(new Appointment(appointmentName, appointmentDiscription, new Date()));
+//			}
+//			
+//			ArrayList<Note> notes = new ArrayList<>();
+//			for(int l = 0; l < 5; l++){
+//				notes.add(new Note(
+//									"BeispielNotiz",
+//									new Date(),
+//									phoneNumbers[i%2]
+//								));
+//			}
+//			
+//			for(int m = 0; m < 4; m++){
+//				Discussion d = discussionsList.get(m);
+//				d.setNotes(notes);
+//				discussionsList.set(i, d);
+//			}
+//			
+//			project.setDiscussions(discussionsList);
+//			project.setAppointments(appointments);
+//
+//			ArrayList<User> membersList = new ArrayList<>();
+//			membersList.add(users[i%2]);
+//			
+//			project.setMembers(membersList);
 			
 			
 			em.persist(project);
