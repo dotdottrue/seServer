@@ -1,6 +1,5 @@
 package de.project.entities;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -23,9 +22,7 @@ import de.project.enumerations.ProjectStatus;
  *
  */
 @Entity
-public class Project implements Serializable{
-
-	private static final long serialVersionUID = 4423868180124925018L;
+public class Project {
 
 	@Id
 	@GeneratedValue
