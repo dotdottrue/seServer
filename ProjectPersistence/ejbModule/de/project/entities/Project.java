@@ -4,20 +4,26 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 
 import de.project.enumerations.ProjectStatus;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
 public class Project {
-	
+
 	@Id
 	@GeneratedValue
 	private long id;
@@ -25,15 +31,24 @@ public class Project {
 	@Enumerated(EnumType.ORDINAL)
 	private ProjectStatus projectStatus;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> members;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "project")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Milestone> milestones;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Appointment> appointments;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Discussion> discussions;
+	
+	@ManyToOne
 	private User owner;
+	
 	private Date updatedOn;
 	private String projectName;
+	private String description;
 	
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
@@ -75,12 +90,6 @@ public class Project {
 		this.milestones = milestone;
 	}
 
-	@Override
-	public String toString() {
-		return "Project [id=" + id + ", projectStatus=" + projectStatus
-				+ ", member=" + members + "]";
-	}
-
 	public Date getUpdatedOn() {
 		return updatedOn;
 	}
@@ -95,6 +104,44 @@ public class Project {
 
 	public void setOwner(User owner) {
 		this.owner = owner;
-	}	
+	}
+
+	
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public List<Discussion> getDiscussions() {
+		return discussions;
+	}
+
+	public void setDiscussions(List<Discussion> discussions) {
+		this.discussions = discussions;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "Project: " + id + "von " + owner + "." ;
+	}
+	
+	public boolean projectValidation() {
+		if((projectName != null) && (owner != null)){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
 }

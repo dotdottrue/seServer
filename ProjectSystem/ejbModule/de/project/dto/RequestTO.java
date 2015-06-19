@@ -1,64 +1,77 @@
 package de.project.dto;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
-import de.project.entities.Project;
-import de.project.entities.User;
+import de.project.dto.project.ProjectTO;
+import de.project.dto.user.UserTO;
 import de.project.enumerations.RequestStatus;
 
 public class RequestTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private long id;
-	private User sourceUser;
-	private Project targetUser;
-	private Project project;
+	private UserTO sourceUser;
+	private UserTO targetUser;
+	private ProjectTO project;
 	private String note;
-	private Calendar updatedAt;
+	private Date updatedAt;
 	private RequestStatus status;
+	
 	public long getId() {
 		return id;
 	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}
-	public User getSourceUser() {
+	
+	public UserTO getSourceUser() {
 		return sourceUser;
 	}
-	public void setSourceUser(User sourceUser) {
+	
+	public void setSourceUser(UserTO sourceUser) {
 		this.sourceUser = sourceUser;
 	}
-	public Project getTargetUser() {
+	
+	public UserTO getTargetUser() {
 		return targetUser;
 	}
-	public void setTargetUser(Project targetUser) {
+	
+	public void setTargetUser(UserTO targetUser) {
 		this.targetUser = targetUser;
 	}
-	public Project getProject() {
+	
+	public ProjectTO getProject() {
 		return project;
 	}
-	public void setProject(Project project) {
+	
+	public void setProject(ProjectTO project) {
 		this.project = project;
 	}
+	
 	public String getNote() {
 		return note;
 	}
+	
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public Calendar getUpdatedAt() {
+	
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Calendar updatedAt) {
-		this.updatedAt = updatedAt;
+	
+	public void setUpdatedAt(Date date) {
+		this.updatedAt = date;
 	}
+	
 	public RequestStatus getStatus() {
 		return status;
 	}
+	
 	public void setStatus(RequestStatus status) {
 		this.status = status;
-	}
-	
-	
+	}	
 }

@@ -6,28 +6,28 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
 public class User implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6846170565657858908L;
 	
 	@Id
+	//@GeneratedValue
 	private String phoneNumber;
 	private String firstName;
 	private String lastName;
-
 	private Date registrationDate;
 	
-	@ManyToMany
+	@ManyToMany(mappedBy="members")
 	private List<Project> projects;
 	
-	@OneToMany
-	@JoinColumn(name = "user_note_id")
-	private List<Note> notes;
 	
 	public User() {
 		super();
@@ -78,7 +78,7 @@ public class User implements Serializable{
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Die Telefonnummer lautet: " + phoneNumber;

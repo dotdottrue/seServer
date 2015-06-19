@@ -1,28 +1,30 @@
 package de.project.entities;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import de.project.enumerations.MilestoneStatus;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
 public class Milestone {
-	
+
 	@Id
 	@GeneratedValue
-	private long id;	
+	private long id;
 	
-	@ManyToOne//oder doch ManyToMany
-	private Project project;
-	
-	private Calendar createdAt;
-	
+	private Date createdAt;
+	private String milestoneName;
+
 	@Enumerated(EnumType.ORDINAL)
 	private MilestoneStatus status;
 	
@@ -34,19 +36,11 @@ public class Milestone {
 		this.id = id;
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-	public Calendar getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Calendar createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 
@@ -56,6 +50,14 @@ public class Milestone {
 
 	public void setStatus(MilestoneStatus status) {
 		this.status = status;
+	}
+	
+	public String getMilestoneName() {
+		return milestoneName;
+	}
+
+	public void setMilestoneName(String milestoneName) {
+		this.milestoneName = milestoneName;
 	}
 	
 }

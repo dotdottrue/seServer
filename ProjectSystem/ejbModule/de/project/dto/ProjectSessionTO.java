@@ -1,36 +1,44 @@
 package de.project.dto;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
-import de.project.entities.User;
-
+import de.project.dto.user.UserTO;
 
 public class ProjectSessionTO implements Serializable{
-
 	
 	private static final long serialVersionUID = 1L;	
+	
 	private int id;
-	private User user;
-	private Calendar createdAt;
+	private UserTO user;
+	private Date createdAt;
 	
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUser() {
+	
+	public UserTO getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	
+	public void setUser(UserTO user) {
 		this.user = user;
 	}
-	public Calendar getCreatedAt() {
+	
+	public Date getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Calendar createdAt) {
+
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
 	
+	@Override
+	public String toString() {
+		return String.valueOf(id);
+	}
 }

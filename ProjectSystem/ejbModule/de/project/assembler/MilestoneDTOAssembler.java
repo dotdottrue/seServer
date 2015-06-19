@@ -11,10 +11,10 @@ public class MilestoneDTOAssembler {
 	public MilestoneTO makeDTO(Milestone milestone) {
 		MilestoneTO dto = new MilestoneTO();
 		dto.setId(milestone.getId());
+		dto.setMilestoneName(milestone.getMilestoneName());
 		dto.setCreatedAt(milestone.getCreatedAt());
-		dto.setProject(milestone.getProject());
 		dto.setStatus(milestone.getStatus());
-		
+
 		return dto;
 	}
 }

@@ -1,5 +1,8 @@
 package de.project.enumerations;
 
+/** 
+ * @author Tobias Kappert
+ */
 public enum ProjectStatus {
-	IDEAL, DELAYED, OUTOFTIME, FINISHED
+	INTIME, DELAYED, OUTOFTIME, FINISHED
 }
