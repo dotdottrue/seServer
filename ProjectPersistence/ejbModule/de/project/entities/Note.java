@@ -1,5 +1,6 @@
 package de.project.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,8 +13,10 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Note {
+public class Note implements Serializable {
 
+	private static final long serialVersionUID = 7541936733858468307L;
+	
 	@Id
 	@GeneratedValue
 	private long id;
@@ -21,11 +24,12 @@ public class Note {
 	private Date createdAt;
 	private String user;
 	
-	/*
-	@OneToOne
-	private Appointment appointment;
-	*/
-	
+	public Note(String note, Date createdAt, String user) {
+		this.note = note;
+		this.createdAt = createdAt;
+		this.user = user;
+	}
+
 	public String getUser() {
 		return user;
 	}

@@ -1,9 +1,11 @@
 package de.project.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -21,7 +23,9 @@ import de.project.enumerations.ProjectStatus;
  *
  */
 @Entity
-public class Project {
+public class Project implements Serializable{
+
+	private static final long serialVersionUID = 4423868180124925018L;
 
 	@Id
 	@GeneratedValue
@@ -30,16 +34,16 @@ public class Project {
 	@Enumerated(EnumType.ORDINAL)
 	private ProjectStatus projectStatus;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> members;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Milestone> milestones;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Appointment> appointments;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Discussion> discussions;
 	
 	@ManyToOne
