@@ -21,7 +21,7 @@ import de.project.enumerations.ProjectStatus;
 
 /**
  * 
- * @author Tobias Kappert | Edaurd Schartner
+ * @author Tobias Kappert | Eduard Schartner
  *
  */
 @Startup
