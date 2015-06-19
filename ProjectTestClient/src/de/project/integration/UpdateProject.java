@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,7 +40,7 @@ public class UpdateProject {
     protected long arg0;
     protected String arg1;
     protected String arg2;
-    protected int arg3;
+    protected String arg3;
 
     /**
      * Ruft den Wert der arg0-Eigenschaft ab.
@@ -109,16 +109,24 @@ public class UpdateProject {
     /**
      * Ruft den Wert der arg3-Eigenschaft ab.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getArg3() {
+    public String getArg3() {
         return arg3;
     }
 
     /**
      * Legt den Wert der arg3-Eigenschaft fest.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setArg3(int value) {
+    public void setArg3(String value) {
         this.arg3 = value;
     }
 

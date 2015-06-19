@@ -15,7 +15,6 @@ import de.project.integration.NotesResponse;
 import de.project.integration.DiscussionResponse;
 import de.project.integration.ProjectsResponse;
 import de.project.integration.ReturnCode;
-//import de.project.integration.ProjectSessionTO;
 import de.project.integration.ProjectUserResponse;
 import de.project.integration.ProjectIntegration;
 import de.project.integration.ProjectIntegrationService;
