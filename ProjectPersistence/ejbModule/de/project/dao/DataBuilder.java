@@ -22,7 +22,7 @@ public class DataBuilder {
 	@PersistenceContext
 	EntityManager em;
 	
-	@Resource
+	/*@Resource
 	private String phoneNumber1, phoneNumber2;
 	
 	@PostConstruct
@@ -44,5 +44,5 @@ public class DataBuilder {
 		LOGGER.info("Neu angelegt: " + user2);
 		
 		
-	}
+	}*/
 }
