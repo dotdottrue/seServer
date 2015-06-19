@@ -106,27 +106,27 @@ public class ProjectDTOAssembler {
 		return dto;
 	}
 	
-	private List<ProjectTO> makeDTO5(List<Project> projects) {
-		
-		List<ProjectTO> dto = new ArrayList<>();
-		
-		for (Project project : projects) {
-			ProjectTO projectTO = new ProjectTO();
-			projectTO.setId(project.getId());
-			projectTO.setOwner(userDtoAssembler.makeDTO(project.getOwner()));
-			projectTO.setProjectName(project.getProjectName());
-			projectTO.setDescription(project.getDescription());
-			projectTO.setProjectStatus(project.getProjectStatus());
-			projectTO.setUpdatedOn(project.getUpdatedOn());
-			projectTO.setAppointments(makeDTO2(project.getAppointments()));
-			projectTO.setDiscussions(makeDTO3(project.getDiscussions()));
-			projectTO.setMembers(makeDTO(project.getMembers()));
-			projectTO.setMilestones(makeDTO4(project.getMilestones()));
-			
-			dto.add(projectTO);		
-		}
-		return dto;
-	}
+//	private List<ProjectTO> makeDTO5(List<Project> projects) {
+//		
+//		List<ProjectTO> dto = new ArrayList<>();
+//		
+//		for (Project project : projects) {
+//			ProjectTO projectTO = new ProjectTO();
+//			projectTO.setId(project.getId());
+//			projectTO.setOwner(userDtoAssembler.makeDTO(project.getOwner()));
+//			projectTO.setProjectName(project.getProjectName());
+//			projectTO.setDescription(project.getDescription());
+//			projectTO.setProjectStatus(project.getProjectStatus());
+//			projectTO.setUpdatedOn(project.getUpdatedOn());
+//			projectTO.setAppointments(makeDTO2(project.getAppointments()));
+//			projectTO.setDiscussions(makeDTO3(project.getDiscussions()));
+//			projectTO.setMembers(makeDTO(project.getMembers()));
+//			projectTO.setMilestones(makeDTO4(project.getMilestones()));
+//			
+//			dto.add(projectTO);		
+//		}
+//		return dto;
+//	}
 	
 	private List<NoteTO> makeDTO6(List<Note> notes) {
 		

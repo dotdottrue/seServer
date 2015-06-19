@@ -37,7 +37,6 @@ public class Note {
 
 	public Note() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public long getId() {

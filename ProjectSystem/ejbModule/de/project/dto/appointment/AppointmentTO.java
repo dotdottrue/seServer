@@ -1,7 +1,6 @@
 package de.project.dto.appointment;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class AppointmentTO implements Serializable {
 
