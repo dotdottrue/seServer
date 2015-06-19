@@ -38,27 +38,27 @@
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/projectDescription</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>Das ist eine Testbeschreibung für die Projekte.</env-entry-value>
+        <env-entry-value>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</env-entry-value>
       </env-entry>
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/discussionName</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>TestDisckussion</env-entry-value>
+        <env-entry-value>TestDiskussion</env-entry-value>
       </env-entry>
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/discussionName2</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>TestDisckussion2</env-entry-value>
+        <env-entry-value>TestDiskussion2</env-entry-value>
       </env-entry>
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/discussionName3</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>TestDisckussion3</env-entry-value>
+        <env-entry-value>TestDiskussion3</env-entry-value>
       </env-entry>
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/discussionName4</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>TestDisckussion4</env-entry-value>
+        <env-entry-value>TestDiskussion4</env-entry-value>
       </env-entry>
       <env-entry>
         <env-entry-name>de.project.dao.DataBuilder/appointmentName</env-entry-name>

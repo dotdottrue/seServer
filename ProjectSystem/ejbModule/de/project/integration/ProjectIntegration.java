@@ -1,6 +1,7 @@
 package de.project.integration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import de.project.assembler.DiscussionDTOAssembler;
 import de.project.assembler.NoteDTOAssembler;
 import de.project.assembler.ProjectDTOAssembler;
 import de.project.assembler.UserDTOAssembler;
+import de.project.dao.local.ProjectAppointmentDAOLocal;
 import de.project.dao.local.ProjectDiscussionDAOLocal;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
@@ -77,6 +79,9 @@ public class ProjectIntegration {
 	 */
 	@EJB(beanName = "ProjectDiscussionDAO", beanInterface = ProjectDiscussionDAOLocal.class)
 	private ProjectDiscussionDAOLocal discussionDAO;
+	
+	@EJB(beanName= "ProjectAppointmentDAO", beanInterface = ProjectAppointmentDAOLocal.class)
+	private ProjectAppointmentDAOLocal appointmentDAO;
 	
 	/**
 	 * DataTransferObject wird via EJB erzeugt.
@@ -330,6 +335,7 @@ public class ProjectIntegration {
 			for(Note n : notes){
 				notesTO.add(noteassembler.makeDTO(n));	
 			}
+			
 			response.setNotes(notesTO);
 			LOGGER.info("Es wurde erfolgreich Notizen aus der Diskussion mit der ID: " + discussionId + " ausgelesen.");
 		}catch(NotesNotExistException ex){
@@ -458,7 +464,7 @@ public class ProjectIntegration {
 			
 			for(Appointment a : appointments){
 				appointmentsTO.add(appointmentassembler.makeDTO(a));
-			}
+			}		
 			
 			response.setAppointments(appointmentsTO);
 		
@@ -496,7 +502,29 @@ public class ProjectIntegration {
 		}
 		return response;
 	}
-
+	
+	public ReturncodeResponse removeProjectAppointment(long projectId, long appointmentId){
+		ReturncodeResponse response = new ReturncodeResponse();
+		try{
+			Project project = projectDAO.findProjectById(projectId);
+			Appointment appointment = appointmentDAO.findAppointmentById(appointmentId);
+			if(project == null || appointment == null){
+				LOGGER.info("Das Projekt oder den Termin gibt es nicht");
+				throw new ProjectNotExistException("Projekt oder Termin nicht vorhanden");
+			}
+			List<Appointment> appointments = project.getAppointments();
+			appointments.remove(appointment);
+			projectDAO.updateProject(project);
+			
+		}catch(ProjectNotExistException ex){
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();	
+		}
+		
+		return response;
+	}
+	
 	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
 		ProjectResponse response = new ProjectResponse();
 		try {
