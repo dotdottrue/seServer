@@ -1,14 +1,22 @@
 package de.project.entities;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
-public class Appointment {
+public class Appointment implements Serializable{
+
+	private static final long serialVersionUID = -7313695809228105600L;
 
 	@Id
 	@GeneratedValue
@@ -22,6 +30,16 @@ public class Appointment {
 	private String description;
 	private Date appointmentDate;
 	
+	public Appointment() {
+		super();
+	}
+
+	public Appointment(String topic, String description, Date appointmentDate) {
+		this.topic = topic;
+		this.description = description;
+		this.appointmentDate = appointmentDate;
+	}
+
 	public long getId() {
 		return id;
 	}

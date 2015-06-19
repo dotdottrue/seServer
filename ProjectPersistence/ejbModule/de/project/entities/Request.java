@@ -11,6 +11,11 @@ import javax.persistence.ManyToOne;
 
 import de.project.enumerations.RequestStatus;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
 public class Request {
 	

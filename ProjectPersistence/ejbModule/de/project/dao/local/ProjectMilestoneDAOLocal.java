@@ -4,7 +4,11 @@ import javax.ejb.Local;
 
 import de.project.entities.Milestone;
 
-
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Local
 public interface ProjectMilestoneDAOLocal {
 	

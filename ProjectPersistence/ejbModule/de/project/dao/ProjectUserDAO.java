@@ -12,17 +12,29 @@ import de.project.dao.local.ProjectUserDAOLocal;
 import de.project.entities.ProjectSession;
 import de.project.entities.User;
 
+/**
+ * 
+ * @author Tobias Kappert
+ *
+ */
 @Stateless
 public class ProjectUserDAO implements ProjectUserDAOLocal {
 	
 	@PersistenceContext
 	private EntityManager em;
 	
+	/**
+	 * Methode um die Datenbank anzusprechen und aus dieser einen Benutzer
+	 * herauszusuchen welcher die Ÿbergebene Telefonnummer hat.
+	 */
 	@Override
 	public User findUserByNumber(String phoneNumber) {
 		return em.find(User.class, phoneNumber);
 	}
 	
+	/**
+	 * Datenbankbefehl zum Erzeugen eines Benutzers.
+	 */
 	@Override
     public User createUser(String phoneNumber) {
     	User user = new User(phoneNumber, new Date());
@@ -42,12 +54,18 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
 		return em.createQuery(cq).getResultList();
 	}*/
     
+	/**
+	 * Eintragung einer Session in die Datenbank.
+	 */
     public ProjectSession createSession(User user) {
     	ProjectSession session = new ProjectSession(user);
     	em.persist(session);
     	return session;
     }
     
+    /**
+     * Lšschung einer Session aus der Datenbank.
+     */
     @Override
     public boolean endSession(int sessionId) {
     	ProjectSession session = em.find(ProjectSession.class, sessionId);
@@ -59,6 +77,9 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
     	}
     }
     
+    /**
+     * Suchen einer Session aus der Datenbank.
+     */
     @Override
     public ProjectSession getSession(int sessionId) {
     	ProjectSession session = em.find(ProjectSession.class, sessionId);

@@ -4,6 +4,11 @@ import javax.ejb.Local;
 
 import de.project.entities.Request;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Local
 public interface ProjectRequestDAOLocal {
 	

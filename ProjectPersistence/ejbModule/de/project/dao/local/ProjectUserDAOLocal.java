@@ -7,6 +7,11 @@ import javax.ejb.Local;
 import de.project.entities.ProjectSession;
 import de.project.entities.User;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Local
 public interface ProjectUserDAOLocal {
 

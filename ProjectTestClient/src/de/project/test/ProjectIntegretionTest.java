@@ -1,11 +1,16 @@
 package de.project.test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import de.project.integration.AppointmentResponse;
+import de.project.integration.UsersResponse;
 import de.project.integration.NotesResponse;
 import de.project.integration.DiscussionResponse;
 import de.project.integration.ProjectsResponse;
@@ -22,7 +27,7 @@ import de.project.integration.UserIntegrationService;
 /**
  * 
  * Testet alle Server-Schnittstellen der projectIntegration.
- * @author tobiaskappert
+ * @author Tobias Kappert
  *
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -46,6 +51,7 @@ public class ProjectIntegretionTest {
 		ProjectUserResponse userResponse = userIntegrationPort.registerUser("01607798983");
 		userIntegrationPort.registerUser("01608898983");
 		userIntegrationPort.registerUser("01609998983");
+		userIntegrationPort.registerUser("01600098983");
 		
 		if(userResponse.getReturnCode().equals(ReturnCode.ERROR)){
 			userResponse = userIntegrationPort.login("01607798983");
@@ -53,6 +59,7 @@ public class ProjectIntegretionTest {
 //		userSession = userResponse.getSession();
 		
 		remote.createProject("01609998983", "TestProject", "Kurzbeschreibung des Tests");
+		remote.createProject("01600098983", "TestProject", "Kurzbeschreibung des Tests");
 	}
 	
 	/**
@@ -97,12 +104,12 @@ public class ProjectIntegretionTest {
 	 */
 	@Test
 	public void getNoProjectsByPhoneTest() {		
-		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01608898983");
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("0160xx98983");
 		Assert.assertEquals(projectsResponse.getReturnCode(), ReturnCode.ERROR);
 	}
 	
 	/**
-	 * Test zum Prüfen ob eine Discussion einem Project zugeordnet werden kann. Es wird der ReturnCode OK erwartet.
+	 * Test zum Prüfen ob eine Diskussion einem Project zugeordnet werden kann. Es wird der ReturnCode OK erwartet.
 	 */
 	@Test
 	public void cAddDiscussionsByProjectTest() {
@@ -112,10 +119,21 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
+	 * Test zum Prüfen ob keine Diskussion einem Project zugeordnet wurde. Es wird der ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void addNoDiscussionsByProjectTest() {
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("0160xy98983");
+		if(projectsResponse.getReturnCode().equals(ReturnCode.ERROR)){
+			Assert.assertEquals(projectsResponse.getReturnCode(), ReturnCode.ERROR);
+		}
+	}
+	
+	/**
 	 * Test zum abrufen einer Diskussion welches einem Project zugeordnet wurde. Es wir der ReturnCode OK erwartet.
 	 */
 	@Test
-	public void getDiscussionByProjectTest() {
+	public void eGetDiscussionByProjectTest() {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
 		remote.addDiscussionToProject(projectsResponse.getProjects().get(0).getId(), "DiskussionThema1");
 		DiscussionResponse discussionProject = remote.getDiscussionsByProject(projectsResponse.getProjects().get(0).getId());
@@ -125,12 +143,37 @@ public class ProjectIntegretionTest {
 	/**
 	 * Test zum abrufen einer Diskussion welches einem Project zugeordnet wurde. 
 	 * Dieser Test soll fehlschlagen.
-	 * Es wir der ReturnCode ERROR erwartet.
+	 * Es wird der ReturnCode ERROR erwartet.
 	 */
 	@Test
-	public void eGetNoDiscussionByProjectTest() {
-		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01609998983");
+	public void getNoDiscussionByProjectTest() {
+		DiscussionResponse discussionProject = remote.getDiscussionsByProject(1);
+		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum Entfernen einer Diskussion aus einem Projekt.
+	 * Es wird der ReturnCode OK erwartet
+	 */
+	@Test
+	public void zRemoveProjectDiscussionTest() {
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
+		remote.addDiscussionToProject(projectsResponse.getProjects().get(0).getId(), "DiskussionThema1");
 		DiscussionResponse discussionProject = remote.getDiscussionsByProject(projectsResponse.getProjects().get(0).getId());
+		ReturncodeResponse discussionResponse = remote.removeProjectDiscussion(projectsResponse.getProjects().get(0).getId(), discussionProject.getDiscussions().get(0).getId());
+		Assert.assertEquals(discussionResponse.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Fehlertest zum Entfernen einer Diskussion aus einem Projekt.
+	 * Es wird der ReturnCode ERROR erwartet
+	 */
+	@Test
+	public void removeNoProjectDiscussionTest() {
+		ProjectsResponse projectsResponse = remote.getProjectsByPhone("0160xx98983");
+		Assert.assertEquals(projectsResponse.getReturnCode(), ReturnCode.ERROR);
+		
+		DiscussionResponse discussionProject = remote.getDiscussionsByProject(1);
 		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.ERROR);
 	}
 	
@@ -145,14 +188,144 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
+	 * Test zum hinzufügen einer Notiz zu einer Diskussion welche fehlschlagen soll.
+	 * Es wird der ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void addNoNoteToDiscussionTest() {
+		ReturncodeResponse noteRepsonse = remote.addNoteToDiscussion(1, "Das ist eine Testnotiz.", "01607798983");
+		Assert.assertEquals(noteRepsonse.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
 	 * Test zum Abfragen einer Notiz aus einer Diskussion. 
 	 * Es wird der ReturnCode OK erwartet.
 	 */
 	@Test
 	public void getNotesByDiscussionTest() {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("01607798983");
-		NotesResponse notesRepsonse = remote.getNotesByDiscussion(projectsResponse.getProjects().get(0).getDiscussions().get(0).getId());
+		remote.addDiscussionToProject(projectsResponse.getProjects().get(0).getId(), "Bla");
+		DiscussionResponse discussionProject = remote.getDiscussionsByProject(projectsResponse.getProjects().get(0).getId());
+		NotesResponse notesRepsonse = remote.getNotesByDiscussion(discussionProject.getDiscussions().get(0).getId());
 		Assert.assertEquals(notesRepsonse.getReturnCode(), ReturnCode.OK);
 	}
 	
+	/**
+	 * Test zum Abfragen einer Notiz aus einer Diskussion welcher fehlschlagen soll. 
+	 * Es wird der ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void getNoNotesByDiscussionTest() {
+		NotesResponse notesRepsonse = remote.getNotesByDiscussion(0);
+		Assert.assertEquals(notesRepsonse.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum Vergleich von Telefonnummern auf dem Gerätzu den in der Datenbank.
+	 * Es wird ein ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void failComparePhonebookTest(){
+		UsersResponse userResponse = remote.comparePhonebook(null);
+		Assert.assertEquals(userResponse.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum Vergleich von Telefonnummern auf dem Gerät zu den in der Datenbank.
+	 * Es wird ein ReturnCode OK erwartet.
+	 */
+	@Test
+	public void comparePhonebookTest(){
+		List<String> userList = new ArrayList<>();
+		userList.add("01608898983");
+		userList.add("01609998983");
+		UsersResponse userResponse = remote.comparePhonebook(userList);
+		Assert.assertEquals(userResponse.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Test zum Hinzufügen eines Benutzers zu einem Projekt.
+	 * Es wird ein ReturnCode OK erwartet.
+	 */
+	@Test
+	public void fAddUserToProjectTest(){
+		ProjectsResponse projectResponse = remote.getProjectsByPhone("01607798983");
+		ReturncodeResponse userProjectResponse = remote.addUserToProject("01607798983", projectResponse.getProjects().get(0).getId());
+		Assert.assertEquals(userProjectResponse.getReturnCode(), ReturnCode.OK);
+	}
+	/**
+	 * Fehlertest zum Hinzufügen eines Benutzers zu einem Projekt.
+	 * Es wird ein ReturnCode OK erwartet.
+	 */
+	@Test
+	public void fNoAddUserToProjectTest(){
+		ProjectsResponse projectResponse = remote.getProjectsByPhone("0160xx98983");
+		Assert.assertEquals(projectResponse.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum hinzufügen von Terminen.
+	 * Es wird ein ReturnCode OK erwartet.
+	 */
+	@Test
+	public void addAppointmentToProjectTest() {
+		ProjectsResponse projectResponse = remote.getProjectsByPhone("01607798983");
+		ReturncodeResponse appointmentResponse = remote.addAppointmentToProject(projectResponse.getProjects().get(0).getId(), "Topic", "Description", 1234567);
+		Assert.assertEquals(appointmentResponse.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Fehlertest beim hinzufügen von Terminen.
+	 * Es wird ein ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void addNoAppointmentToProjectTest() {
+		ReturncodeResponse appointmentResponse = remote.addAppointmentToProject(99999, "Topic", "Description", 1234567);
+		Assert.assertEquals(appointmentResponse.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum Abrufen von Terminen für ein jeweiliges Projekt.
+	 * Es wird ein ReturnCord OK erwartet.
+	 */
+	@Test
+	public void getAppointmentsByProjectTest() {
+		ProjectsResponse projectResponse = remote.getProjectsByPhone("01607798983");
+		AppointmentResponse appointmentResponse = remote.getAppointmentsByProject(projectResponse.getProjects().get(0).getId());
+		Assert.assertEquals(appointmentResponse.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Fehlertest zum Abrufen von Terminen für ein jeweiliges Projekt.
+	 * Es wird ein ReturnCord ERROR erwartet.
+	 */
+	@Test
+	public void getNoAppointmentsByProjectTest() {
+		AppointmentResponse appointmentResponse = remote.getAppointmentsByProject(99999);
+		Assert.assertEquals(appointmentResponse.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum Entfernen eines Members von einem Projekt.
+	 * Es wird ein ReturnCode OK erwartet.
+	 */
+	@Test
+	public void removeProjectMemberTest() {
+		ProjectsResponse projectResponse = remote.getProjectsByPhone("01607798983");
+		remote.addUserToProject("01607798983", projectResponse.getProjects().get(0).getId());
+		ReturncodeResponse projectMemberResponse = remote.removeProjectMember(projectResponse.getProjects().get(0).getId(), "01607798983");
+		Assert.assertEquals(projectMemberResponse.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Fehlertest zum Entfernen eines Members von einem Projekt welches nicht funktionieren soll.
+	 * Es wird ein ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void zRemoveNoProjectMemberTest() {
+//		ProjectsResponse projectResponse = remote.getProjectsByPhone("01607798983");
+//		remote.addUserToProject("01607798983", projectResponse.getProjects().get(0).getId());
+		ReturncodeResponse projectMemberResponse = remote.removeProjectMember(999999, "01607798983");
+		Assert.assertEquals(projectMemberResponse.getReturnCode(), ReturnCode.ERROR);
+	}
 }

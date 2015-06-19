@@ -8,6 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
 public class User implements Serializable{
 	

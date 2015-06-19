@@ -17,23 +17,28 @@ import de.project.entities.Project;
 import de.project.entities.User;
 import de.project.enumerations.ProjectStatus;
 
+/**
+ * 
+ * @author Tobias Kappert
+ *
+ */
 @Stateless
 public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 
 		@PersistenceContext
 		private EntityManager em;
 		
+		/**
+		 * Suchen eines Projektes anhand der ProjektID in der Datenbank.
+		 */
 		@Override
-		public Project getProject(long projectId){
+		public Project findProjectById(long projectId){
 			return em.find(Project.class, projectId);
 		}
 		
-		//glaube brauchen wir gar nicht
-		@Override
-		public Project findProjectById(long id) {
-			return em.find(Project.class, id);
-		}
-
+		/**
+		 * Speichern eines Projektes in der Datenbank.
+		 */
 		@Override
 		public Project createProject(Project project) {
 			project.setProjectStatus(ProjectStatus.INTIME);
@@ -41,7 +46,11 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 			
 			return project;
 		}
-
+		
+		/**
+		 * Finden von Projekten wo der angefragte Benutzer entweder der Besitzer
+		 * oder Projektmitglied ist.
+		 */
 		@Override
 		public List<Project> findProjects(User currentUser) {
 			CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -62,20 +71,29 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 				
 			return yourProjectList;
 		}
-
+		
+		/**
+		 * €ndern des Projektstatuses auf Erledigt/Abgeschlossen.
+		 */
 		@Override
 		public void cancelProject(Project project) {
 			project.setProjectStatus(ProjectStatus.FINISHED);
 			project.setUpdatedOn(new Date());
 			em.persist(project);
 		}
-
+		
+		/**
+		 * Finden von Meilensteinen in einem Projekt. Suche in der Datenbank.
+		 */
 		@Override
 		public List<Milestone> getMilestones(Project project) {
 			List<Milestone> projectMilestones = project.getMilestones();
 			return projectMilestones;
 		}
-
+		
+		/**
+		 * Speichern eines Aktualisierten zustandes eines Projektes.
+		 */
 		@Override
 		public void updateProject(Project project) {
 			project.setUpdatedOn(new Date());

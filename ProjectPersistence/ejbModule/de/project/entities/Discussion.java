@@ -1,5 +1,6 @@
 package de.project.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,8 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Entity
-public class Discussion {
+public class Discussion implements Serializable{
+
+	private static final long serialVersionUID = -6256616602720915105L;
 
 	@Id
 	@GeneratedValue
@@ -21,6 +29,16 @@ public class Discussion {
 	
 	private String topic;
 	private Date createdAt;
+
+	public Discussion() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Discussion(String topic, Date createdAt) {
+		this.topic = topic;
+		this.createdAt = createdAt;
+	}
 
 	public long getId() {
 		return id;

@@ -3,9 +3,7 @@ package de.project.integration;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -18,7 +16,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="appointmentDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="appointmentDate" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="description" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/>
  *         &lt;element name="topic" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
@@ -32,38 +31,55 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "appointmentTO", propOrder = {
     "appointmentDate",
+    "description",
     "id",
     "topic"
 })
 public class AppointmentTO {
 
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar appointmentDate;
+    protected long appointmentDate;
+    protected String description;
     protected long id;
     protected String topic;
 
     /**
      * Ruft den Wert der appointmentDate-Eigenschaft ab.
      * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
      */
-    public XMLGregorianCalendar getAppointmentDate() {
+    public long getAppointmentDate() {
         return appointmentDate;
     }
 
     /**
      * Legt den Wert der appointmentDate-Eigenschaft fest.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     */
+    public void setAppointmentDate(long value) {
+        this.appointmentDate = value;
+    }
+
+    /**
+     * Ruft den Wert der description-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
      *     
      */
-    public void setAppointmentDate(XMLGregorianCalendar value) {
-        this.appointmentDate = value;
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Legt den Wert der description-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDescription(String value) {
+        this.description = value;
     }
 
     /**
