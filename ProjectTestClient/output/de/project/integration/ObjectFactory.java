@@ -30,6 +30,7 @@ public class ObjectFactory {
     private final static QName _AddNoteToDiscussionResponse_QNAME = new QName("http://integration.project.de/", "addNoteToDiscussionResponse");
     private final static QName _CreateProjectResponse_QNAME = new QName("http://integration.project.de/", "createProjectResponse");
     private final static QName _GetProjectsByPhone_QNAME = new QName("http://integration.project.de/", "getProjectsByPhone");
+    private final static QName _RemoveProjectAppointment_QNAME = new QName("http://integration.project.de/", "removeProjectAppointment");
     private final static QName _RemoveProjectMember_QNAME = new QName("http://integration.project.de/", "removeProjectMember");
     private final static QName _GetNotesByDiscussionResponse_QNAME = new QName("http://integration.project.de/", "getNotesByDiscussionResponse");
     private final static QName _GetDiscussionsByProject_QNAME = new QName("http://integration.project.de/", "getDiscussionsByProject");
@@ -37,6 +38,7 @@ public class ObjectFactory {
     private final static QName _CreateProject_QNAME = new QName("http://integration.project.de/", "createProject");
     private final static QName _AddAppointmentToProject_QNAME = new QName("http://integration.project.de/", "addAppointmentToProject");
     private final static QName _AddUserToProject_QNAME = new QName("http://integration.project.de/", "addUserToProject");
+    private final static QName _RemoveProjectAppointmentResponse_QNAME = new QName("http://integration.project.de/", "removeProjectAppointmentResponse");
     private final static QName _UpdateProjectResponse_QNAME = new QName("http://integration.project.de/", "updateProjectResponse");
     private final static QName _GetAppointmentsByProjectResponse_QNAME = new QName("http://integration.project.de/", "getAppointmentsByProjectResponse");
     private final static QName _ComparePhonebookResponse_QNAME = new QName("http://integration.project.de/", "comparePhonebookResponse");
@@ -88,6 +90,14 @@ public class ObjectFactory {
      */
     public AddUserToProject createAddUserToProject() {
         return new AddUserToProject();
+    }
+
+    /**
+     * Create an instance of {@link RemoveProjectAppointmentResponse }
+     * 
+     */
+    public RemoveProjectAppointmentResponse createRemoveProjectAppointmentResponse() {
+        return new RemoveProjectAppointmentResponse();
     }
 
     /**
@@ -259,6 +269,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link RemoveProjectAppointment }
+     * 
+     */
+    public RemoveProjectAppointment createRemoveProjectAppointment() {
+        return new RemoveProjectAppointment();
+    }
+
+    /**
      * Create an instance of {@link RemoveProjectMember }
      * 
      */
@@ -425,6 +443,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RemoveProjectAppointment }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://integration.project.de/", name = "removeProjectAppointment")
+    public JAXBElement<RemoveProjectAppointment> createRemoveProjectAppointment(RemoveProjectAppointment value) {
+        return new JAXBElement<RemoveProjectAppointment>(_RemoveProjectAppointment_QNAME, RemoveProjectAppointment.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link RemoveProjectMember }{@code >}}
      * 
      */
@@ -485,6 +512,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://integration.project.de/", name = "addUserToProject")
     public JAXBElement<AddUserToProject> createAddUserToProject(AddUserToProject value) {
         return new JAXBElement<AddUserToProject>(_AddUserToProject_QNAME, AddUserToProject.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RemoveProjectAppointmentResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://integration.project.de/", name = "removeProjectAppointmentResponse")
+    public JAXBElement<RemoveProjectAppointmentResponse> createRemoveProjectAppointmentResponse(RemoveProjectAppointmentResponse value) {
+        return new JAXBElement<RemoveProjectAppointmentResponse>(_RemoveProjectAppointmentResponse_QNAME, RemoveProjectAppointmentResponse.class, null, value);
     }
 
     /**

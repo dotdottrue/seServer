@@ -147,7 +147,7 @@ public class ProjectIntegretionTest {
 	 */
 	@Test
 	public void getNoDiscussionByProjectTest() {
-		DiscussionResponse discussionProject = remote.getDiscussionsByProject(2);
+		DiscussionResponse discussionProject = remote.getDiscussionsByProject(0111);
 		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.ERROR);
 	}
 	
@@ -173,7 +173,7 @@ public class ProjectIntegretionTest {
 		ProjectsResponse projectsResponse = remote.getProjectsByPhone("0160xx98983");
 		Assert.assertEquals(projectsResponse.getReturnCode(), ReturnCode.ERROR);
 		
-		DiscussionResponse discussionProject = remote.getDiscussionsByProject(2);
+		DiscussionResponse discussionProject = remote.getDiscussionsByProject(0111);
 		Assert.assertEquals(discussionProject.getReturnCode(), ReturnCode.ERROR);
 	}
 	
