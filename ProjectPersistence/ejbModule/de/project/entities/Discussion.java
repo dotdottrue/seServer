@@ -32,7 +32,6 @@ public class Discussion implements Serializable{
 
 	public Discussion() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Discussion(String topic, Date createdAt) {

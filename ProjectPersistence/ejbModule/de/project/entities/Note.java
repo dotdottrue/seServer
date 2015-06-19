@@ -40,7 +40,6 @@ public class Note implements Serializable {
 
 	public Note() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public long getId() {
