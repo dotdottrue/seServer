@@ -2,7 +2,6 @@ package de.project.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
