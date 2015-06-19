@@ -2,6 +2,13 @@ package de.project.dto.appointment;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ * Aufbau des AppointmentTransferObjects.
+ *
+ */
 public class AppointmentTO implements Serializable {
 
 	private static final long serialVersionUID = 4225307722069711177L;

@@ -7,6 +7,11 @@ import de.project.dto.user.UserTO;
 
 import de.project.entities.User;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * Dieser Assembler baut aus einem User-Objekt ein DataTransferObject welches zum Datenaustausch gedacht ist.
+ */
 @Stateless
 public class UserDTOAssembler {
 	

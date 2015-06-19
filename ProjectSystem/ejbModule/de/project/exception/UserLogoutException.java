@@ -2,6 +2,11 @@ package de.project.exception;
 
 import de.project.enumerations.ReturnCode;
 
+/**
+ * 
+ * @author Tobias Kappert
+ *
+ */
 public class UserLogoutException extends Exception {
 
 	private static final long serialVersionUID = 8938078844630133924L;

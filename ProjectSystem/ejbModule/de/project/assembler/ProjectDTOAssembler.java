@@ -19,6 +19,11 @@ import de.project.entities.Note;
 import de.project.entities.Project;
 import de.project.entities.User;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * Dieser Assembler baut aus einem Project-Objekt ein DataTransferObject welches zum Datenaustausch gedacht ist.
+ */
 @Stateless
 public class ProjectDTOAssembler {
 	
@@ -51,7 +56,6 @@ public class ProjectDTOAssembler {
 			userTO.setPhoneNumber(user.getPhoneNumber());
 			userTO.setFirstName(user.getFirstName());
 			userTO.setLastName(user.getLastName());
-			//userTO.setProjects(makeDTO5(user.getProjects()));
 			userTO.setRegistrationDate(user.getRegistrationDate());
 			
 			dto.add(userTO);
@@ -105,28 +109,6 @@ public class ProjectDTOAssembler {
 		}
 		return dto;
 	}
-	
-//	private List<ProjectTO> makeDTO5(List<Project> projects) {
-//		
-//		List<ProjectTO> dto = new ArrayList<>();
-//		
-//		for (Project project : projects) {
-//			ProjectTO projectTO = new ProjectTO();
-//			projectTO.setId(project.getId());
-//			projectTO.setOwner(userDtoAssembler.makeDTO(project.getOwner()));
-//			projectTO.setProjectName(project.getProjectName());
-//			projectTO.setDescription(project.getDescription());
-//			projectTO.setProjectStatus(project.getProjectStatus());
-//			projectTO.setUpdatedOn(project.getUpdatedOn());
-//			projectTO.setAppointments(makeDTO2(project.getAppointments()));
-//			projectTO.setDiscussions(makeDTO3(project.getDiscussions()));
-//			projectTO.setMembers(makeDTO(project.getMembers()));
-//			projectTO.setMilestones(makeDTO4(project.getMilestones()));
-//			
-//			dto.add(projectTO);		
-//		}
-//		return dto;
-//	}
 	
 	private List<NoteTO> makeDTO6(List<Note> notes) {
 		

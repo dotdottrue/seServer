@@ -1,11 +1,17 @@
 package de.project.dto.appointment;
 
-import java.io.Serializable;
 import java.util.List;
 
 import de.project.dto.ReturncodeResponse;
 
-public class AppointmentResponse extends ReturncodeResponse implements Serializable {
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * 
+ * Diese Klasse sorgt dafuer, dass ein Termin/Meilensteinobjekt versendet werden kann mit zusaetzlichem StatusCode.
+ *
+ */
+public class AppointmentResponse extends ReturncodeResponse {
 
 
 	private static final long serialVersionUID = -4823223693859736921L;

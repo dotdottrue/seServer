@@ -10,6 +10,11 @@ import de.project.dto.note.NoteTO;
 import de.project.entities.Discussion;
 import de.project.entities.Note;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * Dieser Assembler baut aus einem Discussion-Objekt ein DataTransferObject welches zum Datenaustausch gedacht ist.
+ */
 @Stateless
 public class DiscussionDTOAssembler {
 	

@@ -6,6 +6,11 @@ import javax.ejb.Stateless;
 import de.project.dto.ProjectSessionTO;
 import de.project.entities.ProjectSession;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Stateless
 public class ProjectSessionDTOAssembler {
 	

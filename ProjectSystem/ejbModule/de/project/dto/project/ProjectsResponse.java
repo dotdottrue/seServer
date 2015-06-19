@@ -4,6 +4,13 @@ import java.util.List;
 
 import de.project.dto.ReturncodeResponse;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * 
+ * Diese Klasse sorgt dafuer, dass Projekte versendet werden kann mit zusaetzlichem StatusCode.
+ *
+ */
 public class ProjectsResponse extends ReturncodeResponse{
 
 	private static final long serialVersionUID = 8173234950970923486L;

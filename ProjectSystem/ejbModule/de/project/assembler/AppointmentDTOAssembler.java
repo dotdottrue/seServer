@@ -5,6 +5,11 @@ import javax.ejb.Stateless;
 import de.project.dto.appointment.AppointmentTO;
 import de.project.entities.Appointment;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * Dieser Assembler baut aus einem Appointment-Objekt ein DataTransferObject welches zum Datenaustausch gedacht ist.
+ */
 @Stateless
 public class AppointmentDTOAssembler {
 	

@@ -2,10 +2,14 @@ package de.project.dto.user;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import de.project.dto.project.ProjectTO;
-
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * 
+ * Aufbau des UserTransferObjects.
+ *
+ */
 public class UserTO implements Serializable{
 		
 	private static final long serialVersionUID = 1L;
@@ -14,7 +18,6 @@ public class UserTO implements Serializable{
 	private String firstName;
 	private String lastName;
 	private Date registrationDate;
-	//private List<ProjectTO> projects;
 	
 	public String getPhoneNumber() {
 		return phoneNumber;
@@ -47,13 +50,5 @@ public class UserTO implements Serializable{
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-	
-/*	public List<ProjectTO> getProjects() {
-		return projects;
-	}
-	
-	public void setProjects(List<ProjectTO> projects) {
-		this.projects = projects;
-	}*/
 		
 }

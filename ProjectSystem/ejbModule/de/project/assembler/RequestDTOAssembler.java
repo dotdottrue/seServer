@@ -6,6 +6,11 @@ import javax.ejb.Stateless;
 import de.project.dto.RequestTO;
 import de.project.entities.Request;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 @Stateless
 public class RequestDTOAssembler {
 	

@@ -5,6 +5,11 @@ import javax.ejb.Stateless;
 import de.project.dto.MilestoneTO;
 import de.project.entities.Milestone;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * Dieser Assembler baut aus einem Meilenstein-Objekt ein DataTransferObject welches zum Datenaustausch gedacht ist.
+ */
 @Stateless
 public class MilestoneDTOAssembler {
 	

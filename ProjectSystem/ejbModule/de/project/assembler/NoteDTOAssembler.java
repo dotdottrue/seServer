@@ -5,6 +5,11 @@ import javax.ejb.Stateless;
 import de.project.dto.note.NoteTO;
 import de.project.entities.Note;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *Dieser Assembler baut aus einem Note-Objekt ein DataTransferObject welches zum Datenaustausch gedacht ist.
+ */
 @Stateless
 public class NoteDTOAssembler {
 	

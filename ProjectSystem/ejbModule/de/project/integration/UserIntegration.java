@@ -22,7 +22,7 @@ import de.project.exception.UserRegistrationException;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
- *Diese Klasse hält die Schnittstellen/Methoden für die Userspezifischen UseCases bereit.
+ *Diese Klasse haelt die Schnittstellen/Methoden für die Userspezifischen UseCases bereit.
  *
  */
 @WebService
@@ -46,8 +46,8 @@ public class UserIntegration {
 	
 	/**
 	 * Schnittstelle/Methode zum Registrieren von Benutzern.
-	 * @param phonenumber = Übergabeparameter ist die telefonnummer womit der Anwender Registriert wird.
-	 * @return = Rückgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code.
+	 * @param phonenumber = Uebergabeparameter ist die telefonnummer womit der Anwender Registriert wird.
+	 * @return = Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code.
 	 */
 	public ProjectUserResponse registerUser(String phonenumber) {
 		ProjectUserResponse response = new ProjectUserResponse();
@@ -77,8 +77,8 @@ public class UserIntegration {
 	/**
 	 * 
 	 * Methode zum Einloggen in die APP.
-	 * @param phonenumber = Übergabeparameter ist die Telefonnummer zum Einloggen.
-	 * @return = Rückgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code. 
+	 * @param phonenumber = Uebergabeparameter ist die Telefonnummer zum Einloggen.
+	 * @return = Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code. 
 	 * Zusätzlich wird eine Session übergeben.
 	 * 
 	 */
@@ -106,8 +106,8 @@ public class UserIntegration {
 	
 	/**
 	 * Schnittstelle/Abmeldung aus der App.
-	 * @param sessionId = Übergabe der SessionId um sich aus der App abzumelden.
-	 * @return = Rückgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code.
+	 * @param sessionId = Uebergabe der SessionId um sich aus der App abzumelden.
+	 * @return = Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code.
 	 */
 	public ReturncodeResponse logout(int sessionId){
 		

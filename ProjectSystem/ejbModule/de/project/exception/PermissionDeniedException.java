@@ -2,6 +2,11 @@ package de.project.exception;
 
 import de.project.enumerations.ReturnCode;
 
+/**
+ * 
+ * @author Tobias Kappert
+ *
+ */
 public class PermissionDeniedException extends ProjectException {
 
 	private static final long serialVersionUID = 5519151063188089873L;
