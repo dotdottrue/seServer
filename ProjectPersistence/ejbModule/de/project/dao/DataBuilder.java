@@ -56,6 +56,7 @@ public class DataBuilder {
 		}
 		LOGGER.info("Neu angelegt: " + user2);	
 	
+			
 		String[] phoneNumbers = { phoneNumber1, phoneNumber2 };
 		String[] projectNames = { projectName, projectName2, projectName3, projectName4 };
 		User[] users = { user1, user2 };
