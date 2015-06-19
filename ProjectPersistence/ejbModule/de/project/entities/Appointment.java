@@ -17,10 +17,6 @@ public class Appointment{
 	@Id
 	@GeneratedValue
 	private long id;
-		
-	/*@OneToOne(mappedBy = "appointment")
-	private Note shortNote;
-	*/ 
 	
 	private String topic;
 	private String description;

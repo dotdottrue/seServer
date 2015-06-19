@@ -21,6 +21,8 @@ import de.project.enumerations.ProjectStatus;
  * 
  * @author Tobias Kappert
  *
+ * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
+ *
  */
 @Stateless
 public class ProjectProjectDAO implements ProjectProjectDAOLocal {

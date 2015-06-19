@@ -9,7 +9,9 @@ import de.project.entities.Note;
 
 /**
  * 
- * @author Tobias Kappert
+ * @author Tobias Kappert | Eduard Schartner
+ * 
+ * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
  *
  */
 @Stateless
