@@ -1,6 +1,7 @@
 package de.project.integration;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -334,6 +335,7 @@ public class ProjectIntegration {
 			for(Note n : notes){
 				notesTO.add(noteassembler.makeDTO(n));	
 			}
+			
 			response.setNotes(notesTO);
 			LOGGER.info("Es wurde erfolgreich Notizen aus der Diskussion mit der ID: " + discussionId + " ausgelesen.");
 		}catch(NotesNotExistException ex){
@@ -462,7 +464,7 @@ public class ProjectIntegration {
 			
 			for(Appointment a : appointments){
 				appointmentsTO.add(appointmentassembler.makeDTO(a));
-			}
+			}		
 			
 			response.setAppointments(appointmentsTO);
 		
