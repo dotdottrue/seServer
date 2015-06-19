@@ -508,7 +508,7 @@ public class ProjectIntegration {
 			Appointment appointment = appointmentDAO.findAppointmentById(appointmentId);
 			if(project == null || appointment == null){
 				LOGGER.info("Das Projekt oder den Termin gibt es nicht");
-				throw new ProjectNotExistException("Projekt oder Termin nicht vorhanden");
+				throw new ProjectNotExistException("Projekt oder Termin nicht vorhanden, ProjectId: "+projectId+", AppointmentId: "+appointmentId);
 			}
 			List<Appointment> appointments = project.getAppointments();
 			appointments.remove(appointment);
