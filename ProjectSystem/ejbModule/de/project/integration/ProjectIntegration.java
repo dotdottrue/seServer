@@ -138,6 +138,7 @@ public class ProjectIntegration {
 				newProject.setUpdatedOn(new Date());
 				newProject.setMembers(members);
 				newProject.setDiscussions(discussions);
+				newProject.setAppointments(appointments);
 				
 				projectDAO.createProject(newProject);
 				
