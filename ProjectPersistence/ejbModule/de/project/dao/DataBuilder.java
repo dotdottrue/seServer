@@ -71,7 +71,7 @@ public class DataBuilder {
 			project.setProjectStatus(ProjectStatus.INTIME);
 			ArrayList<Discussion> discussionsList = new ArrayList<>();
 			for(int j = 0; j < 4; j++){
-				Discussion discussion = new Discussion(discussionNames[j], new Date());
+				Discussion discussion = new Discussion(discussionNames[i], new Date());
 				discussionsList.add(discussion);
 			}
 			
@@ -85,14 +85,14 @@ public class DataBuilder {
 				notes.add(new Note(
 									"BeispielNotiz",
 									new Date(),
-									phoneNumbers[l%2]
+									phoneNumbers[i%2]
 								));
 			}
 			
 			for(int m = 0; m < 4; m++){
-				Discussion d = discussionsList.get(m);
+				Discussion d = discussionsList.get(i);
 				d.setNotes(notes);
-				discussionsList.set(m, d);
+				discussionsList.set(i, d);
 			}
 			
 			project.setDiscussions(discussionsList);
