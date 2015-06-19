@@ -90,7 +90,7 @@ public class DataBuilder {
 			}
 			
 			for(int m = 0; m < 4; m++){
-				Discussion d = discussionsList.get(i);
+				Discussion d = discussionsList.get(m);
 				d.setNotes(notes);
 				discussionsList.set(i, d);
 			}
