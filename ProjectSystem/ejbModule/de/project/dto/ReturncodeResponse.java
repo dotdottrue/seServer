@@ -4,6 +4,14 @@ import java.io.Serializable;
 
 import de.project.enumerations.ReturnCode;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * 
+ * Diese Klasse beinhaltet den mitzusenden Returncode bei einer Anfrage von der App. 
+ * Da das Object ueber Soap gesendet wird, muss es Serializable sein.
+ * 
+ */
 public class ReturncodeResponse implements Serializable{
 
 	private static final long serialVersionUID = -9201142429630293568L;

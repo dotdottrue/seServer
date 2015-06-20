@@ -8,6 +8,7 @@ import de.project.entities.Milestone;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
+ * Interface für die Milestone-Datenbankzugriffe. @Local macht dieses Interface für lokale Zugriffe erreichbar.
  */
 @Local
 public interface ProjectMilestoneDAOLocal {

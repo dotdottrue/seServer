@@ -10,9 +10,19 @@ import de.project.dto.note.NoteTO;
 import de.project.entities.Discussion;
 import de.project.entities.Note;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * Dieser Assembler baut aus einem Discussion-Objekt ein DataTransferObject welches zum Datenaustausch gedacht ist.
+ */
 @Stateless
 public class DiscussionDTOAssembler {
 	
+	/**
+	 * Methode zum Umwandeln des objektes.
+	 * @param discussion = Objekt vom Typ Discussion
+	 * @return = Das umgewandelte DataTransferObject.
+	 */
 	public DiscussionTO makeDTO(Discussion discussion){	
 		DiscussionTO dto = new DiscussionTO();
 		dto.setId(discussion.getId());
@@ -23,6 +33,12 @@ public class DiscussionDTOAssembler {
 		return dto;
 	}
 	
+	/**
+	 * Erstellung der internen Listen dieses DTO's.
+	 * @param notes = Object vom Typ Liste<Note>.
+	 * @param discussionTO = Das DataTransferObject.
+	 * @return Das Umgewandelte DataTransferObject.
+	 */
 	private List<NoteTO> makeDTO(List<Note> notes, DiscussionTO discussionTO) {
 
 		List<NoteTO> dto = new ArrayList<>();

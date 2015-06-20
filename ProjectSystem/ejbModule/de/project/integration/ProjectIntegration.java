@@ -1,7 +1,6 @@
 package de.project.integration;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +20,6 @@ import de.project.dao.local.ProjectAppointmentDAOLocal;
 import de.project.dao.local.ProjectDiscussionDAOLocal;
 import de.project.dao.local.ProjectProjectDAOLocal;
 import de.project.dao.local.ProjectUserDAOLocal;
-import de.project.dto.MilestoneTO;
 import de.project.dto.ReturncodeResponse;
 import de.project.dto.appointment.AppointmentResponse;
 import de.project.dto.appointment.AppointmentTO;
@@ -36,17 +34,14 @@ import de.project.dto.user.UserTO;
 import de.project.dto.user.UsersResponse;
 import de.project.entities.Appointment;
 import de.project.entities.Discussion;
-import de.project.entities.Milestone;
 import de.project.entities.Note;
 import de.project.entities.Project;
-import de.project.entities.ProjectSession;
 import de.project.entities.User;
 import de.project.enumerations.ProjectStatus;
 import de.project.enumerations.ReturnCode;
 import de.project.exception.CompareUsersNotExistException;
 import de.project.exception.DiscussionNotExistsException;
 import de.project.exception.NotesNotExistException;
-import de.project.exception.PermissionDeniedException;
 import de.project.exception.ProjectException;
 import de.project.exception.ProjectNotExistException;
 import de.project.exception.ProjectValidationException;
@@ -54,7 +49,7 @@ import de.project.exception.ProjectValidationException;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
- *Diese Klasse hält die Schnittstellen/Methoden für die Projektsperifischen UseCases bereit.
+ *Diese Klasse haelt die Schnittstellen/Methoden fuer die Projektsperifischen UseCases bereit.
  *
  */
 @WebService
@@ -63,26 +58,28 @@ import de.project.exception.ProjectValidationException;
 public class ProjectIntegration {
 	
 	/**
-	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist für Datenbankabfragen gedacht.
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist fÔøΩr Datenbankabfragen gedacht.
 	 */
 	@EJB(beanName = "ProjectProjectDAO", beanInterface = ProjectProjectDAOLocal.class)
 	private ProjectProjectDAOLocal projectDAO;
 	
 	/**
-	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist für Datenbankabfragen gedacht.
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist fuer Datenbankabfragen gedacht.
 	 */
 	@EJB(beanName = "ProjectUserDAO", beanInterface = ProjectUserDAOLocal.class)
 	private ProjectUserDAOLocal userDAO;
 	
 	/**
-	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist für Datenbankabfragen gedacht.
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist fuer Datenbankabfragen gedacht.
 	 */
 	@EJB(beanName = "ProjectDiscussionDAO", beanInterface = ProjectDiscussionDAOLocal.class)
 	private ProjectDiscussionDAOLocal discussionDAO;
 	
-	@EJB(beanName= "ProjectAppointmentDAO", beanInterface = ProjectAppointmentDAOLocal.class)
+	/**
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist fuer Datenbankabfragen gedacht.
+	 */	
+	@EJB(beanName = "ProjectAppointmentDAO", beanInterface = ProjectAppointmentDAOLocal.class)
 	private ProjectAppointmentDAOLocal appointmentDAO;
-	
 	/**
 	 * DataTransferObject wird via EJB erzeugt.
 	 */
@@ -114,13 +111,12 @@ public class ProjectIntegration {
 	 * @param phoneNumber = Telefonnummer des Appanwenders.
 	 * @param projectName = Name des zu erstellenden Projektes.
 	 * @param description = Beschreibung des Projektes.
-	 * @return = Rückgabe des RückgabeCodes.
+	 * @return = Rueckgabe des StatusCodes.
 	 */
 	public ReturncodeResponse createProject(String phoneNumber, String projectName, String description /*, int sessionId*/ ) {
 		ReturncodeResponse response = new ReturncodeResponse(); 
 		LOGGER.info(phoneNumber+" "+projectName);
 		try{
-			//ProjectSession session = userDAO.getSession(sessionId);
 			Project newProject = new Project();
 			
 			User owner = userDAO.findUserByNumber(phoneNumber);
@@ -139,6 +135,7 @@ public class ProjectIntegration {
 				newProject.setUpdatedOn(new Date());
 				newProject.setMembers(members);
 				newProject.setDiscussions(discussions);
+				newProject.setAppointments(appointments);
 				
 				projectDAO.createProject(newProject);
 				
@@ -157,8 +154,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode erzegt eine Liste aller Projekte die einem Benutzer zugeordnet sind.
-	 * @param phonenumber = Übergabeparameter ist die Telefonnummer des App-Anwenders.
-	 * @return = Es wird eine Liste der Projekte an den AppAnwender zurückgegeben.
+	 * @param phonenumber = Uebergabeparameter ist die Telefonnummer des App-Anwenders.
+	 * @return = Es wird eine Liste der Projekte an den AppAnwender zurueckgegeben.
 	 */
 	public ProjectsResponse getProjectsByPhone(String phonenumber){	
 		ProjectsResponse response = new ProjectsResponse();
@@ -166,8 +163,8 @@ public class ProjectIntegration {
 		try{
 			User user = userDAO.findUserByNumber(phonenumber);
 			if(user == null) {
-				LOGGER.info("Eine Liste der Projekte für den Benutzer mit der Telefonnummer: " + phonenumber + " konnte nicht erzeugt werden.");
-				throw new ProjectNotExistException("Es existieren keine Projekte für den benutzer mit der Telefonnummer: " + phonenumber);		
+				LOGGER.info("Eine Liste der Projekte fÔøΩr den Benutzer mit der Telefonnummer: " + phonenumber + " konnte nicht erzeugt werden.");
+				throw new ProjectNotExistException("Es existieren keine Projekte fÔøΩr den benutzer mit der Telefonnummer: " + phonenumber);		
 			}else{
 				List<Project> projects = user.getProjects();
 				
@@ -176,7 +173,6 @@ public class ProjectIntegration {
 				}else{
 					LOGGER.info("Projektliste ist leer!");
 				}
-				//projectDAO.findProjects(user);
 				List<ProjectTO> projectsTO = new ArrayList<ProjectTO>();
 				
 				for(Project p : projects){
@@ -186,7 +182,7 @@ public class ProjectIntegration {
 				response.setProjects(projectsTO);
 				response.setPhonenumber(phonenumber);
 				
-				LOGGER.info("Eine Liste der Projekte für den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ " wurde erzeugt.");
+				LOGGER.info("Eine Liste der Projekte fÔøΩr den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ " wurde erzeugt.");
 			}
 		}catch(ProjectNotExistException ex){
 			response.setReturnCode(ex.getErrorCode());
@@ -197,8 +193,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode erzeugt bei Anfrage eine Liste aller Diskussionen eines Objektes.
-	 * @param projectId = Dort wird eine Projektnummer/Id von App-Anwender übergeben
-	 * @return = Die Rückgabe enthält eine Liste von Diskussionen im Projekt.
+	 * @param projectId = Dort wird eine Projektnummer/Id von App-Anwender uebergeben
+	 * @return = Die Rueckgabe enthaelt eine Liste von Diskussionen im Projekt.
 	 */
 	public DiscussionResponse getDiscussionsByProject(long projectId){
 		DiscussionResponse response = new DiscussionResponse();
@@ -224,9 +220,9 @@ public class ProjectIntegration {
 	}
 	
 	/**
-	 * Diese Schnittstelle/Methode fügt eine Diskussion zu einem Projekt hinzu.
-	 * @param projectId = Dort wird eine Projektnummer/Id von App-Anwender übergeben
-	 * @param topic = Beinhaltet die Überschrift einer Diskussion.
+	 * Diese Schnittstelle/Methode fuegt eine Diskussion zu einem Projekt hinzu.
+	 * @param projectId = Dort wird eine Projektnummer/Id von App-Anwender uebergeben
+	 * @param topic = Beinhaltet die Ueberschrift einer Diskussion.
 	 * @return = Beim erfolgreichen Anlegen wird ein OK-Code gesendet ansonstne ein Error-Code.
 	 */
 	public ReturncodeResponse addDiscussionToProject(long projectId, String topic){
@@ -255,9 +251,9 @@ public class ProjectIntegration {
 	
 	/**
 	 * Methode/Schnittstelle zum entfernen einer Diskussion aus einem Projekt
-	 * @param projectId = Parameter zum bestimmen zu welchem Projekt die Diskussiong gehört.
+	 * @param projectId = Parameter zum bestimmen zu welchem Projekt die Diskussiong gehoert.
 	 * @param discussionId = Die ID der jeweiligen Diskussion.
-	 * @return = Es wird bei Erfolg der ReturnCode OK bei misserfolg der ReturnCode Error zurückgegeben.
+	 * @return = Es wird bei Erfolg der ReturnCode OK bei misserfolg der ReturnCode Error zurueckgegeben.
 	 */
 	public ReturncodeResponse removeProjectDiscussion(long projectId, long discussionId){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -270,7 +266,6 @@ public class ProjectIntegration {
 			} 
 			List<Discussion> discussions = project.getDiscussions();
 			discussions.remove(discussion);
-			//discussionDAO.removeDiscussion(discussion);
 			projectDAO.updateProject(project);
 		} catch (ProjectNotExistException ex) {
 			response.setReturnCode(ex.getErrorCode());
@@ -281,7 +276,7 @@ public class ProjectIntegration {
 	}
 	
 	/**
-	 * Diese Schnittstelle/Methode erstellt eine Notiz bei der jeweiligen Diskussion die ausgewählt wurde bzw geöffnet ist.
+	 * Diese Schnittstelle/Methode erstellt eine Notiz bei der jeweiligen Diskussion die ausgewaehlt wurde bzw geoeffnet ist.
 	 * @param discussionId = Diskussionsnummer um die richtige Diskussion anzusprechen.
 	 * @param note = Die Notiz die geschrieben wurde.
 	 * @param phonenumber = Telefonnummerdes Benutzers.
@@ -294,7 +289,7 @@ public class ProjectIntegration {
 			
 			if(discussion == null){
 				LOGGER.info("Der Diskussion mit der ID " + discussionId + " wurde keine Notiz hinterlegt.");
-				throw new DiscussionNotExistsException("Es konnte der Diskussion keine Nachricht hinzugefügt werden oder die Diskussion existiert nicht.");
+				throw new DiscussionNotExistsException("Es konnte der Diskussion keine Nachricht hinzugefÔøΩgt werden oder die Diskussion existiert nicht.");
 			}
 
 			Note newNote = new Note();
@@ -315,9 +310,9 @@ public class ProjectIntegration {
 	}
 	
 	/**
-	 * Mit dieser Methode werden die Beiträge in einer Diskussion ausder Datenbank geholt und dem Client übergeben.
+	 * Mit dieser Methode werden die Beitraege in einer Diskussion ausder Datenbank geholt und dem Client uebergeben.
 	 * @param discussionId = Diskussionsnummer um die richtige Diskussion anzusprechen.
-	 * @return = Als Rückgabe wird ein ReturnCorde geschickt und eine Liste an Notizen/Beiträgen. Im Fehlerfall eine Nachricht und ein Fehlercode.
+	 * @return = Als Rueckgabe wird ein ReturnCorde geschickt und eine Liste an Notizen/Beitraegen. Im Fehlerfall eine Nachricht und ein Fehlercode.
 	 */
 	public NotesResponse getNotesByDiscussion(long discussionId){
 		NotesResponse response = new NotesResponse();
@@ -347,7 +342,7 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode/Schnitttelle vergleicht die Kontakte des Handybenutzers mit den Kontakten in der Datenbank.
-	 * @param params = der Parameter Params enthält ein String Array welches eine Dynamische länge von String  parametern fassen kann.
+	 * @param params = der Parameter Params enthaelt ein String Array welches eine dynamische Laenge von String  parametern fassen kann.
 	 * @return = Alle Kontakte aus dem Telefonbuch welche auch diese App benutzen.
 	 */
 	public UsersResponse comparePhonebook (long projectId, String ...params){
@@ -355,7 +350,7 @@ public class ProjectIntegration {
 		try {
 			Project project = projectDAO.findProjectById(projectId);
 			if(params == null || project == null){
-				LOGGER.info("Es wurden keine Kontakte/Parameter übergeben! Oder die Übergabe war Fehlerhaft!");
+				LOGGER.info("Es wurden keine Kontakte/Parameter ÔøΩbergeben! Oder die ÔøΩbergabe war Fehlerhaft!");
 				throw new CompareUsersNotExistException("Es gab keine Benutzer zu vergleichen!");
 			}
 			List<User> usersServer = userDAO.findAllUsers();
@@ -386,10 +381,10 @@ public class ProjectIntegration {
 	}
 	
 	/**
-	 * Diese Schnittstelle erlaubt das hinzufügen eines Benutzers/Users zu dem Projekt.
-	 * @param phoneNumber = Übergabeparameter Telefonnummer für den zu speichernden Benutzer.
-	 * @param projectId = Übergabe parameter ProjektId zur Bestimmung des Projektes.
-	 * @return = Gibt einen OK-Code bei erfolgreichem Anlegen zurück und einen Error-Code falls was nicht klappt.
+	 * Diese Schnittstelle erlaubt das hinzufuegen eines Benutzers/Users zu dem Projekt.
+	 * @param phoneNumber = Uebergabeparameter Telefonnummer fÔøΩr den zu speichernden Benutzer.
+	 * @param projectId = Uebergabe parameter ProjektId zur Bestimmung des Projektes.
+	 * @return = Gibt einen OK-Code bei erfolgreichem Anlegen zurueck und einen Error-Code falls was nicht klappt.
 	 */
 	public ReturncodeResponse addUserToProject(String phoneNumber, long projectId){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -413,12 +408,12 @@ public class ProjectIntegration {
 	}
 	
 	/**
-	 * Diese Methode/Schnittstelle fügt einen Termin bei einem Projekt hinzu.
-	 * @param projectId = Indentifizierung zu welchem Projekt der Termin hinzugefügt werden soll.
+	 * Diese Methode/Schnittstelle fuegt einen Termin bei einem Projekt hinzu.
+	 * @param projectId = Indentifizierung zu welchem Projekt der Termin hinzugefuegt werden soll.
 	 * @param topic = Bezeichnung des Termins.
 	 * @param description = Beschreibung des Termins
 	 * @param date = Datum des Termins.
-	 * @return = Rückgabe bei Erfolg OK-Code bei Fehler ERROR-Code.
+	 * @return = Rueckgabe bei Erfolg OK-Code bei Fehler ERROR-Code.
 	 */
 	public ReturncodeResponse addAppointmentToProject(long projectId, String topic, String description, long date){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -449,7 +444,7 @@ public class ProjectIntegration {
 	/**
 	 * Abrufen des Termins im jeweiligen Projekt.
 	 * @param projectId = Aufruf eines Projektes wo der Termin enthalten ist.
-	 * @return = Übergabe der Termine.
+	 * @return = Uebergabe der Termine.
 	 */
 	public AppointmentResponse getAppointmentsByProject(long projectId){	
 		AppointmentResponse response = new AppointmentResponse();
@@ -464,8 +459,7 @@ public class ProjectIntegration {
 			
 			for(Appointment a : appointments){
 				appointmentsTO.add(appointmentassembler.makeDTO(a));
-			}		
-			
+			}
 			response.setAppointments(appointmentsTO);
 		
 		}catch (ProjectNotExistException ex) {
@@ -477,32 +471,11 @@ public class ProjectIntegration {
 	}
 	
 	/**
-	 * Entfernen eines Projektmitglieds
-	 * @param projectId = Parameter zur Identifizierung des Projektes.
-	 * @param phoneNumber = Telefonnummer zur Identifizierung des Projektmitglieds.
-	 * @return = Rückgabe eines Statuscodes.
+	 * Diese Methode entfernt einen Termin/Meilenstein aus dem Projekt.
+	 * @param projectId = Übergabeparameter welcher das Projekt identifiziert.
+	 * @param appointmentId = Übergabeparameter welcher das Termin Objekt identifiziert.
+	 * @return = Ein Statuscode welche entweder OK oder ERROR beinhaltet.
 	 */
-	public ReturncodeResponse removeProjectMember(long projectId, String phoneNumber) {
-		ReturncodeResponse response = new ReturncodeResponse();
-		try {
-			Project project = projectDAO.findProjectById(projectId);
-			if(project == null){
-				LOGGER.info("Es gibt kein Projekt mit der Id: " + projectId);
-				throw new ProjectNotExistException("Es gibt kein Projekt mit der ID: " + projectId);
-			} 
-			User user = userDAO.findUserByNumber(phoneNumber);
-			List<User> members = project.getMembers();
-			members.remove(user);
-			
-			projectDAO.updateProject(project);
-		}catch (ProjectNotExistException ex) {
-			response.setReturnCode(ex.getErrorCode());
-			response.setMessage(ex.getMessage());
-			ex.printStackTrace();
-		}
-		return response;
-	}
-	
 	public ReturncodeResponse removeProjectAppointment(long projectId, long appointmentId){
 		ReturncodeResponse response = new ReturncodeResponse();
 		try{
@@ -525,7 +498,42 @@ public class ProjectIntegration {
 		return response;
 	}
 	
-	public ProjectResponse updateProject(long id, String projectName, String projectDescription, int sessionId) {	
+	/**
+	 * Entfernen eines Projektmitglieds
+	 * @param projectId = Parameter zur Identifizierung des Projektes.
+	 * @param phoneNumber = Telefonnummer zur Identifizierung des Projektmitglieds.
+	 * @return = Rueckgabe eines Statuscodes.
+	 */
+	public ReturncodeResponse removeProjectMember(long projectId, String phoneNumber) {
+		ReturncodeResponse response = new ReturncodeResponse();
+		try {
+			Project project = projectDAO.findProjectById(projectId);
+			if(project == null){
+				LOGGER.info("Es gibt kein Projekt mit der Id: " + projectId);
+				throw new ProjectNotExistException("Es gibt kein Projekt mit der ID: " + projectId);
+			} 
+			User user = userDAO.findUserByNumber(phoneNumber);
+			List<User> members = project.getMembers();
+			members.remove(user);
+			
+			projectDAO.updateProject(project);
+		}catch (ProjectNotExistException ex) {
+			response.setReturnCode(ex.getErrorCode());
+			response.setMessage(ex.getMessage());
+			ex.printStackTrace();
+		}
+		return response;
+	}
+	
+	/**
+	 * Diese Methode/Schnittstelle führt ein Projektupdate vor.
+	 * @param id = Parameter welcher das Projekt identifiziert.
+	 * @param projectName = Einen evtl. neuen Projektnamen der Aktualisiert wird.
+	 * @param description = Eine Neue Projektdeskripion die aktualisiert werden würde.
+	 * @param projectStatus = ein aktualisierter Projektstatus.
+	 * @return = Rueckgabe eines Statuscodes
+	 */
+	public ProjectResponse updateProject(long id, String projectName, String description, String projectStatus) {	
 		ProjectResponse response = new ProjectResponse();
 		try {
 			Project project = projectDAO.findProjectById(id);
@@ -534,19 +542,13 @@ public class ProjectIntegration {
 				LOGGER.info("Es wurde kein Project mit der ID: " + id + "gefunden.");
 				throw new ProjectNotExistException("Es gibt kein Project mit der angefragten ID.");
 			}			
-			ProjectSession session = userDAO.getSession(sessionId);
-			ArrayList<User> members = new ArrayList<User>();
-			if((project.getOwner().equals(session.getUser())) || members.contains(session.getUser())){
+				project.setDescription(description);
 				project.setProjectName(projectName);
-				project.setDescription(projectDescription);
+				project.setProjectStatus(ProjectStatus.valueOf(projectStatus));
 				projectDAO.updateProject(project);
 				
 				LOGGER.info("Project mit der id " + project.getId() + "wurde aktualisiert.");
-			}else{
-				LOGGER.info("Zugriff fÔøΩr den Benutzer verweigert.");
-				throw new PermissionDeniedException("Zugriff verweigert!");
-			}	
-		}catch(ProjectNotExistException | PermissionDeniedException ex ){
+		}catch(ProjectNotExistException ex){
 			response.setReturnCode(ex.getErrorCode());
 			response.setMessage(ex.getMessage());	
 		}		

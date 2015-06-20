@@ -10,6 +10,8 @@ import de.project.entities.Discussion;
 /**
  * 
  * @author Eduard Schartner
+ * 
+ * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
  *
  */
 @Stateless

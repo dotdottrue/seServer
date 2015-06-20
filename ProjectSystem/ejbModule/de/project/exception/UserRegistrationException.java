@@ -2,6 +2,11 @@ package de.project.exception;
 
 import de.project.enumerations.ReturnCode;
 
+/**
+ * 
+ * @author Tobias Kappert
+ *
+ */
 public class UserRegistrationException extends Exception {
 
 	private static final long serialVersionUID = -462705714948900424L;

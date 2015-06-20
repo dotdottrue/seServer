@@ -3,6 +3,13 @@ package de.project.dto.note;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * 
+ * Aufbau eines NoteTransferObjects.
+ *
+ */
 public class NoteTO implements Serializable{
 	
 	private static final long serialVersionUID = -4781277771288533285L;

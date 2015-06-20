@@ -10,7 +10,11 @@ import de.project.dto.discussion.DiscussionTO;
 import de.project.dto.user.UserTO;
 import de.project.enumerations.*;
 
-
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ */
 public class ProjectTO implements Serializable{		
 	
 	private static final long serialVersionUID = 1L;

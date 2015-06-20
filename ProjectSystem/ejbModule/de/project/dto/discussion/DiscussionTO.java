@@ -6,6 +6,13 @@ import java.util.List;
 
 import de.project.dto.note.NoteTO;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ * 
+ * Aufbau des DiscussionTransferObjects.
+ *
+ */
 public class DiscussionTO implements Serializable{
 
 	private static final long serialVersionUID = -7131993484423007681L;

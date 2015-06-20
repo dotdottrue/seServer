@@ -8,6 +8,8 @@ import de.project.entities.Discussion;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
+ * Interface für die Dicussion-Datenbankzugriffe. @Local macht dieses Interface für lokale Zugriffe erreichbar.
+ *
  */
 @Local
 public interface ProjectDiscussionDAOLocal {

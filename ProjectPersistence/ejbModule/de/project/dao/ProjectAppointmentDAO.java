@@ -7,6 +7,13 @@ import javax.persistence.PersistenceContext;
 import de.project.dao.local.ProjectAppointmentDAOLocal;
 import de.project.entities.Appointment;
 
+/**
+ * 
+ * @author Tobias Kappert | Eduard Schartner
+ *
+ * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
+ *
+ */
 @Stateless
 public class ProjectAppointmentDAO implements ProjectAppointmentDAOLocal {
 	

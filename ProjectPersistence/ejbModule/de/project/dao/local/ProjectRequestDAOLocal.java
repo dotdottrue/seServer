@@ -8,6 +8,7 @@ import de.project.entities.Request;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
+ * Interface für die Request-Datenbankzugriffe. @Local macht dieses Interface für lokale Zugriffe erreichbar.
  */
 @Local
 public interface ProjectRequestDAOLocal {

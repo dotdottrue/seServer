@@ -29,7 +29,6 @@ public class Discussion {
 
 	public Discussion() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Discussion(String topic, Date createdAt) {
