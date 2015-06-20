@@ -97,10 +97,14 @@ public class ProjectIntegration {
 	 */
 	@EJB
 	private NoteDTOAssembler noteassembler;
-	
+	/**
+	 * DataTransferObject wird via EJB erzeugt.
+	 */	
 	@EJB
 	private UserDTOAssembler userassembler;
-	
+	/**
+	 * DataTransferObject wird via EJB erzeugt.
+	 */	
 	@EJB
 	private AppointmentDTOAssembler appointmentassembler;
 
@@ -472,8 +476,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode entfernt einen Termin/Meilenstein aus dem Projekt.
-	 * @param projectId = †bergabeparameter welcher das Projekt identifiziert.
-	 * @param appointmentId = †bergabeparameter welcher das Termin Objekt identifiziert.
+	 * @param projectId = ï¿½bergabeparameter welcher das Projekt identifiziert.
+	 * @param appointmentId = ï¿½bergabeparameter welcher das Termin Objekt identifiziert.
 	 * @return = Ein Statuscode welche entweder OK oder ERROR beinhaltet.
 	 */
 	public ReturncodeResponse removeProjectAppointment(long projectId, long appointmentId){
@@ -526,10 +530,10 @@ public class ProjectIntegration {
 	}
 	
 	/**
-	 * Diese Methode/Schnittstelle fŸhrt ein Projektupdate vor.
+	 * Diese Methode/Schnittstelle fï¿½hrt ein Projektupdate vor.
 	 * @param id = Parameter welcher das Projekt identifiziert.
 	 * @param projectName = Einen evtl. neuen Projektnamen der Aktualisiert wird.
-	 * @param description = Eine Neue Projektdeskripion die aktualisiert werden wŸrde.
+	 * @param description = Eine Neue Projektdeskripion die aktualisiert werden wï¿½rde.
 	 * @param projectStatus = ein aktualisierter Projektstatus.
 	 * @return = Rueckgabe eines Statuscodes
 	 */

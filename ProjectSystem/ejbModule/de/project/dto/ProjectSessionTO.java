@@ -5,6 +5,10 @@ import java.util.Date;
 
 import de.project.dto.user.UserTO;
 
+/**
+ * @author Eduard Schartner
+ * DTO-Objekt zur Übertragung und Nutzung auf dem Client
+ */
 public class ProjectSessionTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;	
