@@ -87,7 +87,7 @@ public class DataBuilder {
 			membersList.add(users[i%2]);
 			
 			project.setMembers(membersList);
-			
+//			
 			em.persist(project);
 			LOGGER.info("Project mit dem Namen: " + projectNames[i] + " wurde angelegt!" );
 	    }

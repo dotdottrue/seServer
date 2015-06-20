@@ -12,7 +12,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import de.project.dao.local.ProjectProjectDAOLocal;
-import de.project.entities.Milestone;
 import de.project.entities.Project;
 import de.project.entities.User;
 import de.project.enumerations.ProjectStatus;
@@ -82,15 +81,6 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 			project.setProjectStatus(ProjectStatus.FINISHED);
 			project.setUpdatedOn(new Date());
 			em.persist(project);
-		}
-		
-		/**
-		 * Finden von Meilensteinen in einem Projekt. Suche in der Datenbank.
-		 */
-		@Override
-		public List<Milestone> getMilestones(Project project) {
-			List<Milestone> projectMilestones = project.getMilestones();
-			return projectMilestones;
 		}
 		
 		/**

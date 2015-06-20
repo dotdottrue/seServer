@@ -14,7 +14,6 @@ import de.project.dto.project.ProjectTO;
 import de.project.dto.user.UserTO;
 import de.project.entities.Appointment;
 import de.project.entities.Discussion;
-import de.project.entities.Milestone;
 import de.project.entities.Note;
 import de.project.entities.Project;
 import de.project.entities.User;
@@ -50,7 +49,6 @@ public class ProjectDTOAssembler {
 		dto.setMembers(makeDTO(project.getMembers()));
 		dto.setAppointments(makeDTO2(project.getAppointments()));
 		dto.setDiscussions(makeDTO3(project.getDiscussions()));
-		dto.setMilestones(makeDTO4(project.getMilestones()));
 
 		return dto;
 	}
@@ -102,21 +100,6 @@ public class ProjectDTOAssembler {
 		return dto;
 	}
 	
-	private List<MilestoneTO> makeDTO4(List<Milestone> milestones) {
-		
-		List<MilestoneTO> dto = new ArrayList<>();
-		
-		for (Milestone milestone : milestones) {
-			MilestoneTO milestoneTO = new MilestoneTO();
-			milestoneTO.setId(milestone.getId());
-			milestoneTO.setMilestoneName(milestone.getMilestoneName());
-			milestoneTO.setStatus(milestone.getStatus());
-			milestoneTO.setCreatedAt(milestone.getCreatedAt());
-			
-			dto.add(milestoneTO);		
-		}
-		return dto;
-	}
 	
 	private List<NoteTO> makeDTO6(List<Note> notes) {
 		

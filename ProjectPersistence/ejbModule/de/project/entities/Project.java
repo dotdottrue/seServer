@@ -36,9 +36,6 @@ public class Project {
 	private List<User> members;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Milestone> milestones;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@OrderBy("appointmentDate ASC")
 	private List<Appointment> appointments;
 	
@@ -82,14 +79,6 @@ public class Project {
 
 	public void setMembers(List<User> members) {
 		this.members = members;
-	}
-
-	public List<Milestone> getMilestones() {
-		return milestones;
-	}
-
-	public void setMilestones(List<Milestone> milestone) {
-		this.milestones = milestone;
 	}
 
 	public Date getUpdatedOn() {
