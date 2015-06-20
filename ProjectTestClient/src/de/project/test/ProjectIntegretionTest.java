@@ -9,6 +9,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import de.project.integration.ProjectResponse;
 import de.project.integration.AppointmentResponse;
 import de.project.integration.UsersResponse;
 import de.project.integration.NotesResponse;
@@ -51,6 +52,7 @@ public class ProjectIntegretionTest {
 		userIntegrationPort.registerUser("01608898983");
 		userIntegrationPort.registerUser("01609998983");
 		userIntegrationPort.registerUser("01600098983");
+		userIntegrationPort.registerUser("08000098983");
 		
 		if(userResponse.getReturnCode().equals(ReturnCode.ERROR)){
 			userResponse = userIntegrationPort.login("01607798983");
@@ -59,6 +61,14 @@ public class ProjectIntegretionTest {
 		
 		remote.createProject("01609998983", "TestProject", "Kurzbeschreibung des Tests");
 		remote.createProject("01600098983", "TestProject", "Kurzbeschreibung des Tests");
+		remote.createProject("08000098983", "TestProject", "Kurzbeschreibung des Tests");
+		
+		remote.createProject("08000098983", "TestProject 5", "Kurzbeschreibung des Tests");
+		remote.createProject("08000098983", "TestProject 6", "Kurzbeschreibung des Tests");
+		
+		ProjectsResponse init = remote.getProjectsByPhone("08000098983");
+		remote.addAppointmentToProject(init.getProjects().get(0).getId(), "Topic", "Description", 1234567);
+		remote.addAppointmentToProject(init.getProjects().get(1).getId(), "Topic", "Description", 1234567);
 	}
 	
 	/**
@@ -323,9 +333,49 @@ public class ProjectIntegretionTest {
 	 */
 	@Test
 	public void zRemoveNoProjectMemberTest() {
-//		ProjectsResponse projectResponse = remote.getProjectsByPhone("01607798983");
-//		remote.addUserToProject("01607798983", projectResponse.getProjects().get(0).getId());
 		ReturncodeResponse projectMemberResponse = remote.removeProjectMember(999999, "01607798983");
 		Assert.assertEquals(projectMemberResponse.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum Entfernen eines Termins/Meilensteins im Projekt.
+	 * Es wird der ReturnCode OK erwartet.
+	 */
+	@Test
+	public void removeProjectAppointmentTest(){
+		ProjectsResponse projectResponse = remote.getProjectsByPhone("08000098983");
+		ReturncodeResponse response = remote.removeProjectAppointment(projectResponse.getProjects().get(0).getId(), projectResponse.getProjects().get(0).getAppointments().get(0).getId());
+		Assert.assertEquals(response.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Fehlertest zum welcher ein fehlerhaftes Löschen simulisieren soll.
+	 * Es wird der ReturnCode Error erwartet.
+	 */
+	@Test
+	public void removeNoProjectAppointmentTest(){
+		ReturncodeResponse response = remote.removeProjectAppointment(999999, 999999);
+		Assert.assertEquals(response.getReturnCode(), ReturnCode.ERROR);
+	}
+	
+	/**
+	 * Test zum updaten eines Projektes.
+	 * Es wird der ReturnCode OK erwartet.
+	 */
+	@Test
+	public void updateProjectTest() {
+		ProjectsResponse projectResponse = remote.getProjectsByPhone("01607798983");
+		ProjectResponse updateProject = remote.updateProject(projectResponse.getProjects().get(0).getId(), "Neuer Name", "Neue Beschreibung", "DELAYED");
+		Assert.assertEquals(updateProject.getReturnCode(), ReturnCode.OK);
+	}
+	
+	/**
+	 * Fehlertest wo ein Updaten des Projektes Fehlschlägt bzw kein Projekt vorhanden ist.
+	 * Es wird der ReturnCode ERROR erwartet.
+	 */
+	@Test
+	public void updateNoProjectTest() {
+		ProjectResponse updateProject = remote.updateProject(0111, "Neuer Name", "Neue Beschreibung", "DELAYED");
+		Assert.assertEquals(updateProject.getReturnCode(), ReturnCode.ERROR);
 	}
 }

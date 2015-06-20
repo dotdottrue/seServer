@@ -93,8 +93,6 @@ public class Request {
 	@Override
 	public String toString() {
 		return "Anfrage: " + id + "von " + sourceUser+ " an " + targetUser + " für das Projekt " + project;
-	}
-	
-	
+	}	
 	
 }

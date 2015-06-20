@@ -62,16 +62,5 @@ public class Note {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-
-	/*
-	public Appointment getAppointment() {
-		return appointment;
-	}
-
-	public void setAppointment(Appointment appointment) {
-		this.appointment = appointment;
-	}
-	 */
-
 	
 }
