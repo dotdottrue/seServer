@@ -13,6 +13,11 @@ import de.project.entities.Milestone;
 @Stateless
 public class MilestoneDTOAssembler {
 	
+	/**
+	 * Methode zum Umwandeln des objektes.
+	 * @param milestone = Objekt vom Typ Milestone.
+	 * @return = Das umgewandelte DataTransferObject.
+	 */
 	public MilestoneTO makeDTO(Milestone milestone) {
 		MilestoneTO dto = new MilestoneTO();
 		dto.setId(milestone.getId());

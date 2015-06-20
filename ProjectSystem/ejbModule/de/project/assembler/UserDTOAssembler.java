@@ -15,9 +15,17 @@ import de.project.entities.User;
 @Stateless
 public class UserDTOAssembler {
 	
+	/**
+	 * EJB zum erzeugen des DataTransferObjects.
+	 */
 	@EJB
 	private UserDTOAssembler userDtoAssembler;
 	
+	/**
+	 * Methode zum Umwandeln des objektes.
+	 * @param user = Objekt vom Typ User
+	 * @return = Das umgewandelte DTO.
+	 */
 	public UserTO makeDTO(User user){
 		
 		UserTO dto = new UserTO();

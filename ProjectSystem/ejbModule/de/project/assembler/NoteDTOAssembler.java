@@ -13,6 +13,11 @@ import de.project.entities.Note;
 @Stateless
 public class NoteDTOAssembler {
 	
+	/**
+	 * Methode zum Umwandeln des objektes.
+	 * @param note = Objekt vom Typ Note.
+	 * @return = RŸckgabe des DataTransferObjects.
+	 */
 	public NoteTO makeDTO(Note note) {
 		NoteTO dto = new NoteTO();
 		dto.setId(note.getId());
