@@ -12,7 +12,7 @@ import de.project.enumerations.MilestoneStatus;
  * 
  * @author Tobias Kappert | Eduard Schartner
  * 
- * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
+ * @Stateless macht aus diesem DataTransferObject welches fuer Datenbankzugriffe zustaendig ist eine zustandslose Session.
  *
  */
 @Stateless
@@ -47,7 +47,7 @@ public class ProjectMilestoneDAO implements ProjectMilestoneDAOLocal {
 	}
 	
 	/**
-	 * Aktualisieren eines Meilensteinstatuses zu verzögert.
+	 * Aktualisieren eines Meilensteinstatuses zu verzoegert.
 	 */
 	@Override
 	public void delayMilestone(Milestone milestone) {

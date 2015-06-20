@@ -4,7 +4,7 @@ package de.project.enumerations;
  * 
  * @author Tobias Kappert
  * 
- * Erzeugung von Meilensteinstati
+ * Erzeugung von Meilensteinstatuse
  *
  */
 public enum MilestoneStatus {

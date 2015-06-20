@@ -16,7 +16,7 @@ import de.project.entities.User;
  * 
  * @author Tobias Kappert
  *
- * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
+ * @Stateless macht aus diesem DataTransferObject welches fuer Datenbankzugriffe zustaendig ist eine zustandslose Session.
  */
 @Stateless
 public class ProjectUserDAO implements ProjectUserDAOLocal {
@@ -26,7 +26,7 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
 	
 	/**
 	 * Methode um die Datenbank anzusprechen und aus dieser einen Benutzer
-	 * herauszusuchen welcher die übergebene Telefonnummer hat.
+	 * herauszusuchen welcher die uebergebene Telefonnummer hat.
 	 */
 	@Override
 	public User findUserByNumber(String phoneNumber) {
@@ -65,7 +65,7 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
     }
     
     /**
-     * Löschung einer Session aus der Datenbank.
+     * Loeschung einer Session aus der Datenbank.
      */
     @Override
     public boolean endSession(int sessionId) {

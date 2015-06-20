@@ -30,8 +30,8 @@ public class UserIntegrationTest {
 	}
 	
 	/**
-	 * Dieser Test prüft ob ein Benutzer registriert werden kann. 
-	 * Der ReturnCode sollte OK lauten und der Benutzer sollte dem gewünschten entsprechen.
+	 * Dieser Test prueft ob ein Benutzer registriert werden kann. 
+	 * Der ReturnCode sollte OK lauten und der Benutzer sollte dem gewuenschten entsprechen.
 	 */	
 	@Test
 	public void userRegistrationTest() {
@@ -41,7 +41,7 @@ public class UserIntegrationTest {
 	}
 	
 	/**
-	 * Dieser Test prüft ob ein Benutzer registriert werden kann. 
+	 * Dieser Test prueft ob ein Benutzer registriert werden kann. 
 	 * Der ReturnCode sollte ERROR da derBenutzer schon vorhanden ist.
 	 */	
 	@Test
@@ -51,7 +51,7 @@ public class UserIntegrationTest {
 	}
 	
 	/**
-	 * Dieser Test prüft ob ein Benutzer sich einloggen kann. 
+	 * Dieser Test prueft ob ein Benutzer sich einloggen kann. 
 	 * Der Returncode sollte OK haben und der Session besitzer die Nummer des Logins.
 	 */
 	@Test
@@ -62,7 +62,7 @@ public class UserIntegrationTest {
 	}
 	
 	/**
-	 * Dieser Test prüft ob ein Benutzer sich einloggen und auch wieder Ausloggen kann
+	 * Dieser Test prueft ob ein Benutzer sich einloggen und auch wieder Ausloggen kann
 	 */
 	@Test
 	public void userLogoutTest() {

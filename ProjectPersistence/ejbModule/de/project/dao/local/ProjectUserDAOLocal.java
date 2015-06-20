@@ -11,7 +11,7 @@ import de.project.entities.User;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
- *Interface für die User-Datenbankzugriffe. @Local macht dieses Interface für lokale Zugriffe erreichbar.
+ *Interface fuer die User-Datenbankzugriffe. {@Local} macht dieses Interface fuer lokale Zugriffe erreichbar.
  */
 @Local
 public interface ProjectUserDAOLocal {
@@ -25,8 +25,6 @@ public interface ProjectUserDAOLocal {
     public boolean endSession(int sessionId);
     
     public List<User> findAllUsers();
-
-    //public List<User> searchUsers(String phoneNumber);
 
     public ProjectSession getSession(int sessionId);
 

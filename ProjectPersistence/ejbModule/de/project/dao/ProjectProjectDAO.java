@@ -21,7 +21,7 @@ import de.project.enumerations.ProjectStatus;
  * 
  * @author Tobias Kappert
  *
- * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
+ * @Stateless macht aus diesem DataTransferObject welches fuer Datenbankzugriffe zustaendig ist eine zustandslose Session.
  *
  */
 @Stateless
@@ -75,7 +75,7 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 		}
 		
 		/**
-		 * Ändern des Projektstatuses auf Erledigt/Abgeschlossen.
+		 * Aendern des Projektstatuses auf Erledigt/Abgeschlossen.
 		 */
 		@Override
 		public void cancelProject(Project project) {

@@ -7,7 +7,7 @@ import de.project.dto.user.UserTO;
 
 /**
  * @author Eduard Schartner
- * DTO-Objekt zur Übertragung und Nutzung auf dem Client
+ * DTO-Objekt zur Uebertragung und Nutzung auf dem Client
  */
 public class ProjectSessionTO implements Serializable{
 	

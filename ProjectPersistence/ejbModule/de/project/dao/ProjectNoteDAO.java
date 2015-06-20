@@ -11,7 +11,7 @@ import de.project.entities.Note;
  * 
  * @author Tobias Kappert | Eduard Schartner
  * 
- * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
+ * @Stateless macht aus diesem DataTransferObject welches fuer Datenbankzugriffe zustaendig ist eine zustandslose Session.
  *
  */
 @Stateless
@@ -29,7 +29,7 @@ public class ProjectNoteDAO implements ProjectNoteDAOLocal {
 	}
 	
 	/**
-	 * Ändern eines Beitrages.
+	 * Aendern eines Beitrages.
 	 */
 	@Override
 	public void editNote(long noteId, String newNote) {

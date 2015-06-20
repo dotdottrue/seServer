@@ -8,7 +8,7 @@ import de.project.entities.Appointment;
  * 
  * @author Tobias Kappert
  *
- * Interface für die Appointment-Datenbankzugriffe. @Local macht dieses Interface für lokale Zugriffe erreichbar.
+ * Interface fuer die Appointment-Datenbankzugriffe. {@Local} macht dieses Interface fuer lokale Zugriffe erreichbar.
  */
 @Local
 public interface ProjectAppointmentDAOLocal {

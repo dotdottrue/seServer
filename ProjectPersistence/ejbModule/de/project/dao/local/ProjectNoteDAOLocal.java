@@ -8,7 +8,7 @@ import de.project.entities.Note;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
- * Interface für die Note-Datenbankzugriffe. @Local macht dieses Interface für lokale Zugriffe erreichbar.
+ * Interface fuer die Note-Datenbankzugriffe. {@Local} macht dieses Interface fuer lokale Zugriffe erreichbar.
  */
 @Local
 public interface ProjectNoteDAOLocal {
