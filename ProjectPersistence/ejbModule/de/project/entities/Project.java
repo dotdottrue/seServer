@@ -35,14 +35,14 @@ public class Project {
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<User> members;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Milestone> milestones;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@OrderBy("appointmentDate ASC")
 	private List<Appointment> appointments;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Discussion> discussions;
 	
 	@ManyToOne
