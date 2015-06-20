@@ -53,7 +53,7 @@ public class UserIntegration {
 		ProjectUserResponse response = new ProjectUserResponse();
 		try {
 			User user = this.userDAO.findUserByNumber(phonenumber);
-			if(user == null){
+			if(user == null && phonenumber.matches( "[0123456789]*")){
 				user = this.userDAO.createUser(phonenumber);
 				LOGGER.info("Benutzer " + user + " erfolgreich angelegt.");
 				
