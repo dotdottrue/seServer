@@ -62,34 +62,34 @@ public class DataBuilder {
 		User[] users = { user1, user2 };
 		String[] discussionNames = { discussionName, discussionName2, discussionName3, discussionName4 };
 			
-	    for(int i = 0; i < 4; i++){
-			Project project = new Project();
-			project.setOwner(users[i%2]);
-			project.setUpdatedOn(new Date());
-			project.setProjectName(projectNames[i]);
-			project.setDescription(projectDescription);	
-			project.setProjectStatus(ProjectStatus.INTIME);
-			ArrayList<Discussion> discussionsList = new ArrayList<>();
-			for(int j = 0; j < 4; j++){
-				Discussion discussion = new Discussion(discussionNames[j], new Date());
-				discussionsList.add(discussion);
-			}
-			
-			project.setDiscussions(discussionsList);
-			
-			ArrayList<Appointment> appointments = new ArrayList<>();
-			for(int k = 0; k < 4; k++){
-				appointments.add(new Appointment(appointmentName, appointmentDiscription, new Date()));
-			}
-			project.setAppointments(appointments);
-			
-			ArrayList<User> membersList = new ArrayList<>();
-			membersList.add(users[i%2]);
-			
-			project.setMembers(membersList);
-			
-			em.persist(project);
-			LOGGER.info("Project mit dem Namen: " + projectNames[i] + " wurde angelegt!" );
-	    }
+//	    for(int i = 0; i < 4; i++){
+//			Project project = new Project();
+//			project.setOwner(users[i%2]);
+//			project.setUpdatedOn(new Date());
+//			project.setProjectName(projectNames[i]);
+//			project.setDescription(projectDescription);	
+//			project.setProjectStatus(ProjectStatus.INTIME);
+//			ArrayList<Discussion> discussionsList = new ArrayList<>();
+//			for(int j = 0; j < 4; j++){
+//				Discussion discussion = new Discussion(discussionNames[j], new Date());
+//				discussionsList.add(discussion);
+//			}
+//			
+//			project.setDiscussions(discussionsList);
+//			
+//			ArrayList<Appointment> appointments = new ArrayList<>();
+//			for(int k = 0; k < 4; k++){
+//				appointments.add(new Appointment(appointmentName, appointmentDiscription, new Date()));
+//			}
+//			project.setAppointments(appointments);
+//			
+//			ArrayList<User> membersList = new ArrayList<>();
+//			membersList.add(users[i%2]);
+//			
+//			project.setMembers(membersList);
+//			
+//			em.persist(project);
+//			LOGGER.info("Project mit dem Namen: " + projectNames[i] + " wurde angelegt!" );
+//	    }
 	}
 }
