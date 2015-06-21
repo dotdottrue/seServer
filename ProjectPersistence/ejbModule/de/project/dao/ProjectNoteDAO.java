@@ -29,7 +29,7 @@ public class ProjectNoteDAO implements ProjectNoteDAOLocal {
 	}
 	
 	/**
-	 * €ndern eines Beitrages.
+	 * Aendern eines Beitrages.
 	 */
 	@Override
 	public void editNote(long noteId, String newNote) {

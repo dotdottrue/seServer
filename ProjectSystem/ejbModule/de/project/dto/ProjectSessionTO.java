@@ -5,6 +5,13 @@ import java.util.Date;
 
 import de.project.dto.user.UserTO;
 
+/**
+ * 
+ * @author tobiaskappert
+ *
+ * Aufbau des ProjectSession DataTransferObjects.
+ *
+ */
 public class ProjectSessionTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;	

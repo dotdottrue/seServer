@@ -72,7 +72,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum erzeugen eines Projektes. Der Rückgabecode sollte OK lauten.
+	 * Test zum erzeugen eines Projektes. Der Rueckgabecode sollte OK lauten.
 	 */
 	@Test
 	public void aCreateProjectTest() {		
@@ -81,7 +81,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum erzeugen eines Projektes. Der Rückgabecode sollte OK lauten.
+	 * Test zum erzeugen eines Projektes. Der Rueckgabecode sollte OK lauten.
 	 */
 	@Test
 	public void createNoProjectTest() {
@@ -90,7 +90,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Tests um alle Projecte anzufragen, die zu einem Project gehören!
+	 * Tests um alle Projecte anzufragen, die zu einem Project gehoeren!
 	 */
 	@Test
 	public void bGetProjectsByPhoneTest() {
@@ -108,7 +108,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Tests um alle Projecte anzufragen, die zu einem Project gehören!
+	 * Tests um alle Projecte anzufragen, die zu einem Project gehoeren!
 	 * Dieser Test soll fehlschlagen.
 	 */
 	@Test
@@ -118,7 +118,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum Prüfen ob eine Diskussion einem Project zugeordnet werden kann. Es wird der ReturnCode OK erwartet.
+	 * Test zum Pruefen ob eine Diskussion einem Project zugeordnet werden kann. Es wird der ReturnCode OK erwartet.
 	 */
 	@Test
 	public void cAddDiscussionsByProjectTest() {
@@ -128,7 +128,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum Prüfen ob keine Diskussion einem Project zugeordnet wurde. Es wird der ReturnCode ERROR erwartet.
+	 * Test zum Pruefen ob keine Diskussion einem Project zugeordnet wurde. Es wird der ReturnCode ERROR erwartet.
 	 */
 	@Test
 	public void addNoDiscussionsByProjectTest() {
@@ -187,7 +187,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum hinzufügen einer Notiz zu einer Diskussion. Es wird der ReturnCode OK erwartet.
+	 * Test zum hinzufuegen einer Notiz zu einer Diskussion. Es wird der ReturnCode OK erwartet.
 	 */
 	@Test
 	public void dAddNoteToDiscussionTest() {
@@ -197,7 +197,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum hinzufügen einer Notiz zu einer Diskussion welche fehlschlagen soll.
+	 * Test zum hinzufuegen einer Notiz zu einer Diskussion welche fehlschlagen soll.
 	 * Es wird der ReturnCode ERROR erwartet.
 	 */
 	@Test
@@ -254,7 +254,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum Hinzufügen eines Benutzers zu einem Projekt.
+	 * Test zum Hinzufuegen eines Benutzers zu einem Projekt.
 	 * Es wird ein ReturnCode OK erwartet.
 	 */
 	@Test
@@ -264,7 +264,7 @@ public class ProjectIntegretionTest {
 		Assert.assertEquals(userProjectResponse.getReturnCode(), ReturnCode.OK);
 	}
 	/**
-	 * Fehlertest zum Hinzufügen eines Benutzers zu einem Projekt.
+	 * Fehlertest zum Hinzufuegen eines Benutzers zu einem Projekt.
 	 * Es wird ein ReturnCode OK erwartet.
 	 */
 	@Test
@@ -274,7 +274,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Test zum hinzufügen von Terminen.
+	 * Test zum hinzufuegen von Terminen.
 	 * Es wird ein ReturnCode OK erwartet.
 	 */
 	@Test
@@ -285,7 +285,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Fehlertest beim hinzufügen von Terminen.
+	 * Fehlertest beim hinzufuegen von Terminen.
 	 * Es wird ein ReturnCode ERROR erwartet.
 	 */
 	@Test
@@ -349,7 +349,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Fehlertest zum welcher ein fehlerhaftes Löschen simulisieren soll.
+	 * Fehlertest zum Termin entfernen, welcher ein fehler beim Loeschen simulisieren soll.
 	 * Es wird der ReturnCode Error erwartet.
 	 */
 	@Test
@@ -370,7 +370,7 @@ public class ProjectIntegretionTest {
 	}
 	
 	/**
-	 * Fehlertest wo ein Updaten des Projektes Fehlschlägt bzw kein Projekt vorhanden ist.
+	 * Fehlertest wo ein Updaten des Projektes Fehlschlaegt bzw kein Projekt vorhanden ist.
 	 * Es wird der ReturnCode ERROR erwartet.
 	 */
 	@Test

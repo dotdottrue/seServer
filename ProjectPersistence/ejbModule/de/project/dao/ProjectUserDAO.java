@@ -65,7 +65,7 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
     }
     
     /**
-     * Lšschung einer Session aus der Datenbank.
+     * Loeschung einer Session aus der Datenbank.
      */
     @Override
     public boolean endSession(int sessionId) {
@@ -86,7 +86,10 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
     	ProjectSession session = em.find(ProjectSession.class, sessionId);
     	return session;
     }
-
+    
+    /**
+     * Finden aller Benutzer in der Datenbank.
+     */
 	@Override
 	public List<User> findAllUsers() {
 		TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);

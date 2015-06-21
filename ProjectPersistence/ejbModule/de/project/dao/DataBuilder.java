@@ -22,7 +22,8 @@ import de.project.enumerations.ProjectStatus;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
- * Klasse zum erstellen von Testdaten.
+ * Klasse zum erstellen von Testdaten. Es wird die Singleton Annotation verwendet, da diese Klasse nur als einmalige
+ * Instanz erzeugt werden soll. Die Startup Annotation besagt, dass die Klasse direkt bei Startup ausgefuehrt werden soll.
  *
  */
 @Startup
@@ -32,14 +33,19 @@ public class DataBuilder {
 	private static final Logger LOGGER = Logger.getLogger(DataBuilder.class);
 	
 	@PersistenceContext
-	EntityManager em;
+	private EntityManager em;
 	
-
+	/**
+	 * Benutzen von DependencyInjection zum füllen/abhaengigkeiten herstellen der Parameter.
+	 */
 	@Resource
 	private String phoneNumber1, phoneNumber2, projectName, projectName2, projectName3, projectName4, 
 				   discussionName, discussionName2, discussionName3, discussionName4, projectDescription
 				   , appointmentName, appointmentName2, appointmentName3, appointmentName4, appointmentDiscription;
 	
+	/**
+	 * Direkt beim Programmstart soll die folgende Methode ausgeführt werden.
+	 */
 	@PostConstruct
 	private void init() {
 		User user1 = em.find(User.class, phoneNumber1); 
@@ -87,7 +93,7 @@ public class DataBuilder {
 			membersList.add(users[i%2]);
 			
 			project.setMembers(membersList);
-//			
+		
 			em.persist(project);
 			LOGGER.info("Project mit dem Namen: " + projectNames[i] + " wurde angelegt!" );
 	    }

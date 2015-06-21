@@ -11,7 +11,7 @@ import de.project.entities.User;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
- *Interface für die User-Datenbankzugriffe. @Local macht dieses Interface für lokale Zugriffe erreichbar.
+ *Interface für die User-Datenbankzugriffe. Die Local-Annotation macht dieses Interface für lokale Zugriffe erreichbar.
  */
 @Local
 public interface ProjectUserDAOLocal {

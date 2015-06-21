@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import de.project.dto.MilestoneTO;
 import de.project.dto.appointment.AppointmentTO;
 import de.project.dto.discussion.DiscussionTO;
 import de.project.dto.user.UserTO;
@@ -22,7 +21,6 @@ public class ProjectTO implements Serializable{
 	private long id;
 	private ProjectStatus projectStatus;
 	private List<UserTO> members;
-	private List<MilestoneTO> milestones;
 	private List<AppointmentTO> appointments;
 	private List<DiscussionTO> discussions;
 	private UserTO owner;
@@ -52,14 +50,6 @@ public class ProjectTO implements Serializable{
 	
 	public void setMembers(List<UserTO> members) {
 		this.members = members;
-	}
-	
-	public List<MilestoneTO> getMilestones() {
-		return milestones;
-	}
-	
-	public void setMilestones(List<MilestoneTO> milestones) {
-		this.milestones = milestones;
 	}
 	
 	public List<AppointmentTO> getAppointments() {

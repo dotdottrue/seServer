@@ -74,7 +74,7 @@ public class ProjectProjectDAO implements ProjectProjectDAOLocal {
 		}
 		
 		/**
-		 * €ndern des Projektstatuses auf Erledigt/Abgeschlossen.
+		 * Aendern des Projektstatuses auf Erledigt/Abgeschlossen.
 		 */
 		@Override
 		public void cancelProject(Project project) {

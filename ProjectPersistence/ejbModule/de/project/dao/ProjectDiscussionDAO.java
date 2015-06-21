@@ -39,7 +39,7 @@ public class ProjectDiscussionDAO implements ProjectDiscussionDAOLocal {
 	}
 	
 	/**
-	 * Lšschen der Diskussion aus der Datenbank
+	 * Loeschen der Diskussion aus der Datenbank
 	 */
 	@Override
 	public void removeDiscussion(Discussion discussion) {
