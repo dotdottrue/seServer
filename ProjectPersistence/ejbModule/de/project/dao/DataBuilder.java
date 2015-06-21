@@ -36,7 +36,7 @@ public class DataBuilder {
 	private EntityManager em;
 	
 	/**
-	 * Benutzen von DependencyInjection zum füllen/abhaengigkeiten herstellen der Parameter.
+	 * Benutzen von DependencyInjection zum fuellen/abhaengigkeiten herstellen der Parameter.
 	 */
 	@Resource
 	private String phoneNumber1, phoneNumber2, projectName, projectName2, projectName3, projectName4, 
@@ -44,7 +44,7 @@ public class DataBuilder {
 				   , appointmentName, appointmentName2, appointmentName3, appointmentName4, appointmentDiscription;
 	
 	/**
-	 * Direkt beim Programmstart soll die folgende Methode ausgeführt werden.
+	 * Direkt beim Programmstart soll die folgende Methode ausgefuehrt werden.
 	 */
 	@PostConstruct
 	private void init() {

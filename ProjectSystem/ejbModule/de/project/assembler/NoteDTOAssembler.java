@@ -16,7 +16,7 @@ public class NoteDTOAssembler {
 	/**
 	 * Methode zum Umwandeln des objektes.
 	 * @param note = Objekt vom Typ Note.
-	 * @return = RŸckgabe des DataTransferObjects.
+	 * @return = Rueckgabe des DataTransferObjects.
 	 */
 	public NoteTO makeDTO(Note note) {
 		NoteTO dto = new NoteTO();

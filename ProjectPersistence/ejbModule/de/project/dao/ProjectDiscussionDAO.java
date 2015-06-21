@@ -11,7 +11,7 @@ import de.project.entities.Discussion;
  * 
  * @author Eduard Schartner
  * 
- *{@Stateless} macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
+ *{@Stateless} macht aus diesem DataTransferObject welches fuer Datenbankzugriffe zustaendig ist eine zustandslose Session.
  *
  */
 @Stateless
@@ -22,7 +22,7 @@ public class ProjectDiscussionDAO implements ProjectDiscussionDAOLocal {
 	private EntityManager em;
 	
 	/**
-	 * Suchen einer Diskussion in der Datenbank und Rückgabe dieser Diskussion.
+	 * Suchen einer Diskussion in der Datenbank und Rueckgabe dieser Diskussion.
 	 */
 	@Override
 	public Discussion getDiscussionById(long id) {		

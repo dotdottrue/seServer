@@ -22,7 +22,7 @@ import de.project.exception.UserRegistrationException;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
- *Diese Klasse haelt die Schnittstellen/Methoden für die Userspezifischen UseCases bereit.
+ *Diese Klasse haelt die Schnittstellen/Methoden fuer die Userspezifischen UseCases bereit.
  *
  */
 @WebService
@@ -33,7 +33,7 @@ public class UserIntegration {
 	private static final Logger LOGGER = Logger.getLogger(UserIntegration.class);
 	
 	/**
-	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist für Datenbankabfragen gedacht.
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist fuer Datenbankabfragen gedacht.
 	 */
 	@EJB(beanName= "ProjectUserDAO", beanInterface = ProjectUserDAOLocal.class)
 	private ProjectUserDAOLocal userDAO;
@@ -79,7 +79,7 @@ public class UserIntegration {
 	 * Methode zum Einloggen in die APP.
 	 * @param phonenumber = Uebergabeparameter ist die Telefonnummer zum Einloggen.
 	 * @return = Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code. 
-	 * Zusätzlich wird eine Session übergeben.
+	 * Zusaetzlich wird eine Session uebergeben.
 	 * 
 	 */
 	public ProjectUserResponse login(String phonenumber){

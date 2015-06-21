@@ -58,7 +58,7 @@ import de.project.exception.ProjectValidationException;
 public class ProjectIntegration {
 	
 	/**
-	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist fï¿½r Datenbankabfragen gedacht.
+	 * Referenz auf die EJB wird via Dependency Injection erzeugt. Die EJB ist fuer Datenbankabfragen gedacht.
 	 */
 	@EJB(beanName = "ProjectProjectDAO", beanInterface = ProjectProjectDAOLocal.class)
 	private ProjectProjectDAOLocal projectDAO;
@@ -140,8 +140,8 @@ public class ProjectIntegration {
 				projectDAO.createProject(newProject);
 				
 			}else {
-				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefï¿½llt waren.");
-				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefï¿½llt");
+				LOGGER.info("Project wurde nicht angelegt da die Pflichtfelder nicht gefuellt waren.");
+				throw new ProjectValidationException(ReturnCode.ERROR, "Es wurden nicht alle Pflichfelder gefuellt");
 			}
 			
 			}catch(ProjectValidationException ex) {
@@ -163,8 +163,8 @@ public class ProjectIntegration {
 		try{
 			User user = userDAO.findUserByNumber(phonenumber);
 			if(user == null) {
-				LOGGER.info("Eine Liste der Projekte fï¿½r den Benutzer mit der Telefonnummer: " + phonenumber + " konnte nicht erzeugt werden.");
-				throw new ProjectNotExistException("Es existieren keine Projekte fï¿½r den benutzer mit der Telefonnummer: " + phonenumber);		
+				LOGGER.info("Eine Liste der Projekte fuer den Benutzer mit der Telefonnummer: " + phonenumber + " konnte nicht erzeugt werden.");
+				throw new ProjectNotExistException("Es existieren keine Projekte fuer den benutzer mit der Telefonnummer: " + phonenumber);		
 			}else{
 				List<Project> projects = user.getProjects();
 				
@@ -182,7 +182,7 @@ public class ProjectIntegration {
 				response.setProjects(projectsTO);
 				response.setPhonenumber(phonenumber);
 				
-				LOGGER.info("Eine Liste der Projekte fï¿½r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ " wurde erzeugt.");
+				LOGGER.info("Eine Liste der Projekte fuer den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ " wurde erzeugt.");
 			}
 		}catch(ProjectNotExistException ex){
 			response.setReturnCode(ex.getErrorCode());
@@ -209,8 +209,8 @@ public class ProjectIntegration {
 				}	
 				response.setDiscussions(discussionsTO);
 			}else{
-				LOGGER.info("Es gibt keine Diskussionen fï¿½r das Projekt.");
-				throw new DiscussionNotExistsException("Es existiert keine Diskussion fï¿½r das angefragte Projekt.");
+				LOGGER.info("Es gibt keine Diskussionen fuer das Projekt.");
+				throw new DiscussionNotExistsException("Es existiert keine Diskussion fuer das angefragte Projekt.");
 			}
 		}catch(DiscussionNotExistsException ex){
 			response.setReturnCode(ex.getErrorCode());
@@ -350,7 +350,7 @@ public class ProjectIntegration {
 		try {
 			Project project = projectDAO.findProjectById(projectId);
 			if(params == null || project == null){
-				LOGGER.info("Es wurden keine Kontakte/Parameter ï¿½bergeben! Oder die ï¿½bergabe war Fehlerhaft!");
+				LOGGER.info("Es wurden keine Kontakte/Parameter uebergeben! Oder die uebergabe war Fehlerhaft!");
 				throw new CompareUsersNotExistException("Es gab keine Benutzer zu vergleichen!");
 			}
 			List<User> usersServer = userDAO.findAllUsers();
@@ -382,7 +382,7 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Schnittstelle erlaubt das hinzufuegen eines Benutzers/Users zu dem Projekt.
-	 * @param phoneNumber = Uebergabeparameter Telefonnummer fï¿½r den zu speichernden Benutzer.
+	 * @param phoneNumber = Uebergabeparameter Telefonnummer fuer den zu speichernden Benutzer.
 	 * @param projectId = Uebergabe parameter ProjektId zur Bestimmung des Projektes.
 	 * @return = Gibt einen OK-Code bei erfolgreichem Anlegen zurueck und einen Error-Code falls was nicht klappt.
 	 */
@@ -472,8 +472,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode entfernt einen Termin/Meilenstein aus dem Projekt.
-	 * @param projectId = †bergabeparameter welcher das Projekt identifiziert.
-	 * @param appointmentId = †bergabeparameter welcher das Termin Objekt identifiziert.
+	 * @param projectId = uebergabeparameter welcher das Projekt identifiziert.
+	 * @param appointmentId = uebergabeparameter welcher das Termin Objekt identifiziert.
 	 * @return = Ein Statuscode welche entweder OK oder ERROR beinhaltet.
 	 */
 	public ReturncodeResponse removeProjectAppointment(long projectId, long appointmentId){
@@ -526,10 +526,10 @@ public class ProjectIntegration {
 	}
 	
 	/**
-	 * Diese Methode/Schnittstelle fŸhrt ein Projektupdate vor.
+	 * Diese Methode/Schnittstelle fuehrt ein Projektupdate vor.
 	 * @param id = Parameter welcher das Projekt identifiziert.
 	 * @param projectName = Einen evtl. neuen Projektnamen der Aktualisiert wird.
-	 * @param description = Eine Neue Projektdeskripion die aktualisiert werden wŸrde.
+	 * @param description = Eine Neue Projektdeskripion die aktualisiert werden wuerde.
 	 * @param projectStatus = ein aktualisierter Projektstatus.
 	 * @return = Rueckgabe eines Statuscodes
 	 */
