@@ -22,8 +22,8 @@ public class ProjectSessionDTOAssembler {
 	
 	/**
 	 * Methode zum Umwandeln des objektes.
-	 * @param projectSession = Objekt vom  Typ ProjectSession.
-	 * @return = Das umgewandelte DataTransferObject.
+	 * @param projectSession Objekt vom  Typ ProjectSession.
+	 * @return Das umgewandelte DataTransferObject.
 	 */
 	public ProjectSessionTO makeDTO(ProjectSession projectSession) {
 		ProjectSessionTO dto = new ProjectSessionTO();

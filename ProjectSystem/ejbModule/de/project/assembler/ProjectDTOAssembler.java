@@ -33,8 +33,8 @@ public class ProjectDTOAssembler {
 	
 	/**
 	 * Methode zum Umwandeln des objektes.
-	 * @param project = Objekt vom Typ Project
-	 * @return = Das umgewandelte DataTransferObject.
+	 * @param project Objekt vom Typ Project
+	 * @return Das umgewandelte DataTransferObject.
 	 */
 	public ProjectTO makeDTO(Project project){
 		

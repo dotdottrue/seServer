@@ -46,8 +46,8 @@ public class UserIntegration {
 	
 	/**
 	 * Schnittstelle/Methode zum Registrieren von Benutzern.
-	 * @param phonenumber = Uebergabeparameter ist die telefonnummer womit der Anwender Registriert wird.
-	 * @return = Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code.
+	 * @param phonenumber Uebergabeparameter ist die telefonnummer womit der Anwender Registriert wird.
+	 * @return Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code.
 	 */
 	public ProjectUserResponse registerUser(String phonenumber) {
 		ProjectUserResponse response = new ProjectUserResponse();
@@ -77,8 +77,8 @@ public class UserIntegration {
 	/**
 	 * 
 	 * Methode zum Einloggen in die APP.
-	 * @param phonenumber = Uebergabeparameter ist die Telefonnummer zum Einloggen.
-	 * @return = Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code. 
+	 * @param phonenumber Uebergabeparameter ist die Telefonnummer zum Einloggen.
+	 * @return Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code. 
 	 * Zusaetzlich wird eine Session uebergeben.
 	 * 
 	 */
@@ -106,8 +106,8 @@ public class UserIntegration {
 	
 	/**
 	 * Schnittstelle/Abmeldung aus der App.
-	 * @param sessionId = Uebergabe der SessionId um sich aus der App abzumelden.
-	 * @return = Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code.
+	 * @param sessionId Uebergabe der SessionId um sich aus der App abzumelden.
+	 * @return Rueckgabe ist ein OK-Code bei erfolgreicher Registrierung ansosten ein ERROR-Code.
 	 */
 	public ReturncodeResponse logout(int sessionId){
 		

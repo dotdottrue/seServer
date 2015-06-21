@@ -23,8 +23,8 @@ public class UserDTOAssembler {
 	
 	/**
 	 * Methode zum Umwandeln des objektes.
-	 * @param user = Objekt vom Typ User
-	 * @return = Das umgewandelte DTO.
+	 * @param user Objekt vom Typ User
+	 * @return Das umgewandelte DTO.
 	 */
 	public UserTO makeDTO(User user){
 		

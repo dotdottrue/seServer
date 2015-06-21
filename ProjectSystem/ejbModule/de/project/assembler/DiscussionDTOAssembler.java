@@ -20,8 +20,8 @@ public class DiscussionDTOAssembler {
 	
 	/**
 	 * Methode zum Umwandeln des objektes.
-	 * @param discussion = Objekt vom Typ Discussion
-	 * @return = Das umgewandelte DataTransferObject.
+	 * @param discussion Objekt vom Typ Discussion
+	 * @return Das umgewandelte DataTransferObject.
 	 */
 	public DiscussionTO makeDTO(Discussion discussion){	
 		DiscussionTO dto = new DiscussionTO();
@@ -35,8 +35,8 @@ public class DiscussionDTOAssembler {
 	
 	/**
 	 * Erstellung der internen Listen dieses DTO's.
-	 * @param notes = Object vom Typ Liste<Note>.
-	 * @param discussionTO = Das DataTransferObject.
+	 * @param notes Object vom Typ Liste<Note>.
+	 * @param discussionTO Das DataTransferObject.
 	 * @return Das Umgewandelte DataTransferObject.
 	 */
 	private List<NoteTO> makeDTO(List<Note> notes, DiscussionTO discussionTO) {

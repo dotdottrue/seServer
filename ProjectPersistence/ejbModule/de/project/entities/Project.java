@@ -29,6 +29,9 @@ public class Project {
 	@GeneratedValue
 	private long id;
 	
+	/**
+	 * Speicherung der Enum-Typen mit int werten bspw. 0 = INTIME
+	 */
 	@Enumerated(EnumType.ORDINAL)
 	private ProjectStatus projectStatus;
 	

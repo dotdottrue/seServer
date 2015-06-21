@@ -49,7 +49,7 @@ import de.project.exception.ProjectValidationException;
  * 
  * @author Tobias Kappert | Eduard Schartner
  *
- *Diese Klasse haelt die Schnittstellen/Methoden fuer die Projektsperifischen UseCases bereit.
+ *Diese Klasse haelt die Schnittstellen/Methoden fuer die projektspezifischen UseCases bereit.
  *
  */
 @WebService
@@ -108,10 +108,10 @@ public class ProjectIntegration {
 
 	/**
 	 * Die Methode erzeugt ein Projekt. Falls es den Benutzer nicht gibt wird eine Exception geschmissen.
-	 * @param phoneNumber = Telefonnummer des Appanwenders.
-	 * @param projectName = Name des zu erstellenden Projektes.
-	 * @param description = Beschreibung des Projektes.
-	 * @return = Rueckgabe des StatusCodes.
+	 * @param phoneNumber Telefonnummer des Appanwenders.
+	 * @param projectName Name des zu erstellenden Projektes.
+	 * @param description Beschreibung des Projektes.
+	 * @return Rueckgabe des StatusCodes.
 	 */
 	public ReturncodeResponse createProject(String phoneNumber, String projectName, String description /*, int sessionId*/ ) {
 		ReturncodeResponse response = new ReturncodeResponse(); 
@@ -154,8 +154,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode erzegt eine Liste aller Projekte die einem Benutzer zugeordnet sind.
-	 * @param phonenumber = Uebergabeparameter ist die Telefonnummer des App-Anwenders.
-	 * @return = Es wird eine Liste der Projekte an den AppAnwender zurueckgegeben.
+	 * @param phonenumber Uebergabeparameter ist die Telefonnummer des App-Anwenders.
+	 * @return Es wird eine Liste der Projekte an den AppAnwender zurueckgegeben.
 	 */
 	public ProjectsResponse getProjectsByPhone(String phonenumber){	
 		ProjectsResponse response = new ProjectsResponse();
@@ -193,8 +193,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode erzeugt bei Anfrage eine Liste aller Diskussionen eines Objektes.
-	 * @param projectId = Dort wird eine Projektnummer/Id von App-Anwender uebergeben
-	 * @return = Die Rueckgabe enthaelt eine Liste von Diskussionen im Projekt.
+	 * @param projectId Dort wird eine Projektnummer/Id vom App-Anwender uebergeben
+	 * @return Die Rueckgabe enthaelt eine Liste von Diskussionen im Projekt.
 	 */
 	public DiscussionResponse getDiscussionsByProject(long projectId){
 		DiscussionResponse response = new DiscussionResponse();
@@ -221,9 +221,9 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Schnittstelle/Methode fuegt eine Diskussion zu einem Projekt hinzu.
-	 * @param projectId = Dort wird eine Projektnummer/Id von App-Anwender uebergeben
-	 * @param topic = Beinhaltet die Ueberschrift einer Diskussion.
-	 * @return = Beim erfolgreichen Anlegen wird ein OK-Code gesendet ansonstne ein Error-Code.
+	 * @param projectId Dort wird eine Projektnummer/Id vom App-Anwender uebergeben
+	 * @param topic Beinhaltet die Ueberschrift einer Diskussion.
+	 * @return Beim erfolgreichen Anlegen wird ein OK-Code gesendet ansonsten ein Error-Code.
 	 */
 	public ReturncodeResponse addDiscussionToProject(long projectId, String topic){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -251,9 +251,9 @@ public class ProjectIntegration {
 	
 	/**
 	 * Methode/Schnittstelle zum entfernen einer Diskussion aus einem Projekt
-	 * @param projectId = Parameter zum bestimmen zu welchem Projekt die Diskussiong gehoert.
-	 * @param discussionId = Die ID der jeweiligen Diskussion.
-	 * @return = Es wird bei Erfolg der ReturnCode OK bei misserfolg der ReturnCode Error zurueckgegeben.
+	 * @param projectId Parameter zum bestimmen zu welchem Projekt die Diskussiong gehoert.
+	 * @param discussionId Die ID der jeweiligen Diskussion.
+	 * @return Es wird bei Erfolg der ReturnCode OK bei misserfolg der ReturnCode Error zurueckgegeben.
 	 */
 	public ReturncodeResponse removeProjectDiscussion(long projectId, long discussionId){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -277,10 +277,10 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Schnittstelle/Methode erstellt eine Notiz bei der jeweiligen Diskussion die ausgewaehlt wurde bzw geoeffnet ist.
-	 * @param discussionId = Diskussionsnummer um die richtige Diskussion anzusprechen.
-	 * @param note = Die Notiz die geschrieben wurde.
-	 * @param phonenumber = Telefonnummerdes Benutzers.
-	 * @return = Bei erfolgreicher Erstellung wird ein OK-Code beim Fehler ein Error-Code gesendet.
+	 * @param discussionId Diskussionsnummer um die richtige Diskussion anzusprechen.
+	 * @param note Die Notiz die geschrieben wurde.
+	 * @param phonenumber Telefonnummerdes Benutzers.
+	 * @return Bei erfolgreicher Erstellung wird ein OK-Code beim Fehler ein Error-Code gesendet.
 	 */
 	public ReturncodeResponse addNoteToDiscussion(long discussionId, String note, String phonenumber){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -311,8 +311,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Mit dieser Methode werden die Beitraege in einer Diskussion ausder Datenbank geholt und dem Client uebergeben.
-	 * @param discussionId = Diskussionsnummer um die richtige Diskussion anzusprechen.
-	 * @return = Als Rueckgabe wird ein ReturnCorde geschickt und eine Liste an Notizen/Beitraegen. Im Fehlerfall eine Nachricht und ein Fehlercode.
+	 * @param discussionId Diskussionsnummer um die richtige Diskussion anzusprechen.
+	 * @return Als Rueckgabe wird ein ReturnCorde geschickt und eine Liste an Notizen/Beitraegen. Im Fehlerfall eine Nachricht und ein Fehlercode.
 	 */
 	public NotesResponse getNotesByDiscussion(long discussionId){
 		NotesResponse response = new NotesResponse();
@@ -342,8 +342,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode/Schnitttelle vergleicht die Kontakte des Handybenutzers mit den Kontakten in der Datenbank.
-	 * @param params = der Parameter Params enthaelt ein String Array welches eine dynamische Laenge von String  parametern fassen kann.
-	 * @return = Alle Kontakte aus dem Telefonbuch welche auch diese App benutzen.
+	 * @param params Der Parameter Params enthaelt ein String Array welches eine dynamische Laenge von String  parametern fassen kann.
+	 * @return Alle Kontakte aus dem Telefonbuch welche auch diese App benutzen.
 	 */
 	public UsersResponse comparePhonebook (long projectId, String ...params){
 		UsersResponse response = new UsersResponse();
@@ -382,9 +382,9 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Schnittstelle erlaubt das hinzufuegen eines Benutzers/Users zu dem Projekt.
-	 * @param phoneNumber = Uebergabeparameter Telefonnummer fuer den zu speichernden Benutzer.
-	 * @param projectId = Uebergabe parameter ProjektId zur Bestimmung des Projektes.
-	 * @return = Gibt einen OK-Code bei erfolgreichem Anlegen zurueck und einen Error-Code falls was nicht klappt.
+	 * @param phoneNumber Uebergabeparameter Telefonnummer fuer den zu speichernden Benutzer.
+	 * @param projectId Uebergabe parameter ProjektId zur Bestimmung des Projektes.
+	 * @return Gibt einen OK-Code bei erfolgreichem Anlegen zurueck und einen Error-Code falls was nicht klappt.
 	 */
 	public ReturncodeResponse addUserToProject(String phoneNumber, long projectId){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -409,11 +409,11 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode/Schnittstelle fuegt einen Termin bei einem Projekt hinzu.
-	 * @param projectId = Indentifizierung zu welchem Projekt der Termin hinzugefuegt werden soll.
-	 * @param topic = Bezeichnung des Termins.
-	 * @param description = Beschreibung des Termins
-	 * @param date = Datum des Termins.
-	 * @return = Rueckgabe bei Erfolg OK-Code bei Fehler ERROR-Code.
+	 * @param projectId Indentifizierung zu welchem Projekt der Termin hinzugefuegt werden soll.
+	 * @param topic Bezeichnung des Termins.
+	 * @param description Beschreibung des Termins
+	 * @param date Datum des Termins.
+	 * @return Rueckgabe bei Erfolg OK-Code bei Fehler ERROR-Code.
 	 */
 	public ReturncodeResponse addAppointmentToProject(long projectId, String topic, String description, long date){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -443,8 +443,8 @@ public class ProjectIntegration {
 	
 	/**
 	 * Abrufen des Termins im jeweiligen Projekt.
-	 * @param projectId = Aufruf eines Projektes wo der Termin enthalten ist.
-	 * @return = Uebergabe der Termine.
+	 * @param projectId Aufruf eines Projektes wo der Termin enthalten ist.
+	 * @return Uebergabe der Termine.
 	 */
 	public AppointmentResponse getAppointmentsByProject(long projectId){	
 		AppointmentResponse response = new AppointmentResponse();
@@ -472,9 +472,9 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode entfernt einen Termin/Meilenstein aus dem Projekt.
-	 * @param projectId = uebergabeparameter welcher das Projekt identifiziert.
-	 * @param appointmentId = uebergabeparameter welcher das Termin Objekt identifiziert.
-	 * @return = Ein Statuscode welche entweder OK oder ERROR beinhaltet.
+	 * @param projectId Uebergabeparameter welcher das Projekt identifiziert.
+	 * @param appointmentId Uebergabeparameter welcher das Termin Objekt identifiziert.
+	 * @return Ein Statuscode welche entweder OK oder ERROR beinhaltet.
 	 */
 	public ReturncodeResponse removeProjectAppointment(long projectId, long appointmentId){
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -500,9 +500,9 @@ public class ProjectIntegration {
 	
 	/**
 	 * Entfernen eines Projektmitglieds
-	 * @param projectId = Parameter zur Identifizierung des Projektes.
-	 * @param phoneNumber = Telefonnummer zur Identifizierung des Projektmitglieds.
-	 * @return = Rueckgabe eines Statuscodes.
+	 * @param projectId Parameter zur Identifizierung des Projektes.
+	 * @param phoneNumber Telefonnummer zur Identifizierung des Projektmitglieds.
+	 * @return Rueckgabe eines Statuscodes.
 	 */
 	public ReturncodeResponse removeProjectMember(long projectId, String phoneNumber) {
 		ReturncodeResponse response = new ReturncodeResponse();
@@ -527,11 +527,11 @@ public class ProjectIntegration {
 	
 	/**
 	 * Diese Methode/Schnittstelle fuehrt ein Projektupdate vor.
-	 * @param id = Parameter welcher das Projekt identifiziert.
-	 * @param projectName = Einen evtl. neuen Projektnamen der Aktualisiert wird.
-	 * @param description = Eine Neue Projektdeskripion die aktualisiert werden wuerde.
-	 * @param projectStatus = ein aktualisierter Projektstatus.
-	 * @return = Rueckgabe eines Statuscodes
+	 * @param id Parameter welcher das Projekt identifiziert.
+	 * @param projectName Einen evtl. neuen Projektnamen der Aktualisiert wird.
+	 * @param description Eine Neue Projektdeskripion die aktualisiert werden wuerde.
+	 * @param projectStatus Ein aktualisierter Projektstatus.
+	 * @return Rueckgabe eines Statuscodes
 	 */
 	public ProjectResponse updateProject(long id, String projectName, String description, String projectStatus) {	
 		ProjectResponse response = new ProjectResponse();
