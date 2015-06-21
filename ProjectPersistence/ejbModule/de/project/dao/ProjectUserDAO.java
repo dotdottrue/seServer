@@ -16,7 +16,7 @@ import de.project.entities.User;
  * 
  * @author Tobias Kappert
  *
- * @Stateless macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
+ * {@Stateless} macht aus diesem DataTransferObject welches für Datenbankzugriffe zustaendig ist eine zustandslose Session.
  */
 @Stateless
 public class ProjectUserDAO implements ProjectUserDAOLocal {
