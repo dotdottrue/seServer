@@ -68,7 +68,7 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
      * Loeschung einer Session aus der Datenbank.
      */
     @Override
-    public boolean endSession(int sessionId) {
+    public boolean endSession(long sessionId) {
     	ProjectSession session = em.find(ProjectSession.class, sessionId);
     	if(session != null) {
     		em.remove(session);
@@ -82,7 +82,7 @@ public class ProjectUserDAO implements ProjectUserDAOLocal {
      * Suchen einer Session aus der Datenbank.
      */
     @Override
-    public ProjectSession getSession(int sessionId) {
+    public ProjectSession getSession(long sessionId) {
     	ProjectSession session = em.find(ProjectSession.class, sessionId);
     	return session;
     }

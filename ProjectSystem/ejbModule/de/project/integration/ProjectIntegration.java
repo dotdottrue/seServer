@@ -36,6 +36,7 @@ import de.project.entities.Appointment;
 import de.project.entities.Discussion;
 import de.project.entities.Note;
 import de.project.entities.Project;
+import de.project.entities.ProjectSession;
 import de.project.entities.User;
 import de.project.enumerations.ProjectStatus;
 import de.project.enumerations.ReturnCode;
@@ -117,16 +118,16 @@ public class ProjectIntegration {
 	 * @param description = Beschreibung des Projektes.
 	 * @return = Rueckgabe des StatusCodes.
 	 */
-	public ReturncodeResponse createProject(String phoneNumber, String projectName, String description /*, int sessionId*/ ) {
+	public ReturncodeResponse createProject(long sessionId, String projectName, String description /*, int sessionId*/ ) {
 		ReturncodeResponse response = new ReturncodeResponse(); 
-		LOGGER.info(phoneNumber+" "+projectName);
+		LOGGER.info(sessionId + " " + projectName);
 		try{
 			Project newProject = new Project();
 			
-			User owner = userDAO.findUserByNumber(phoneNumber);
+			ProjectSession session = userDAO.getSession(sessionId);
 			
-			if(owner != null){
-			
+			if(session != null){
+				User owner = userDAO.findUserByNumber(session.getUser().getPhoneNumber());
 				List<User> members = new ArrayList<User>();
 				List<Discussion> discussions = new ArrayList<Discussion>();
 				List<Appointment> appointments = new ArrayList<Appointment>();
@@ -155,20 +156,19 @@ public class ProjectIntegration {
 		return response;
 	}
 	
-	
 	/**
 	 * Diese Methode erzegt eine Liste aller Projekte die einem Benutzer zugeordnet sind.
 	 * @param phonenumber = Uebergabeparameter ist die Telefonnummer des App-Anwenders.
 	 * @return = Es wird eine Liste der Projekte an den AppAnwender zurueckgegeben.
 	 */
-	public ProjectsResponse getProjectsByPhone(String phonenumber){	
+	public ProjectsResponse getProjectsByPhone(long sessionId){	
 		ProjectsResponse response = new ProjectsResponse();
-
+		ProjectSession session = userDAO.getSession(sessionId);
 		try{
-			User user = userDAO.findUserByNumber(phonenumber);
-			if(user == null) {
-				LOGGER.info("Eine Liste der Projekte f�r den Benutzer mit der Telefonnummer: " + phonenumber + " konnte nicht erzeugt werden.");
-				throw new ProjectNotExistException("Es existieren keine Projekte f�r den benutzer mit der Telefonnummer: " + phonenumber);		
+			User user = userDAO.findUserByNumber(session.getUser().getPhoneNumber());
+			if(user == null || session == null) {
+				LOGGER.info("Eine Liste der Projekte f�r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber() + " konnte nicht erzeugt werden.");
+				throw new ProjectNotExistException("Es existieren keine Projekte f�r den benutzer mit der Telefonnummer: " + user.getPhoneNumber());		
 			}else{
 				List<Project> projects = user.getProjects();
 				
@@ -184,7 +184,7 @@ public class ProjectIntegration {
 				}
 						
 				response.setProjects(projectsTO);
-				response.setPhonenumber(phonenumber);
+				response.setPhonenumber(user.getPhoneNumber());
 				
 				LOGGER.info("Eine Liste der Projekte f�r den Benutzer mit der Telefonnummer: " + user.getPhoneNumber()+ " wurde erzeugt.");
 			}

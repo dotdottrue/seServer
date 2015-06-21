@@ -22,10 +22,10 @@ public interface ProjectUserDAOLocal {
 
     public User createUser(String phoneNumber);
 
-    public boolean endSession(int sessionId);
+    public boolean endSession(long sessionId);
     
     public List<User> findAllUsers();
 
-    public ProjectSession getSession(int sessionId);
+    public ProjectSession getSession(long sessionId);
 
 }
